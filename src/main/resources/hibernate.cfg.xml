@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+
+
+		<!-- FOR WILDFLY JNDI USE   -->
+			
+		    <property name="connection.datasource">java:jboss/datasources/testDB</property>
+		    <property name="show_sql">true</property>
+		    <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+		    <property name="hibernate.show_sql">false</property>
+		    <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+		    <property name="hibernate.generate_statistics">true</property>
+		    <property name="hibernate.connection.release_mode">after_transaction</property>  
+	
+		<!-- FOR TOMCAT ENVIRONMENT ONLY 
+
+			
+			<property name="connection.url">jdbc:mysql://localhost:3306/telco</property> 
+			<property name="connection.username">root</property> 
+			<property name="connection.password">root</property>
+			<property name="connection.driver_class">com.mysql.jdbc.Driver</property> 
+			<property name="connection.pool_size">50</property> 
+			<property name="hibernate.show_sql">false</property>
+			<property name="dialect">org.hibernate.dialect.MySQLDialect</property> -->
+		  	
+			 
+			<property name="cache.use_second_leusevel_cache">false</property> 
+			<property name="connection.autoReconnect">true</property>
+			<property name="connection.autoReconnectForPools">true</property>
+			<property name="connection.is-connection-validation-required">true</property>			
+			<property name="hibernate.enable_lazy_load_no_trans">true</property> 
+			
+			
+		<!-- DB schema will be updated if needed -->
+		    <mapping class="com.mobilelife.persistance.entities.PlansPlannationaldataEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.AuthUserGroupsEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansPlantypeEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansPlaninternationalmmsEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansPlanroamingdataEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansPlanflexiEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansPlanfeeEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansPlanroamingincomingminsEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansPlanwifiEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansPlaninternationalvideocallEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.AuthPermissionEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansPlannationalminutesonnetEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansPlanroamingoutgoingminsEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansPlansocialdataEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansOperatorEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansPlanoutofbundleEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansPlanlocalcallsmsEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansPlaninternationalminutesEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansPlannationalminutesEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansPlansmsonnetEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.AuthUserUserPermissionsEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansPlaninternationalcallsmsEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.AuthGroupPermissionsEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansPlanlocalvideocallEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansPlansmsoffnetEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.AuthGroupEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansPlanlocalmmsEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.UserAccountEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansPlaninternationalsmsEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansPlanprimaryEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansPlanmiscellaneousEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.AuthUserEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansPlanunitsEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansPlanpreferrednumbersEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.UserAccountDetailsEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansPlannationalminutesoffnetEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansPlansmsEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.UserAccessEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.UserAccessTokenEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansPlanaddonsEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlanFiltersEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansPlantypeConfEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.CountriesEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansPlanbucketEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlanDevicebrandEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansDeviceprimaryEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansDevicepriceEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansFeedbackEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansPlanflexismsEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.GlobalsEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansMisFeaturesEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.AlianceCampaignEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.AlianceCampaignAgeEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.AlianceParternsEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.AlianceParternsAgeEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.OrderOffersMapEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.OrderPlanprimaryEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.OrderPlanprimaryOffersCouponsEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.ParternsOperatorOffersEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.ParternsOperatorOffersCouponsEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.DeviceFeedbackEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansDevicePlanEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlansDeviceplansEntity" />
+		    <mapping class="com.mobilelife.persistance.entities.PlanDevicemodelEntity" />
+			<mapping class="com.mobilelife.persistance.entities.PlanDevicecolorEntity" />
+			<mapping class="com.mobilelife.persistance.entities.PlansPlanOperatorTncEntity" />
+			<mapping class="com.mobilelife.persistance.entities.PlansOperatorTncEntity" />
+			<mapping class="com.mobilelife.persistance.entities.PlansPlandataEntity" />
+			<mapping class="com.mobilelife.persistance.entities.PlansPlanspecialminutesEntity" />
+			<mapping class="com.mobilelife.persistance.entities.PlansPartnerRouteEntity" />   
+			<mapping class="com.mobilelife.persistance.entities.PartnerRouteMasterEntity" />   
+			<mapping class="com.mobilelife.persistance.entities.PartnerRouteChildEntity" />   
+			<mapping class="com.mobilelife.persistance.entities.ReferencesMasterEntity" />   
+			<mapping class="com.mobilelife.persistance.entities.ReferencesChildEntity" />   
+			<mapping class="com.mobilelife.persistance.entities.PartnerRouteArchiveEntity" />   
+			
+	</session-factory>
+</hibernate-configuration>

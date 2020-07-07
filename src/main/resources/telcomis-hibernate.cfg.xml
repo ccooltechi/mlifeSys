@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+
+
+		<!-- FOR WILDFLY JNDI USE  --> 
+			
+		    <property name="connection.datasource">java:jboss/datasources/telcoMis</property>
+		    <property name="show_sql">true</property>
+		    <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+		    <property name="hibernate.show_sql">false</property>
+		    <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+		    <property name="hibernate.generate_statistics">true</property>
+		    <property name="hibernate.connection.release_mode">after_transaction</property> 
+		
+	
+		<!-- FOR TOMCAT ENVIRONMENT ONLY
+
+			
+			<property name="connection.url">jdbc:mysql://localhost:3306/telcomis</property> 
+			<property name="connection.username">root</property> 
+			<property name="connection.password">root</property>
+			<property name="connection.driver_class">com.mysql.jdbc.Driver</property> 
+			<property name="connection.pool_size">50</property> 
+			<property name="hibernate.show_sql">false</property>
+			<property name="dialect">org.hibernate.dialect.MySQLDialect</property>   -->  
+			
+			 
+			<property name="cache.use_second_leusevel_cache">false</property> 
+			<property name="connection.autoReconnect">true</property>
+			<property name="connection.autoReconnectForPools">true</property>
+			<property name="connection.is-connection-validation-required">true</property>			
+			<property name="hibernate.enable_lazy_load_no_trans">true</property> 
+			
+			
+		<!-- DB schema will be updated if needed -->
+		    <mapping class="com.mobilelife.persistance.entities.UserInfo" />
+		    <mapping class="com.mobilelife.persistance.entities.UserInfoDetails" />
+		    <mapping class="com.mobilelife.persistance.entities.SearchDetails" />
+					          
+	</session-factory>
+</hibernate-configuration>
