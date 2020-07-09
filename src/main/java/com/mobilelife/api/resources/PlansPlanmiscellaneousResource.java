@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.services.PlansPlanmiscellaneousServices;
 import com.mobilelife.common.CommonUtils;
-import com.mobilelife.controler.mapper.bean.PlansPlanmiscellaneous;
+import com.mobilelife.controler.mapper.bean.PlansPlanmiscellaneousBean;
 import com.mobilelife.controler.mapper.request.PlansPlanmiscellaneousRequest;
 
 @Path("/planmiscellaneous")
@@ -30,9 +30,9 @@ public class PlansPlanmiscellaneousResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createNew(PlansPlanmiscellaneousRequest request) {
-        PlansPlanmiscellaneous bean = (PlansPlanmiscellaneous)request.getRequest();
+        PlansPlanmiscellaneousBean bean = (PlansPlanmiscellaneousBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlanmiscellaneous country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlanmiscellaneousBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }
@@ -42,7 +42,7 @@ public class PlansPlanmiscellaneousResource {
     @Path("/{authtoken}/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") Integer id) {
-        PlansPlanmiscellaneous bean  = service.getByPlanId(id);
+        PlansPlanmiscellaneousBean bean  = service.getByPlanId(id);
         Response response = commonUtils.buildResponse(bean);
         return response;
     }
@@ -52,9 +52,9 @@ public class PlansPlanmiscellaneousResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateExisting(PlansPlanmiscellaneousRequest request) {
-        PlansPlanmiscellaneous bean = (PlansPlanmiscellaneous)request.getRequest();
+        PlansPlanmiscellaneousBean bean = (PlansPlanmiscellaneousBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlanmiscellaneous country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlanmiscellaneousBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }

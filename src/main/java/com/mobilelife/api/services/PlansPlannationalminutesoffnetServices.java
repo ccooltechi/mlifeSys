@@ -5,11 +5,11 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.exception.RecordNotFoundException;
 import com.mobilelife.controler.mapper.PlansPlannationalminutesoffnetMapper;
-import com.mobilelife.controler.mapper.bean.PlansPlannationalminutesoffnet;
+import com.mobilelife.controler.mapper.bean.PlansPlannationalminutesoffnetBean;
 import com.mobilelife.persistance.dao.PlansPlannationalminutesoffnetDao;
 import com.mobilelife.persistance.dao.PlansPlanprimaryDao;
-import com.mobilelife.persistance.entities.PlansPlannationalminutesoffnetEntity;
-import com.mobilelife.persistance.entities.PlansPlanprimaryEntity;
+import com.mobilelife.persistance.entities.PlansPlannationalminutesoffnet;
+import com.mobilelife.persistance.entities.PlansPlanprimary;
 
 
 public class PlansPlannationalminutesoffnetServices {
@@ -19,31 +19,31 @@ public class PlansPlannationalminutesoffnetServices {
 	PlansPlannationalminutesoffnetMapper mapper = new PlansPlannationalminutesoffnetMapper();
 	PlansPlanprimaryDao planrepository = new PlansPlanprimaryDao();
 
-    public PlansPlannationalminutesoffnet getByPlanId(Integer id)
+    public PlansPlannationalminutesoffnetBean getByPlanId(Integer id)
     {
-    	PlansPlanprimaryEntity plansPlanprimaryEntity = planrepository.findById(id);
-    	PlansPlannationalminutesoffnetEntity entity = plansPlanprimaryEntity.getPlansPlannationalminutesoffnet();
+    	PlansPlanprimary plansPlanprimaryEntity = planrepository.findById(id);
+    	PlansPlannationalminutesoffnet entity = plansPlanprimaryEntity.getPlansPlannationalminutesoffnet();
         if(null!=entity) {
-        	PlansPlannationalminutesoffnet bean = mapper.mapBean(entity);
+        	PlansPlannationalminutesoffnetBean bean = mapper.mapBean(entity);
             return bean;
         } else {
             throw new RecordNotFoundException("No record exist for given id "+id);
         }
     }
      
-    public boolean createOrUpdate(PlansPlannationalminutesoffnet bean)
+    public boolean createOrUpdate(PlansPlannationalminutesoffnetBean bean)
     {
     	boolean retVal = false;
     	if ((bean.getId()!=null) && (bean.getId()>0))
     	{
-    		PlansPlannationalminutesoffnetEntity existEntity = repository.findById(bean.getId());
+    		PlansPlannationalminutesoffnet existEntity = repository.findById(bean.getId());
     		if(null!=existEntity)
 	        {
-    			PlansPlannationalminutesoffnetEntity entity = mapper.mapBeanToEntity(bean, existEntity);
+    			PlansPlannationalminutesoffnet entity = mapper.mapBeanToEntity(bean, existEntity);
 	            retVal = repository.updateData(entity);
 	            return retVal;
 	        } else {
-	        	PlansPlannationalminutesoffnetEntity entity = mapper.mapBeanToEntity(bean);
+	        	PlansPlannationalminutesoffnet entity = mapper.mapBeanToEntity(bean);
     			int id = repository.findId()+1;
     			entity.setId(id);		
 	        	retVal = repository.saveData(entity);
@@ -52,7 +52,7 @@ public class PlansPlannationalminutesoffnetServices {
     	}
     	else
     	{
-    		PlansPlannationalminutesoffnetEntity entity = mapper.mapBeanToEntity(bean);
+    		PlansPlannationalminutesoffnet entity = mapper.mapBeanToEntity(bean);
 			int id = repository.findId()+1;
 			entity.setId(id);		
     		retVal = repository.saveData(entity);

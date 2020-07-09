@@ -7,20 +7,20 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.mobilelife.controler.mapper.bean.PlansPlanunits;
+import com.mobilelife.controler.mapper.bean.PlansPlanunitsBean;
 import com.mobilelife.persistance.dao.PlansPlanprimaryDao;
-import com.mobilelife.persistance.entities.PlansPlanprimaryEntity;
-import com.mobilelife.persistance.entities.PlansPlanunitsEntity;
+import com.mobilelife.persistance.entities.PlansPlanprimary;
+import com.mobilelife.persistance.entities.PlansPlanunits;
 
 public class PlansPlanunitsMapper {
 	private static Logger logger = LoggerFactory.getLogger(PlansPlanunitsMapper.class);
 
-    public List<PlansPlanunits> mapBean(List<PlansPlanunitsEntity> entityList) {
-        List<PlansPlanunits> retBean = new ArrayList<PlansPlanunits>();
+    public List<PlansPlanunitsBean> mapBean(List<PlansPlanunits> entityList) {
+        List<PlansPlanunitsBean> retBean = new ArrayList<PlansPlanunitsBean>();
         for (int i=0; i<entityList.size();i++)
         {
-            PlansPlanunitsEntity entity = entityList.get(i);
-            PlansPlanunits bean = new PlansPlanunits();
+            PlansPlanunits entity = entityList.get(i);
+            PlansPlanunitsBean bean = new PlansPlanunitsBean();
             bean.setId(entity.getId());
             bean.setIsActive(entity.getIsActive());
             bean.setPlanPrimaryId(entity.getPlanPrimaryId().getId());
@@ -32,8 +32,8 @@ public class PlansPlanunitsMapper {
         return retBean;
     }
     
-    public PlansPlanunits mapBean(PlansPlanunitsEntity entity) {
-        PlansPlanunits bean = new PlansPlanunits();
+    public PlansPlanunitsBean mapBean(PlansPlanunits entity) {
+        PlansPlanunitsBean bean = new PlansPlanunitsBean();
         bean.setId(entity.getId());
         bean.setIsActive(entity.getIsActive());
         bean.setPlanPrimaryId(entity.getPlanPrimaryId().getId());
@@ -44,8 +44,8 @@ public class PlansPlanunitsMapper {
         return bean;
     }
 
-    public PlansPlanunitsEntity mapBeanToEntity(PlansPlanunits bean, PlansPlanunitsEntity existEntity) {
-        PlansPlanunitsEntity updateEntity = existEntity;
+    public PlansPlanunits mapBeanToEntity(PlansPlanunitsBean bean, PlansPlanunits existEntity) {
+        PlansPlanunits updateEntity = existEntity;
         updateEntity.setIsActive(bean.getIsActive());
         updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setUnits(bean.getUnits());
@@ -55,10 +55,10 @@ public class PlansPlanunitsMapper {
         return updateEntity;
     }
 
-    public PlansPlanunitsEntity mapBeanToEntity(PlansPlanunits bean) {
+    public PlansPlanunits mapBeanToEntity(PlansPlanunitsBean bean) {
         PlansPlanprimaryDao planrepository = new PlansPlanprimaryDao();
-        PlansPlanprimaryEntity plansPlanprimaryEntity = planrepository.findById(bean.getPlanPrimaryId());
-        PlansPlanunitsEntity updateEntity = new PlansPlanunitsEntity();
+        PlansPlanprimary plansPlanprimaryEntity = planrepository.findById(bean.getPlanPrimaryId());
+        PlansPlanunits updateEntity = new PlansPlanunits();
         updateEntity.setCreationDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setPlanPrimaryId(plansPlanprimaryEntity);

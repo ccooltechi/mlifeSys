@@ -9,8 +9,8 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.AlianceCampaignEntity;
-import com.mobilelife.persistance.entities.PlansPlanfeeEntity;
+import com.mobilelife.persistance.entities.AlianceCampaign;
+import com.mobilelife.persistance.entities.PlansPlanfee;
 
 public class AlianceCampaignDao {
 	private static Logger logger = LoggerFactory.getLogger(AlianceCampaignDao.class);
@@ -24,11 +24,11 @@ public class AlianceCampaignDao {
 		Session session = HibernateSessionManager.getSession();
 		int rid = 0;
 		try {
-			List<AlianceCampaignEntity> AlianceCampaignList = null;
+			List<AlianceCampaign> AlianceCampaignList = null;
 
 			String query = "Select * from aliance_campaign order by id desc limit 1";
 			logger.debug("query in findID in  AlianceCampaignDao " + query);
-			AlianceCampaignList = new HibernateDAO().findBySQLQuery(session, AlianceCampaignEntity.class, query,"aliance_campaign");
+			AlianceCampaignList = new HibernateDAO().findBySQLQuery(session, AlianceCampaign.class, query,"aliance_campaign");
 
 			logger.debug("findID  in  AlianceCampaignDao Size = "+AlianceCampaignList.size());
 			if ((null!=AlianceCampaignList) && (AlianceCampaignList.size()>0))
@@ -45,7 +45,7 @@ public class AlianceCampaignDao {
 		}
 		return rid;
 	}
-	public void saveData(AlianceCampaignEntity entityObj) {
+	public void saveData(AlianceCampaign entityObj) {
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
 		try {

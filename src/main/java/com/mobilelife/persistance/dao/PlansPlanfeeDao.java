@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.PlansPlanfeeEntity;
+import com.mobilelife.persistance.entities.PlansPlanfee;
 
 public class PlansPlanfeeDao {
 	private static Logger logger = LoggerFactory.getLogger(PlansPlanfeeDao.class);
@@ -24,11 +24,11 @@ public class PlansPlanfeeDao {
 		Session session = HibernateSessionManager.getSession();
 		int rid = 0;
 		try {
-			List<PlansPlanfeeEntity> plansPlanfeeList = null;
+			List<PlansPlanfee> plansPlanfeeList = null;
 
 			String query = "Select * from plans_planfee order by id desc limit 1";
 			logger.debug("query in findID in  PlansPlanfeeDao " + query);
-			plansPlanfeeList = new HibernateDAO().findBySQLQuery(session, PlansPlanfeeEntity.class, query,"plans_planfee");
+			plansPlanfeeList = new HibernateDAO().findBySQLQuery(session, PlansPlanfee.class, query,"plans_planfee");
 
 			logger.debug("findID  in  PlansPlanfeeDao Size = "+plansPlanfeeList.size());
 			if ((null!=plansPlanfeeList) && (plansPlanfeeList.size()>0))
@@ -45,7 +45,7 @@ public class PlansPlanfeeDao {
 		}
 		return rid;
 	}
-	public boolean saveData(PlansPlanfeeEntity entityObj) {
+	public boolean saveData(PlansPlanfee entityObj) {
 		boolean retVal = false;
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -64,7 +64,7 @@ public class PlansPlanfeeDao {
 		return retVal;
 	}
 	
-	public boolean updateData(PlansPlanfeeEntity entityObj) {
+	public boolean updateData(PlansPlanfee entityObj) {
 		boolean retVal = false;
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -83,13 +83,13 @@ public class PlansPlanfeeDao {
 		return retVal;
 	}
 	
-	public PlansPlanfeeEntity findById(Integer id) {
+	public PlansPlanfee findById(Integer id) {
 		Session session = HibernateSessionManager.getSession();
-		PlansPlanfeeEntity entity = null;
+		PlansPlanfee entity = null;
 		try {
-			Query query = session.getNamedQuery("PlansPlanfeeEntity.findById");
+			Query query = session.getNamedQuery("PlansPlanfee.findById");
 			query.setParameter("id", id);
-			entity = (PlansPlanfeeEntity)(query.list().get(0));
+			entity = (PlansPlanfee)(query.list().get(0));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {

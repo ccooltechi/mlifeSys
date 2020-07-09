@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.services.PlansPlanlocalcallsmsServices;
 import com.mobilelife.common.CommonUtils;
-import com.mobilelife.controler.mapper.bean.PlansPlanlocalcallsms;
+import com.mobilelife.controler.mapper.bean.PlansPlanlocalcallsmsBean;
 import com.mobilelife.controler.mapper.request.PlansPlanlocalcallsmsRequest;
 
 @Path("/planlocalcallsms")
@@ -30,9 +30,9 @@ public class PlansPlanlocalcallsmsResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createNew(PlansPlanlocalcallsmsRequest request) {
-        PlansPlanlocalcallsms bean = (PlansPlanlocalcallsms)request.getRequest();
+        PlansPlanlocalcallsmsBean bean = (PlansPlanlocalcallsmsBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlanlocalcallsms country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlanlocalcallsmsBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }
@@ -42,7 +42,7 @@ public class PlansPlanlocalcallsmsResource {
     @Path("/{authtoken}/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") Integer id) {
-        PlansPlanlocalcallsms bean  = service.getByPlanId(id);
+        PlansPlanlocalcallsmsBean bean  = service.getByPlanId(id);
         Response response = commonUtils.buildResponse(bean);
         return response;
     }
@@ -52,9 +52,9 @@ public class PlansPlanlocalcallsmsResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateExisting(PlansPlanlocalcallsmsRequest request) {
-        PlansPlanlocalcallsms bean = (PlansPlanlocalcallsms)request.getRequest();
+        PlansPlanlocalcallsmsBean bean = (PlansPlanlocalcallsmsBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlanlocalcallsms country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlanlocalcallsmsBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }

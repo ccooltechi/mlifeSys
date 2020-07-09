@@ -5,11 +5,11 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.exception.RecordNotFoundException;
 import com.mobilelife.controler.mapper.PlansPlansmsoffnetMapper;
-import com.mobilelife.controler.mapper.bean.PlansPlansmsoffnet;
+import com.mobilelife.controler.mapper.bean.PlansPlansmsoffnetBean;
 import com.mobilelife.persistance.dao.PlansPlanprimaryDao;
 import com.mobilelife.persistance.dao.PlansPlansmsoffnetDao;
-import com.mobilelife.persistance.entities.PlansPlanprimaryEntity;
-import com.mobilelife.persistance.entities.PlansPlansmsoffnetEntity;
+import com.mobilelife.persistance.entities.PlansPlanprimary;
+import com.mobilelife.persistance.entities.PlansPlansmsoffnet;
 
 
 public class PlansPlansmsoffnetServices {
@@ -19,31 +19,31 @@ public class PlansPlansmsoffnetServices {
 	PlansPlansmsoffnetMapper mapper = new PlansPlansmsoffnetMapper();
 	PlansPlanprimaryDao planrepository = new PlansPlanprimaryDao();
 
-    public PlansPlansmsoffnet getByPlanId(Integer id)
+    public PlansPlansmsoffnetBean getByPlanId(Integer id)
     {
-    	PlansPlanprimaryEntity plansPlanprimaryEntity = planrepository.findById(id);
-    	PlansPlansmsoffnetEntity entity = plansPlanprimaryEntity.getPlansPlansmsoffnet();
+    	PlansPlanprimary plansPlanprimaryEntity = planrepository.findById(id);
+    	PlansPlansmsoffnet entity = plansPlanprimaryEntity.getPlansPlansmsoffnet();
         if(null!=entity) {
-        	PlansPlansmsoffnet bean = mapper.mapBean(entity);
+        	PlansPlansmsoffnetBean bean = mapper.mapBean(entity);
             return bean;
         } else {
             throw new RecordNotFoundException("No record exist for given id "+id);
         }
     }
      
-    public boolean createOrUpdate(PlansPlansmsoffnet bean)
+    public boolean createOrUpdate(PlansPlansmsoffnetBean bean)
     {
     	boolean retVal = false;
     	if ((bean.getId()!=null) && (bean.getId()>0))
     	{
-    		PlansPlansmsoffnetEntity existEntity = repository.findById(bean.getId());
+    		PlansPlansmsoffnet existEntity = repository.findById(bean.getId());
     		if(null!=existEntity)
 	        {
-    			PlansPlansmsoffnetEntity entity = mapper.mapBeanToEntity(bean, existEntity);
+    			PlansPlansmsoffnet entity = mapper.mapBeanToEntity(bean, existEntity);
 	            retVal = repository.updateData(entity);
 	            return retVal;
 	        } else {
-	        	PlansPlansmsoffnetEntity entity = mapper.mapBeanToEntity(bean);
+	        	PlansPlansmsoffnet entity = mapper.mapBeanToEntity(bean);
     			int id = repository.findId()+1;
     			entity.setId(id);		
 	        	retVal = repository.saveData(entity);
@@ -52,7 +52,7 @@ public class PlansPlansmsoffnetServices {
     	}
     	else
     	{
-    		PlansPlansmsoffnetEntity entity = mapper.mapBeanToEntity(bean);
+    		PlansPlansmsoffnet entity = mapper.mapBeanToEntity(bean);
 			int id = repository.findId()+1;
 			entity.setId(id);		
     		retVal = repository.saveData(entity);

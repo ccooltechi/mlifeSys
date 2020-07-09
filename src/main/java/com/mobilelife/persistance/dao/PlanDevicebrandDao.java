@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.PlanDevicebrandEntity;
-import com.mobilelife.persistance.entities.PlansPlantypeEntity;
+import com.mobilelife.persistance.entities.PlanDevicebrand;
+import com.mobilelife.persistance.entities.PlansPlantype;
 
 public class PlanDevicebrandDao {
 	private static Logger logger = LoggerFactory.getLogger(PlanDevicebrandDao.class);
@@ -21,12 +21,12 @@ public class PlanDevicebrandDao {
 		
 	}
 	
-	public List<PlanDevicebrandEntity> findAll()
+	public List<PlanDevicebrand> findAll()
 	{
 		Session session = HibernateSessionManager.getSession();
-		List<PlanDevicebrandEntity> planDevicebrand = null;
+		List<PlanDevicebrand> planDevicebrand = null;
 		try {
-			Query query = session.getNamedQuery("PlanDevicebrandEntity.findAll");
+			Query query = session.getNamedQuery("PlanDevicebrand.findAll");
 			System.out.println("Size = "+query.list().size());
 			planDevicebrand = query.list();
 		} catch (Exception ex) {
@@ -39,16 +39,16 @@ public class PlanDevicebrandDao {
 		return planDevicebrand;
 	}
 
-	public PlanDevicebrandEntity findByName(String deviceBrand)
+	public PlanDevicebrand findByName(String deviceBrand)
 	{
 		Session session = HibernateSessionManager.getSession();
-		PlanDevicebrandEntity planDevicebrand = null;
+		PlanDevicebrand planDevicebrand = null;
 		try {
-			Query query = session.getNamedQuery("PlanDevicebrandEntity.findByDeviceBrand");
+			Query query = session.getNamedQuery("PlanDevicebrand.findByDeviceBrand");
 			query.setParameter("deviceBrand", deviceBrand);
 			System.out.println("deviceBrand = "+deviceBrand);
 			System.out.println("Size = "+query.list().size());
-			planDevicebrand = (PlanDevicebrandEntity)query.list().get(0);
+			planDevicebrand = (PlanDevicebrand)query.list().get(0);
 			System.out.println("planDevicebrand ID = "+planDevicebrand.getId());
 			System.out.println("planDevicebrand Name = "+planDevicebrand.getDeviceBrand());
 		} catch (Exception ex) {
@@ -61,14 +61,14 @@ public class PlanDevicebrandDao {
 		return planDevicebrand;
 	}
 
-	public PlanDevicebrandEntity findById(Integer id) {
+	public PlanDevicebrand findById(Integer id) {
 		Session session = HibernateSessionManager.getSession();
-		PlanDevicebrandEntity entity = null;
+		PlanDevicebrand entity = null;
 		try {
-			Query query = session.getNamedQuery("PlanDevicebrandEntity.findById");
+			Query query = session.getNamedQuery("PlanDevicebrand.findById");
 			query.setParameter("id", id);
 			System.out.println("findById = "+id);
-			entity = (PlanDevicebrandEntity)(query.list().get(0));
+			entity = (PlanDevicebrand)(query.list().get(0));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
@@ -80,7 +80,7 @@ public class PlanDevicebrandDao {
 		return entity;
 	}
 	
-	public boolean saveData(PlanDevicebrandEntity entityObj) {
+	public boolean saveData(PlanDevicebrand entityObj) {
 		boolean retVal = false;
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -98,7 +98,7 @@ public class PlanDevicebrandDao {
 		return retVal;
 	}
 
-	public boolean updateData(PlanDevicebrandEntity entityObj) {
+	public boolean updateData(PlanDevicebrand entityObj) {
 		boolean retVal = false;
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -116,7 +116,7 @@ public class PlanDevicebrandDao {
 		return retVal;
 	}
 
-	public boolean deleteData(PlanDevicebrandEntity entityObj) {
+	public boolean deleteData(PlanDevicebrand entityObj) {
 		boolean retVal = false;
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -139,11 +139,11 @@ public class PlanDevicebrandDao {
 		Session session = HibernateSessionManager.getSession();
 		int rid = 0;
 		try {
-			List<PlanDevicebrandEntity> plansPlanfeeList = null;
+			List<PlanDevicebrand> plansPlanfeeList = null;
 
 			String query = "Select * from plan_devicebrand order by id desc limit 1";
 			logger.debug("query in findID in  findId " + query);
-			plansPlanfeeList = new HibernateDAO().findBySQLQuery(session, PlanDevicebrandEntity.class, query,"plan_devicebrand");
+			plansPlanfeeList = new HibernateDAO().findBySQLQuery(session, PlanDevicebrand.class, query,"plan_devicebrand");
 
 			logger.debug("findID  in  findId Size = "+plansPlanfeeList.size());
 			if ((null!=plansPlanfeeList) && (plansPlanfeeList.size()>0))

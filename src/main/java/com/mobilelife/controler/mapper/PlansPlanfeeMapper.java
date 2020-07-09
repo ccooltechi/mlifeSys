@@ -7,21 +7,21 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.mobilelife.controler.mapper.bean.PlansPlanfee;
-import com.mobilelife.controler.mapper.bean.PlansPlantype;
+import com.mobilelife.controler.mapper.bean.PlansPlanfeeBean;
+import com.mobilelife.controler.mapper.bean.PlansPlantypeBean;
 import com.mobilelife.persistance.dao.PlansPlanprimaryDao;
-import com.mobilelife.persistance.entities.PlansPlanfeeEntity;
-import com.mobilelife.persistance.entities.PlansPlanprimaryEntity;
+import com.mobilelife.persistance.entities.PlansPlanfee;
+import com.mobilelife.persistance.entities.PlansPlanprimary;
 
 public class PlansPlanfeeMapper {
 	private static Logger logger = LoggerFactory.getLogger(PlansPlanfeeMapper.class);
 
-    public List<PlansPlanfee> mapBean(List<PlansPlanfeeEntity> entityList) {
-        List<PlansPlanfee> retBean = new ArrayList<PlansPlanfee>();
+    public List<PlansPlanfeeBean> mapBean(List<PlansPlanfee> entityList) {
+        List<PlansPlanfeeBean> retBean = new ArrayList<PlansPlanfeeBean>();
         for (int i=0; i<entityList.size();i++)
         {
-        	PlansPlanfeeEntity entity = entityList.get(i);
-        	PlansPlanfee bean = new PlansPlanfee();
+        	PlansPlanfee entity = entityList.get(i);
+        	PlansPlanfeeBean bean = new PlansPlanfeeBean();
             bean.setId(entity.getId());
             bean.setActive(entity.getIsActive());
             bean.setPlanMonthlyFee(entity.getPlanMonthlyFee());
@@ -34,8 +34,8 @@ public class PlansPlanfeeMapper {
         return retBean;
     }
     
-    public PlansPlanfee mapBean(PlansPlanfeeEntity entity) {
-    	PlansPlanfee bean = new PlansPlanfee();
+    public PlansPlanfeeBean mapBean(PlansPlanfee entity) {
+    	PlansPlanfeeBean bean = new PlansPlanfeeBean();
         bean.setId(entity.getId());
         bean.setActive(entity.getIsActive());
         bean.setPlanMonthlyFee(entity.getPlanMonthlyFee());
@@ -46,8 +46,8 @@ public class PlansPlanfeeMapper {
         return bean;
     }
 
-    public PlansPlanfeeEntity mapBeanToEntity(PlansPlanfee bean, PlansPlanfeeEntity existEntity) {
-    	PlansPlanfeeEntity updateEntity = existEntity;
+    public PlansPlanfee mapBeanToEntity(PlansPlanfeeBean bean, PlansPlanfee existEntity) {
+    	PlansPlanfee updateEntity = existEntity;
         updateEntity.setIsActive(bean.isActive());
         updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setPlanMonthlyFee(bean.getPlanMonthlyFee());
@@ -57,10 +57,10 @@ public class PlansPlanfeeMapper {
         return updateEntity;
     }
 
-    public PlansPlanfeeEntity mapBeanToEntity(PlansPlanfee bean) {
+    public PlansPlanfee mapBeanToEntity(PlansPlanfeeBean bean) {
     	PlansPlanprimaryDao planrepository = new PlansPlanprimaryDao();
-    	PlansPlanprimaryEntity plansPlanprimaryEntity = planrepository.findById(bean.getPlanPrimaryId());
-    	PlansPlanfeeEntity updateEntity = new PlansPlanfeeEntity();
+    	PlansPlanprimary plansPlanprimaryEntity = planrepository.findById(bean.getPlanPrimaryId());
+    	PlansPlanfee updateEntity = new PlansPlanfee();
         updateEntity.setCreationDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setIsActive(bean.isActive());

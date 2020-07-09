@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.services.PlansPlaninternationalcallsmsServices;
 import com.mobilelife.common.CommonUtils;
-import com.mobilelife.controler.mapper.bean.PlansPlaninternationalcallsms;
+import com.mobilelife.controler.mapper.bean.PlansPlaninternationalcallsmsBean;
 import com.mobilelife.controler.mapper.request.PlansPlaninternationalcallsmsRequest;
 
 
@@ -31,9 +31,9 @@ public class PlansPlaninternationalcallsmsResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createNew(PlansPlaninternationalcallsmsRequest request) {
-        PlansPlaninternationalcallsms bean = (PlansPlaninternationalcallsms)request.getRequest();
+        PlansPlaninternationalcallsmsBean bean = (PlansPlaninternationalcallsmsBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlaninternationalcallsms country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlaninternationalcallsmsBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }
@@ -43,7 +43,7 @@ public class PlansPlaninternationalcallsmsResource {
     @Path("/{authtoken}/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") Integer id) {
-        PlansPlaninternationalcallsms bean  = service.getByPlanId(id);
+        PlansPlaninternationalcallsmsBean bean  = service.getByPlanId(id);
         Response response = commonUtils.buildResponse(bean);
         return response;
     }
@@ -53,9 +53,9 @@ public class PlansPlaninternationalcallsmsResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateExisting(PlansPlaninternationalcallsmsRequest request) {
-        PlansPlaninternationalcallsms bean = (PlansPlaninternationalcallsms)request.getRequest();
+        PlansPlaninternationalcallsmsBean bean = (PlansPlaninternationalcallsmsBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlaninternationalcallsms country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlaninternationalcallsmsBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }

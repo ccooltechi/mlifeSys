@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.services.PlanDevicecolorServices;
 import com.mobilelife.common.CommonUtils;
-import com.mobilelife.controler.mapper.bean.PlanDevicecolor;
+import com.mobilelife.controler.mapper.bean.PlanDevicecolorBean;
 import com.mobilelife.controler.mapper.request.PlanDevicecolorRequest;
 
 
@@ -34,9 +34,9 @@ public class PlanDevicecolorResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createNew(PlanDevicecolorRequest request) {
-    	PlanDevicecolor bean = (PlanDevicecolor)request.getRequest();
+    	PlanDevicecolorBean bean = (PlanDevicecolorBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        List<PlanDevicecolor> country = service.getAll();
+        List<PlanDevicecolorBean> country = service.getAll();
         Response response = commonUtils.buildResponse(country);
         return response;
     }
@@ -47,7 +47,7 @@ public class PlanDevicecolorResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll(@PathParam("authtoken") String authtoken)
     {
-        List<PlanDevicecolor> bean = service.getAll();
+        List<PlanDevicecolorBean> bean = service.getAll();
         Response response = commonUtils.buildResponse(bean);
         return response;
     }
@@ -57,7 +57,7 @@ public class PlanDevicecolorResource {
     @Path("/{authtoken}/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") Integer id) {
-    	PlanDevicecolor bean  = service.getById(id);
+    	PlanDevicecolorBean bean  = service.getById(id);
         Response response = commonUtils.buildResponse(bean);
         return response;
     }
@@ -67,9 +67,9 @@ public class PlanDevicecolorResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateExisting(PlanDevicecolorRequest request) {
-    	PlanDevicecolor bean = (PlanDevicecolor)request.getRequest();
+    	PlanDevicecolorBean bean = (PlanDevicecolorBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        List<PlanDevicecolor> country = service.getAll();
+        List<PlanDevicecolorBean> country = service.getAll();
         Response response = commonUtils.buildResponse(country);
         return response;
     }
@@ -80,7 +80,7 @@ public class PlanDevicecolorResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteExisting(@PathParam("id") Integer id) {
         boolean status = service.delete(id);
-        List<PlanDevicecolor> bean = service.getAll();
+        List<PlanDevicecolorBean> bean = service.getAll();
         Response response = commonUtils.buildResponse(bean);
         return response;
     }

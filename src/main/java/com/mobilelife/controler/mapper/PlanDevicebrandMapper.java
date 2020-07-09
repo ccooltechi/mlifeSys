@@ -7,20 +7,20 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.mobilelife.controler.mapper.bean.PlanDevicebrand;
-import com.mobilelife.controler.mapper.bean.PlansPlantype;
-import com.mobilelife.persistance.entities.PlanDevicebrandEntity;
-import com.mobilelife.persistance.entities.PlansPlantypeEntity;
+import com.mobilelife.controler.mapper.bean.PlanDevicebrandBean;
+import com.mobilelife.controler.mapper.bean.PlansPlantypeBean;
+import com.mobilelife.persistance.entities.PlanDevicebrand;
+import com.mobilelife.persistance.entities.PlansPlantype;
 
 public class PlanDevicebrandMapper {
 	private static Logger logger = LoggerFactory.getLogger(PlanDevicebrandMapper.class);
 
-    public List<PlanDevicebrand> mapBean(List<PlanDevicebrandEntity> entityList) {
-        List<PlanDevicebrand> retBean = new ArrayList<PlanDevicebrand>();
+    public List<PlanDevicebrandBean> mapBean(List<PlanDevicebrand> entityList) {
+        List<PlanDevicebrandBean> retBean = new ArrayList<PlanDevicebrandBean>();
         for (int i=0; i<entityList.size();i++)
         {
-        	PlanDevicebrandEntity entity = entityList.get(i);
-        	PlanDevicebrand bean = new PlanDevicebrand();
+        	PlanDevicebrand entity = entityList.get(i);
+        	PlanDevicebrandBean bean = new PlanDevicebrandBean();
             bean.setId(entity.getId());
             bean.setIsActive(entity.getIsActive());
             bean.setDeviceBrand(entity.getDeviceBrand());
@@ -30,8 +30,8 @@ public class PlanDevicebrandMapper {
         return retBean;
     }
     
-    public PlanDevicebrand mapBean(PlanDevicebrandEntity entity) {
-    	PlanDevicebrand bean = new PlanDevicebrand();
+    public PlanDevicebrandBean mapBean(PlanDevicebrand entity) {
+    	PlanDevicebrandBean bean = new PlanDevicebrandBean();
         bean.setId(entity.getId());
         bean.setIsActive(entity.getIsActive());
         bean.setDeviceBrand(entity.getDeviceBrand());
@@ -39,8 +39,8 @@ public class PlanDevicebrandMapper {
         return bean;
     }
 
-    public PlanDevicebrandEntity mapBeanToEntity(PlanDevicebrand bean, PlanDevicebrandEntity existEntity) {
-    	PlanDevicebrandEntity updateEntity = existEntity;
+    public PlanDevicebrand mapBeanToEntity(PlanDevicebrandBean bean, PlanDevicebrand existEntity) {
+    	PlanDevicebrand updateEntity = existEntity;
         updateEntity.setIsActive(bean.getIsActive());
         updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setDeviceBrand(bean.getDeviceBrand());
@@ -48,8 +48,8 @@ public class PlanDevicebrandMapper {
         return updateEntity;
     }
 
-    public PlanDevicebrandEntity mapBeanToEntity(PlanDevicebrand bean) {
-    	PlanDevicebrandEntity updateEntity = new PlanDevicebrandEntity();
+    public PlanDevicebrand mapBeanToEntity(PlanDevicebrandBean bean) {
+    	PlanDevicebrand updateEntity = new PlanDevicebrand();
         updateEntity.setCreationDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setIsActive(bean.getIsActive());

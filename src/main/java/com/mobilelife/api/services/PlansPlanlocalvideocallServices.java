@@ -5,11 +5,11 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.exception.RecordNotFoundException;
 import com.mobilelife.controler.mapper.PlansPlanlocalvideocallMapper;
-import com.mobilelife.controler.mapper.bean.PlansPlanlocalvideocall;
+import com.mobilelife.controler.mapper.bean.PlansPlanlocalvideocallBean;
 import com.mobilelife.persistance.dao.PlansPlanlocalvideocallDao;
 import com.mobilelife.persistance.dao.PlansPlanprimaryDao;
-import com.mobilelife.persistance.entities.PlansPlanlocalvideocallEntity;
-import com.mobilelife.persistance.entities.PlansPlanprimaryEntity;
+import com.mobilelife.persistance.entities.PlansPlanlocalvideocall;
+import com.mobilelife.persistance.entities.PlansPlanprimary;
 
 
 public class PlansPlanlocalvideocallServices {
@@ -19,31 +19,31 @@ public class PlansPlanlocalvideocallServices {
 	PlansPlanlocalvideocallMapper mapper = new PlansPlanlocalvideocallMapper();
 	PlansPlanprimaryDao planrepository = new PlansPlanprimaryDao();
 
-    public PlansPlanlocalvideocall getByPlanId(Integer id)
+    public PlansPlanlocalvideocallBean getByPlanId(Integer id)
     {
-    	PlansPlanprimaryEntity plansPlanprimaryEntity = planrepository.findById(id);
-    	PlansPlanlocalvideocallEntity entity = plansPlanprimaryEntity.getPlansPlanlocalvideocall();
+    	PlansPlanprimary plansPlanprimaryEntity = planrepository.findById(id);
+    	PlansPlanlocalvideocall entity = plansPlanprimaryEntity.getPlansPlanlocalvideocall();
         if(null!=entity) {
-        	PlansPlanlocalvideocall bean = mapper.mapBean(entity);
+        	PlansPlanlocalvideocallBean bean = mapper.mapBean(entity);
             return bean;
         } else {
             throw new RecordNotFoundException("No record exist for given id "+id);
         }
     }
      
-    public boolean createOrUpdate(PlansPlanlocalvideocall bean)
+    public boolean createOrUpdate(PlansPlanlocalvideocallBean bean)
     {
     	boolean retVal = false;
     	if ((bean.getId()!=null) && (bean.getId()>0))
     	{
-    		PlansPlanlocalvideocallEntity existEntity = repository.findById(bean.getId());
+    		PlansPlanlocalvideocall existEntity = repository.findById(bean.getId());
     		if(null!=existEntity)
 	        {
-    			PlansPlanlocalvideocallEntity entity = mapper.mapBeanToEntity(bean, existEntity);
+    			PlansPlanlocalvideocall entity = mapper.mapBeanToEntity(bean, existEntity);
 	            retVal = repository.updateData(entity);
 	            return retVal;
 	        } else {
-	        	PlansPlanlocalvideocallEntity entity = mapper.mapBeanToEntity(bean);
+	        	PlansPlanlocalvideocall entity = mapper.mapBeanToEntity(bean);
     			int id = repository.findId()+1;
     			entity.setId(id);		
 	        	retVal = repository.saveData(entity);
@@ -52,7 +52,7 @@ public class PlansPlanlocalvideocallServices {
     	}
     	else
     	{
-    		PlansPlanlocalvideocallEntity entity = mapper.mapBeanToEntity(bean);
+    		PlansPlanlocalvideocall entity = mapper.mapBeanToEntity(bean);
 			int id = repository.findId()+1;
 			entity.setId(id);		
     		retVal = repository.saveData(entity);

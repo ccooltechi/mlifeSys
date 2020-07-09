@@ -14,32 +14,32 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.PlansDeviceprimaryEntity;
+import com.mobilelife.persistance.entities.PlansDeviceprimary;
 
 public class PlansDevicePrimaryDao {
 	private static Logger logger = LoggerFactory.getLogger(PlansDevicePrimaryDao.class);
 
-	public List<PlansDeviceprimaryEntity> findAllPlans()
+	public List<PlansDeviceprimary> findAllPlans()
 	{
 		Session session = HibernateSessionManager.getSession();
-		List<PlansDeviceprimaryEntity> plansPlanprimary = null;
+		List<PlansDeviceprimary> plansPlanprimary = null;
 		Query query = session.getNamedQuery("PlansDeviceprimary.findAll");
 		logger.debug("findAllDevicePlans Size = "+query.list().size());
-		plansPlanprimary = (List<PlansDeviceprimaryEntity>)query.list();
+		plansPlanprimary = (List<PlansDeviceprimary>)query.list();
 		return plansPlanprimary;
 	}
 
-	public List<PlansDeviceprimaryEntity> findAllPlans(int pageNumber, int results_per_page)
+	public List<PlansDeviceprimary> findAllPlans(int pageNumber, int results_per_page)
 	{
 		Session session = HibernateSessionManager.getSession();
-		List<PlansDeviceprimaryEntity> plansPlanprimary = null;
+		List<PlansDeviceprimary> plansPlanprimary = null;
 		try {
-			List<PlansDeviceprimaryEntity> plansPlanprimaryList = null;
+			List<PlansDeviceprimary> plansPlanprimaryList = null;
 
 			String query = "Select a.* from plans_deviceprimary a  where a.is_active=1 ";
 			logger.debug("query in findAllPlans for all " + query);
 //			plansPlanprimaryList = new HibernateDAO().findBySQLQuery(session, PlansPlanprimary.class, query,"plans_planprimary");
-			plansPlanprimaryList = new HibernateDAO().findBySQLQueryWithPagination(session, query, PlansDeviceprimaryEntity.class, "plans_deviceprimary", pageNumber, results_per_page);
+			plansPlanprimaryList = new HibernateDAO().findBySQLQueryWithPagination(session, query, PlansDeviceprimary.class, "plans_deviceprimary", pageNumber, results_per_page);
 
 			logger.debug("findAllPlans Size = "+plansPlanprimaryList.size());
 			if ((null!=plansPlanprimaryList) && (plansPlanprimaryList.size()>0))
@@ -58,16 +58,16 @@ public class PlansDevicePrimaryDao {
 		return plansPlanprimary;
 	}
 	
-	public List<PlansDeviceprimaryEntity> findPlansByIDs(String planID)
+	public List<PlansDeviceprimary> findPlansByIDs(String planID)
 	{
 		Session session = HibernateSessionManager.getSession();
-		List<PlansDeviceprimaryEntity> plansPlanprimary = null;
+		List<PlansDeviceprimary> plansPlanprimary = null;
 		try {
-			List<PlansDeviceprimaryEntity> plansPlanprimaryList = null;
+			List<PlansDeviceprimary> plansPlanprimaryList = null;
 
 			String query = "Select a.* from plans_deviceprimary a where a.is_active=1 and a.id in ("+planID+")";
 			logger.debug("query in findPlansByIDs for all " + query);
-			plansPlanprimaryList = new HibernateDAO().findBySQLQuery(session, PlansDeviceprimaryEntity.class, query,"plans_deviceprimary");
+			plansPlanprimaryList = new HibernateDAO().findBySQLQuery(session, PlansDeviceprimary.class, query,"plans_deviceprimary");
 
 			logger.debug("findPlansByIDs Size = "+plansPlanprimaryList.size());
 			if ((null!=plansPlanprimaryList) && (plansPlanprimaryList.size()>0))
@@ -86,16 +86,16 @@ public class PlansDevicePrimaryDao {
 		return plansPlanprimary;
 	}
 
-	public PlansDeviceprimaryEntity findDevicePlansByIDs(String planID)
+	public PlansDeviceprimary findDevicePlansByIDs(String planID)
 	{
 		Session session = HibernateSessionManager.getSession();
-		PlansDeviceprimaryEntity plansPlanprimary = null;
+		PlansDeviceprimary plansPlanprimary = null;
 		try {
-			List<PlansDeviceprimaryEntity> plansPlanprimaryList = null;
+			List<PlansDeviceprimary> plansPlanprimaryList = null;
 
 			String query = "Select a.* from plans_deviceprimary a where a.is_active=1 and a.id in ("+planID+")";
 			logger.debug("query in findPlansByIDs for all " + query);
-			plansPlanprimaryList = new HibernateDAO().findBySQLQuery(session, PlansDeviceprimaryEntity.class, query,"plans_deviceprimary");
+			plansPlanprimaryList = new HibernateDAO().findBySQLQuery(session, PlansDeviceprimary.class, query,"plans_deviceprimary");
 
 			logger.debug("findPlansByIDs Size = "+plansPlanprimaryList.size());
 			if ((null!=plansPlanprimaryList) && (plansPlanprimaryList.size()>0))
@@ -115,17 +115,17 @@ public class PlansDevicePrimaryDao {
 	}
 
 
-	public List<PlansDeviceprimaryEntity> findPlansByFilterOLD(String query, int pageNumber, int results_per_page)
+	public List<PlansDeviceprimary> findPlansByFilterOLD(String query, int pageNumber, int results_per_page)
 	{
 		Session session = HibernateSessionManager.getSession();
-		List<PlansDeviceprimaryEntity> plansPlanprimary = null;
+		List<PlansDeviceprimary> plansPlanprimary = null;
 		try {
-			List<PlansDeviceprimaryEntity> plansPlanprimaryList = null;
+			List<PlansDeviceprimary> plansPlanprimaryList = null;
 
 //			String query = "Select a.* from plans_deviceprimary a  where a.is_active=1 order by a.cost";
 			logger.debug("query in findAllPlans for all " + query);
 //			plansPlanprimaryList = new HibernateDAO().findBySQLQuery(session, PlansPlanprimary.class, query,"plans_planprimary");
-			plansPlanprimaryList = new HibernateDAO().findBySQLQueryWithPagination(session, query, PlansDeviceprimaryEntity.class, "plans_deviceprimary", pageNumber, results_per_page);
+			plansPlanprimaryList = new HibernateDAO().findBySQLQueryWithPagination(session, query, PlansDeviceprimary.class, "plans_deviceprimary", pageNumber, results_per_page);
 
 			logger.debug("findAllPlans Size = "+plansPlanprimaryList.size());
 			if ((null!=plansPlanprimaryList) && (plansPlanprimaryList.size()>0))
@@ -192,11 +192,11 @@ public class PlansDevicePrimaryDao {
 		Session session = HibernateSessionManager.getSession();
 		int rid = 0;
 		try {
-			List<PlansDeviceprimaryEntity> resultList = null;
+			List<PlansDeviceprimary> resultList = null;
 
 			String query = "Select * from plans_deviceprimary order by id desc";
 			logger.debug("query in findID in  PlansDeviceprimary " + query);
-			resultList = new HibernateDAO().findBySQLQuery(session, PlansDeviceprimaryEntity.class, query,"plans_deviceprimary");
+			resultList = new HibernateDAO().findBySQLQuery(session, PlansDeviceprimary.class, query,"plans_deviceprimary");
 
 			logger.debug("findID  in  PlansDeviceprimary Size = ");
 			if ((null!=resultList) && (resultList.size()>0))
@@ -419,16 +419,16 @@ public class PlansDevicePrimaryDao {
 
 
 
-	public PlansDeviceprimaryEntity findPlansByBrandModelOperatorIDs(String operator, String brand, String device, int memory, String commitment)
+	public PlansDeviceprimary findPlansByBrandModelOperatorIDs(String operator, String brand, String device, int memory, String commitment)
 	{
 		Session session = HibernateSessionManager.getSession();
-		PlansDeviceprimaryEntity plansPlanprimary = null;
+		PlansDeviceprimary plansPlanprimary = null;
 		try {
-			List<PlansDeviceprimaryEntity> plansPlanprimaryList = null;
+			List<PlansDeviceprimary> plansPlanprimaryList = null;
 
 			String query = "Select a.* from plans_deviceprimary a where a.is_active=1 and a.operator_id="+operator+" and brand_type = '"+brand+"' and device_model ='"+device+"' and device_memory="+memory+" and commitment='"+commitment+"'";
 			logger.debug("query in findPlansByIDs for all " + query);
-			plansPlanprimaryList = new HibernateDAO().findBySQLQuery(session, PlansDeviceprimaryEntity.class, query,"plans_deviceprimary");
+			plansPlanprimaryList = new HibernateDAO().findBySQLQuery(session, PlansDeviceprimary.class, query,"plans_deviceprimary");
 
 			logger.debug("findPlansByIDs Size = "+plansPlanprimaryList.size());
 			if ((null!=plansPlanprimaryList) && (plansPlanprimaryList.size()>0))
@@ -446,7 +446,7 @@ public class PlansDevicePrimaryDao {
 		return plansPlanprimary;
 	}
 
-	public void saveData(PlansDeviceprimaryEntity entityObj) {
+	public void saveData(PlansDeviceprimary entityObj) {
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
 		try {

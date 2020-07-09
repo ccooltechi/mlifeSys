@@ -7,20 +7,20 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.mobilelife.controler.mapper.bean.PlansPlanOperatorTnc;
+import com.mobilelife.controler.mapper.bean.PlansPlanOperatorTncBean;
 import com.mobilelife.persistance.dao.PlansPlanprimaryDao;
-import com.mobilelife.persistance.entities.PlansPlanOperatorTncEntity;
-import com.mobilelife.persistance.entities.PlansPlanprimaryEntity;
+import com.mobilelife.persistance.entities.PlansPlanOperatorTnc;
+import com.mobilelife.persistance.entities.PlansPlanprimary;
 
 public class PlansPlanOperatorTncMapper {
 	private static Logger logger = LoggerFactory.getLogger(PlansPlanOperatorTncMapper.class);
 
-    public List<PlansPlanOperatorTnc> mapBean(List<PlansPlanOperatorTncEntity> entityList) {
-        List<PlansPlanOperatorTnc> retBean = new ArrayList<PlansPlanOperatorTnc>();
+    public List<PlansPlanOperatorTncBean> mapBean(List<PlansPlanOperatorTnc> entityList) {
+        List<PlansPlanOperatorTncBean> retBean = new ArrayList<PlansPlanOperatorTncBean>();
         for (int i=0; i<entityList.size();i++)
         {
-            PlansPlanOperatorTncEntity entity = entityList.get(i);
-            PlansPlanOperatorTnc bean = new PlansPlanOperatorTnc();
+            PlansPlanOperatorTnc entity = entityList.get(i);
+            PlansPlanOperatorTncBean bean = new PlansPlanOperatorTncBean();
             bean.setId(entity.getId());
             bean.setIsActive(entity.getIsActive());
             bean.setPlanPrimaryId(entity.getPlanPrimaryId().getId());
@@ -31,8 +31,8 @@ public class PlansPlanOperatorTncMapper {
         return retBean;
     }
     
-    public PlansPlanOperatorTnc mapBean(PlansPlanOperatorTncEntity entity) {
-        PlansPlanOperatorTnc bean = new PlansPlanOperatorTnc();
+    public PlansPlanOperatorTncBean mapBean(PlansPlanOperatorTnc entity) {
+        PlansPlanOperatorTncBean bean = new PlansPlanOperatorTncBean();
         bean.setId(entity.getId());
         bean.setIsActive(entity.getIsActive());
         bean.setPlanPrimaryId(entity.getPlanPrimaryId().getId());
@@ -42,8 +42,8 @@ public class PlansPlanOperatorTncMapper {
         return bean;
     }
 
-    public PlansPlanOperatorTncEntity mapBeanToEntity(PlansPlanOperatorTnc bean, PlansPlanOperatorTncEntity existEntity) {
-        PlansPlanOperatorTncEntity updateEntity = existEntity;
+    public PlansPlanOperatorTnc mapBeanToEntity(PlansPlanOperatorTncBean bean, PlansPlanOperatorTnc existEntity) {
+        PlansPlanOperatorTnc updateEntity = existEntity;
         updateEntity.setIsActive(bean.getIsActive());
         updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setPlanFaq(bean.getPlanFaq());
@@ -52,10 +52,10 @@ public class PlansPlanOperatorTncMapper {
         return updateEntity;
     }
 
-    public PlansPlanOperatorTncEntity mapBeanToEntity(PlansPlanOperatorTnc bean) {
+    public PlansPlanOperatorTnc mapBeanToEntity(PlansPlanOperatorTncBean bean) {
         PlansPlanprimaryDao planrepository = new PlansPlanprimaryDao();
-        PlansPlanprimaryEntity plansPlanprimaryEntity = planrepository.findById(bean.getPlanPrimaryId());
-        PlansPlanOperatorTncEntity updateEntity = new PlansPlanOperatorTncEntity();
+        PlansPlanprimary plansPlanprimaryEntity = planrepository.findById(bean.getPlanPrimaryId());
+        PlansPlanOperatorTnc updateEntity = new PlansPlanOperatorTnc();
         updateEntity.setCreationDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setPlanPrimaryId(plansPlanprimaryEntity);

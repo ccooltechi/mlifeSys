@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.PlansPlaninternationalvideocallEntity;
-import com.mobilelife.persistance.entities.PlansPlanlocalcallsmsEntity;
+import com.mobilelife.persistance.entities.PlansPlaninternationalvideocall;
+import com.mobilelife.persistance.entities.PlansPlanlocalcallsms;
 
 public class PlansPlanlocalcallsmsDao {
 	private static Logger logger = LoggerFactory.getLogger(PlansPlanlocalcallsmsDao.class);
@@ -26,11 +26,11 @@ public class PlansPlanlocalcallsmsDao {
 		Session session = HibernateSessionManager.getSession();
 		int rid = 0;
 		try {
-			List<PlansPlanlocalcallsmsEntity> resultList = null;
+			List<PlansPlanlocalcallsms> resultList = null;
 
 			String query = "Select * from plans_planlocalcallsms order by id desc";
 			logger.debug("query in findID in  PlansPlanlocalcallsms " + query);
-			resultList = new HibernateDAO().findBySQLQuery(session, PlansPlanlocalcallsmsEntity.class, query,"plans_planlocalcallsms");
+			resultList = new HibernateDAO().findBySQLQuery(session, PlansPlanlocalcallsms.class, query,"plans_planlocalcallsms");
 
 			logger.debug("findID  in  PlansPlanlocalcallsms Size = "+resultList.size());
 			if ((null!=resultList) && (resultList.size()>0))
@@ -48,7 +48,7 @@ public class PlansPlanlocalcallsmsDao {
 		return rid;
 	}
 
-	public boolean saveData(PlansPlanlocalcallsmsEntity entityObj) {
+	public boolean saveData(PlansPlanlocalcallsms entityObj) {
 		boolean retVal = false; 
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -67,7 +67,7 @@ public class PlansPlanlocalcallsmsDao {
 		return retVal;
 	}
 
-	public boolean updateData(PlansPlanlocalcallsmsEntity entityObj) {
+	public boolean updateData(PlansPlanlocalcallsms entityObj) {
 		boolean retVal = false; 
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -85,13 +85,13 @@ public class PlansPlanlocalcallsmsDao {
 		}
 		return retVal;	}
 
-	public PlansPlanlocalcallsmsEntity findById(Integer id) {
+	public PlansPlanlocalcallsms findById(Integer id) {
 		Session session = HibernateSessionManager.getSession();
-		PlansPlanlocalcallsmsEntity entity = null;
+		PlansPlanlocalcallsms entity = null;
 		try {
-			Query query = session.getNamedQuery("PlansPlanlocalcallsmsEntity.findById");
+			Query query = session.getNamedQuery("PlansPlanlocalcallsms.findById");
 			query.setParameter("id", id);
-			entity = (PlansPlanlocalcallsmsEntity)(query.list().get(0));
+			entity = (PlansPlanlocalcallsms)(query.list().get(0));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {

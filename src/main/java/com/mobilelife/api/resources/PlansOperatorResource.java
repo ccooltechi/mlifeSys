@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.services.PlansOperatorServices;
 import com.mobilelife.common.CommonUtils;
-import com.mobilelife.controler.mapper.bean.PlansOperator;
+import com.mobilelife.controler.mapper.bean.PlansOperatorBean;
 import com.mobilelife.controler.mapper.request.OperatorRequest;
 
 import com.wordnik.swagger.annotations.*;
@@ -36,12 +36,12 @@ public class PlansOperatorResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @ApiOperation(produces="application/json", value = "Create New Operator", httpMethod="POST", notes = "<br>This service is used for creating new operator", response = PlansOperator.class)
-    @ApiResponses(value = { @ApiResponse(code = 200,response = PlansOperator.class, message = "Successful operation"),@ApiResponse(code = 400, message = "Bad Request", response = Error.class), @ApiResponse(code = 422, message = "Invalid data", response = Error.class), @ApiResponse(code = 500, message = "Internal Server Error", response = Error.class) })
+    @ApiOperation(produces="application/json", value = "Create New Operator", httpMethod="POST", notes = "<br>This service is used for creating new operator", response = PlansOperatorBean.class)
+    @ApiResponses(value = { @ApiResponse(code = 200,response = PlansOperatorBean.class, message = "Successful operation"),@ApiResponse(code = 400, message = "Bad Request", response = Error.class), @ApiResponse(code = 422, message = "Invalid data", response = Error.class), @ApiResponse(code = 500, message = "Internal Server Error", response = Error.class) })
     public Response createNew(OperatorRequest request) {
-    	PlansOperator bean = (PlansOperator)request.getRequest();
+    	PlansOperatorBean bean = (PlansOperatorBean)request.getRequest();
     	boolean status = service.createOrUpdate(bean);
-        List<PlansOperator> country = service.getAll();
+        List<PlansOperatorBean> country = service.getAll();
         Response response = commonUtils.buildResponse(country);
 		return response;
     }
@@ -50,11 +50,11 @@ public class PlansOperatorResource {
     @GET
 	@Path("/{authtoken}")
     @Produces(MediaType.APPLICATION_JSON)
-    @ApiOperation(produces="application/json", value = "Fetch All Operators", httpMethod="GET", notes = "<br>This service fetches all operators", response = PlansOperator.class)
-    @ApiResponses(value = { @ApiResponse(code = 200,response = PlansOperator.class, message = "Successful operation"),@ApiResponse(code = 400, message = "Bad Request", response = Error.class), @ApiResponse(code = 422, message = "Invalid data", response = Error.class), @ApiResponse(code = 500, message = "Internal Server Error", response = Error.class) })
+    @ApiOperation(produces="application/json", value = "Fetch All Operators", httpMethod="GET", notes = "<br>This service fetches all operators", response = PlansOperatorBean.class)
+    @ApiResponses(value = { @ApiResponse(code = 200,response = PlansOperatorBean.class, message = "Successful operation"),@ApiResponse(code = 400, message = "Bad Request", response = Error.class), @ApiResponse(code = 422, message = "Invalid data", response = Error.class), @ApiResponse(code = 500, message = "Internal Server Error", response = Error.class) })
 	public Response getAll(@PathParam("authtoken") String authtoken)
 	{
-        List<PlansOperator> bean = service.getAll();
+        List<PlansOperatorBean> bean = service.getAll();
         Response response = commonUtils.buildResponse(bean);
 		return response;
 	}
@@ -63,10 +63,10 @@ public class PlansOperatorResource {
     @GET
     @Path("/{authtoken}/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    @ApiOperation(produces="application/json", value = "Fetch Operators By operator id", httpMethod="GET", notes = "<br>This service fetches operator by id", response = PlansOperator.class)
-    @ApiResponses(value = { @ApiResponse(code = 200,response = PlansOperator.class, message = "Successful operation"),@ApiResponse(code = 400, message = "Bad Request", response = Error.class), @ApiResponse(code = 422, message = "Invalid data", response = Error.class), @ApiResponse(code = 500, message = "Internal Server Error", response = Error.class) })
+    @ApiOperation(produces="application/json", value = "Fetch Operators By operator id", httpMethod="GET", notes = "<br>This service fetches operator by id", response = PlansOperatorBean.class)
+    @ApiResponses(value = { @ApiResponse(code = 200,response = PlansOperatorBean.class, message = "Successful operation"),@ApiResponse(code = 400, message = "Bad Request", response = Error.class), @ApiResponse(code = 422, message = "Invalid data", response = Error.class), @ApiResponse(code = 500, message = "Internal Server Error", response = Error.class) })
     public Response getById(@PathParam("id") Integer id) {
-    	PlansOperator bean  = service.getById(id);
+    	PlansOperatorBean bean  = service.getById(id);
         Response response = commonUtils.buildResponse(bean);
 		return response;
     }
@@ -75,12 +75,12 @@ public class PlansOperatorResource {
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @ApiOperation(produces="application/json", value = "Update existing Operator By operator id", httpMethod="PUT", notes = "<br>This service updates existing operator", response = PlansOperator.class)
-    @ApiResponses(value = { @ApiResponse(code = 200,response = PlansOperator.class, message = "Successful operation"),@ApiResponse(code = 400, message = "Bad Request", response = Error.class), @ApiResponse(code = 422, message = "Invalid data", response = Error.class), @ApiResponse(code = 500, message = "Internal Server Error", response = Error.class) })
+    @ApiOperation(produces="application/json", value = "Update existing Operator By operator id", httpMethod="PUT", notes = "<br>This service updates existing operator", response = PlansOperatorBean.class)
+    @ApiResponses(value = { @ApiResponse(code = 200,response = PlansOperatorBean.class, message = "Successful operation"),@ApiResponse(code = 400, message = "Bad Request", response = Error.class), @ApiResponse(code = 422, message = "Invalid data", response = Error.class), @ApiResponse(code = 500, message = "Internal Server Error", response = Error.class) })
     public Response updateExisting(OperatorRequest request) {
-    	PlansOperator bean = (PlansOperator)request.getRequest();
+    	PlansOperatorBean bean = (PlansOperatorBean)request.getRequest();
     	boolean status = service.createOrUpdate(bean);
-        List<PlansOperator> country = service.getAll();
+        List<PlansOperatorBean> country = service.getAll();
         Response response = commonUtils.buildResponse(country);
 		return response;
     }
@@ -89,11 +89,11 @@ public class PlansOperatorResource {
     @DELETE
     @Path("/{authtoken}/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    @ApiOperation(produces="application/json", value = "Delete Operator By operator id", httpMethod="DELETE", notes = "<br>This service delete operator by id", response = PlansOperator.class)
-    @ApiResponses(value = { @ApiResponse(code = 200,response = PlansOperator.class, message = "Successful operation"),@ApiResponse(code = 400, message = "Bad Request", response = Error.class), @ApiResponse(code = 422, message = "Invalid data", response = Error.class), @ApiResponse(code = 500, message = "Internal Server Error", response = Error.class) })
+    @ApiOperation(produces="application/json", value = "Delete Operator By operator id", httpMethod="DELETE", notes = "<br>This service delete operator by id", response = PlansOperatorBean.class)
+    @ApiResponses(value = { @ApiResponse(code = 200,response = PlansOperatorBean.class, message = "Successful operation"),@ApiResponse(code = 400, message = "Bad Request", response = Error.class), @ApiResponse(code = 422, message = "Invalid data", response = Error.class), @ApiResponse(code = 500, message = "Internal Server Error", response = Error.class) })
     public Response deleteExisting(@PathParam("id") Integer id) {
     	boolean status = service.delete(id);
-        List<PlansOperator> bean = service.getAll();
+        List<PlansOperatorBean> bean = service.getAll();
         Response response = commonUtils.buildResponse(bean);
 		return response;
     }

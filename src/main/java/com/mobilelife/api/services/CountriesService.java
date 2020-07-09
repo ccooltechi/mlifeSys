@@ -9,9 +9,9 @@ import org.slf4j.LoggerFactory;
 import com.mobilelife.api.exception.RecordNotFoundException;
 import com.mobilelife.api.resources.CountryResource;
 import com.mobilelife.controler.mapper.CountryMapper;
-import com.mobilelife.controler.mapper.bean.Countries;
+import com.mobilelife.controler.mapper.bean.CountriesBean;
 import com.mobilelife.persistance.dao.CountryDao;
-import com.mobilelife.persistance.entities.CountriesEntity;
+import com.mobilelife.persistance.entities.Countries;
 
 public class CountriesService {
 
@@ -19,16 +19,16 @@ public class CountriesService {
 	CountryDao repository = new CountryDao();
 	CountryMapper mapper = new CountryMapper();
 
-	public List<Countries> getAll() {
-        List<CountriesEntity> entity = repository.findAll();
-        List<Countries> bean = mapper.mapBean(entity);
+	public List<CountriesBean> getAll() {
+        List<Countries> entity = repository.findAll();
+        List<CountriesBean> bean = mapper.mapBean(entity);
 		return bean;
 	}
 
-    public Countries getById(Integer id)
+    public CountriesBean getById(Integer id)
     {
-        CountriesEntity entity = repository.findById(id);
-        Countries bean = mapper.mapBean(entity);
+        Countries entity = repository.findById(id);
+        CountriesBean bean = mapper.mapBean(entity);
         if(null!=entity) {
         	repository.findByCodes("'"+entity.getCountryCode()+"'");
             return bean;
@@ -37,15 +37,15 @@ public class CountriesService {
         }
     }
      
-    public boolean createOrUpdate(CountriesEntity entity)
+    public boolean createOrUpdate(Countries entity)
     {
     	boolean retVal = false;
     	if(entity.getId()!=null)
     	{
-    		CountriesEntity existEntity = repository.findById(entity.getId());
+    		Countries existEntity = repository.findById(entity.getId());
     		if(null!=existEntity)
 	        {
-	    		CountriesEntity updateEntity = existEntity;
+	    		Countries updateEntity = existEntity;
 	    		updateEntity.setCountryCode(entity.getCountryCode());
 	    		updateEntity.setCountryName(entity.getCountryName());
 	            retVal = repository.updateData(updateEntity);
@@ -65,7 +65,7 @@ public class CountriesService {
     public boolean delete(Integer id)
     {
     	boolean retVal =false;
-		CountriesEntity entity = repository.findById(id);
+		Countries entity = repository.findById(id);
 		if(null!=entity)
         {
 			retVal = repository.deleteData(entity);

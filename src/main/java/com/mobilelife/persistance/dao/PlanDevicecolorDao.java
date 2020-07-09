@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.PlanDevicecolorEntity;
+import com.mobilelife.persistance.entities.PlanDevicecolor;
 
 public class PlanDevicecolorDao {
 	private static Logger logger = LoggerFactory.getLogger(PlanDevicecolorDao.class);
@@ -20,12 +20,12 @@ public class PlanDevicecolorDao {
 		
 	}
 	
-	public List<PlanDevicecolorEntity> findAll()
+	public List<PlanDevicecolor> findAll()
 	{
 		Session session = HibernateSessionManager.getSession();
-		List<PlanDevicecolorEntity> planDevicebrand = null;
+		List<PlanDevicecolor> planDevicebrand = null;
 		try {
-			Query query = session.getNamedQuery("PlanDevicecolorEntity.findAll");
+			Query query = session.getNamedQuery("PlanDevicecolor.findAll");
 			planDevicebrand = query.list();
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -37,14 +37,14 @@ public class PlanDevicecolorDao {
 		return planDevicebrand;
 	}
 
-	public PlanDevicecolorEntity findByName(String deviceBrand)
+	public PlanDevicecolor findByName(String deviceBrand)
 	{
 		Session session = HibernateSessionManager.getSession();
-		PlanDevicecolorEntity planDevicebrand = null;
+		PlanDevicecolor planDevicebrand = null;
 		try {
-			Query query = session.getNamedQuery("PlanDevicecolorEntity.findByDeviceColor");
+			Query query = session.getNamedQuery("PlanDevicecolor.findByDeviceColor");
 			query.setParameter("deviceBrand", deviceBrand);
-			planDevicebrand = (PlanDevicecolorEntity)query.list().get(0);
+			planDevicebrand = (PlanDevicecolor)query.list().get(0);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
@@ -55,13 +55,13 @@ public class PlanDevicecolorDao {
 		return planDevicebrand;
 	}
 
-	public PlanDevicecolorEntity findById(Integer id) {
+	public PlanDevicecolor findById(Integer id) {
 		Session session = HibernateSessionManager.getSession();
-		PlanDevicecolorEntity entity = null;
+		PlanDevicecolor entity = null;
 		try {
-			Query query = session.getNamedQuery("PlanDevicecolorEntity.findById");
+			Query query = session.getNamedQuery("PlanDevicecolor.findById");
 			query.setParameter("id", id);
-			entity = (PlanDevicecolorEntity)(query.list().get(0));
+			entity = (PlanDevicecolor)(query.list().get(0));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
@@ -73,7 +73,7 @@ public class PlanDevicecolorDao {
 		return entity;
 	}
 	
-	public boolean saveData(PlanDevicecolorEntity entityObj) {
+	public boolean saveData(PlanDevicecolor entityObj) {
 		boolean retVal = false;
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -91,7 +91,7 @@ public class PlanDevicecolorDao {
 		return retVal;
 	}
 
-	public boolean updateData(PlanDevicecolorEntity entityObj) {
+	public boolean updateData(PlanDevicecolor entityObj) {
 		boolean retVal = false;
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -109,7 +109,7 @@ public class PlanDevicecolorDao {
 		return retVal;
 	}
 
-	public boolean deleteData(PlanDevicecolorEntity entityObj) {
+	public boolean deleteData(PlanDevicecolor entityObj) {
 		boolean retVal = false;
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -132,11 +132,11 @@ public class PlanDevicecolorDao {
 		Session session = HibernateSessionManager.getSession();
 		int rid = 0;
 		try {
-			List<PlanDevicecolorEntity> plansPlanfeeList = null;
+			List<PlanDevicecolor> plansPlanfeeList = null;
 
 			String query = "Select * from plan_devicecolor order by id desc limit 1";
 			logger.debug("query in findID in  findId " + query);
-			plansPlanfeeList = new HibernateDAO().findBySQLQuery(session, PlanDevicecolorEntity.class, query,"plan_devicecolor");
+			plansPlanfeeList = new HibernateDAO().findBySQLQuery(session, PlanDevicecolor.class, query,"plan_devicecolor");
 
 			logger.debug("findID  in  findId Size = "+plansPlanfeeList.size());
 			if ((null!=plansPlanfeeList) && (plansPlanfeeList.size()>0))

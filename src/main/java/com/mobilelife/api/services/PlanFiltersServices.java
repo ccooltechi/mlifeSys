@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.exception.RecordNotFoundException;
 import com.mobilelife.controler.mapper.PlanFiltersMapper;
-import com.mobilelife.controler.mapper.bean.PlanFilters;
+import com.mobilelife.controler.mapper.bean.PlanFiltersBean;
 import com.mobilelife.persistance.dao.PlanFilterDao;
-import com.mobilelife.persistance.entities.PlanFiltersEntity;
+import com.mobilelife.persistance.entities.PlanFilters;
 
 
 public class PlanFiltersServices {
@@ -18,16 +18,16 @@ public class PlanFiltersServices {
 	PlanFilterDao repository = new PlanFilterDao();
 	PlanFiltersMapper mapper = new PlanFiltersMapper();
 
-	public List<PlanFilters> getAll() {
-        List<PlanFiltersEntity> entityList = repository.findAll();
-        List<PlanFilters> bean = mapper.mapBean(entityList);
+	public List<PlanFiltersBean> getAll() {
+        List<PlanFilters> entityList = repository.findAll();
+        List<PlanFiltersBean> bean = mapper.mapBean(entityList);
 		return bean;
 	}
 
-    public PlanFilters getById(Integer id)
+    public PlanFiltersBean getById(Integer id)
     {
-    	PlanFiltersEntity entity = repository.findById(id);
-    	PlanFilters bean = mapper.mapBean(entity);
+    	PlanFilters entity = repository.findById(id);
+    	PlanFiltersBean bean = mapper.mapBean(entity);
         if(null!=entity) {
             return bean;
         } else {
@@ -35,19 +35,19 @@ public class PlanFiltersServices {
         }
     }
      
-    public boolean createOrUpdate(PlanFilters bean)
+    public boolean createOrUpdate(PlanFiltersBean bean)
     {
     	boolean retVal = false;
     	if ((bean.getId()!=null) && (bean.getId()>0))
     	{
-    		PlanFiltersEntity existEntity = repository.findById(bean.getId());
+    		PlanFilters existEntity = repository.findById(bean.getId());
     		if(null!=existEntity)
 	        {
-    			PlanFiltersEntity entity = mapper.mapBeanToEntity(bean, existEntity);
+    			PlanFilters entity = mapper.mapBeanToEntity(bean, existEntity);
 	            retVal = repository.updateData(entity);
 	            return retVal;
 	        } else {
-	        	PlanFiltersEntity entity = mapper.mapBeanToEntity(bean);
+	        	PlanFilters entity = mapper.mapBeanToEntity(bean);
     			int id = repository.findId()+1;
     			entity.setId(id);		
 	        	retVal = repository.saveData(entity);
@@ -56,7 +56,7 @@ public class PlanFiltersServices {
     	}
     	else
     	{
-    		PlanFiltersEntity entity = mapper.mapBeanToEntity(bean);
+    		PlanFilters entity = mapper.mapBeanToEntity(bean);
 			int id = repository.findId()+1;
 			entity.setId(id);		
     		retVal = repository.saveData(entity);
@@ -67,7 +67,7 @@ public class PlanFiltersServices {
     public boolean delete(Integer id)
     {
     	boolean retVal =false;
-    	PlanFiltersEntity entity = repository.findById(id);
+    	PlanFilters entity = repository.findById(id);
 		if(null!=entity)
         {
 			retVal = repository.deleteData(entity);

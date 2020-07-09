@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.PlansPlannationalminutesonnetEntity;
-import com.mobilelife.persistance.entities.PlansPlanoutofbundleEntity;
+import com.mobilelife.persistance.entities.PlansPlannationalminutesonnet;
+import com.mobilelife.persistance.entities.PlansPlanoutofbundle;
 
 public class PlansPlanoutofbundleDao {
 	private static Logger logger = LoggerFactory.getLogger(PlansPlanoutofbundleDao.class);
@@ -26,11 +26,11 @@ public class PlansPlanoutofbundleDao {
 		Session session = HibernateSessionManager.getSession();
 		int rid = 0;
 		try {
-			List<PlansPlanoutofbundleEntity> resultList = null;
+			List<PlansPlanoutofbundle> resultList = null;
 
 			String query = "Select * from plans_planoutofbundle order by id desc";
 			logger.debug("query in findID in  PlansPlanoutofbundle " + query);
-			resultList = new HibernateDAO().findBySQLQuery(session, PlansPlanoutofbundleEntity.class, query,"plans_planoutofbundle");
+			resultList = new HibernateDAO().findBySQLQuery(session, PlansPlanoutofbundle.class, query,"plans_planoutofbundle");
 
 			logger.debug("findID  in  PlansPlanoutofbundle Size = "+resultList.size());
 			if ((null!=resultList) && (resultList.size()>0))
@@ -48,7 +48,7 @@ public class PlansPlanoutofbundleDao {
 		return rid;
 	}
 
-	public boolean saveData(PlansPlanoutofbundleEntity entityObj) {
+	public boolean saveData(PlansPlanoutofbundle entityObj) {
 		boolean retVal = false; 
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -67,7 +67,7 @@ public class PlansPlanoutofbundleDao {
 		return retVal;
 	}
 
-	public boolean updateData(PlansPlanoutofbundleEntity entityObj) {
+	public boolean updateData(PlansPlanoutofbundle entityObj) {
 		boolean retVal = false; 
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -86,13 +86,13 @@ public class PlansPlanoutofbundleDao {
 		return retVal;
 	}
 
-	public PlansPlanoutofbundleEntity findById(Integer id) {
+	public PlansPlanoutofbundle findById(Integer id) {
 		Session session = HibernateSessionManager.getSession();
-		PlansPlanoutofbundleEntity entity = null;
+		PlansPlanoutofbundle entity = null;
 		try {
-			Query query = session.getNamedQuery("PlansPlanoutofbundleEntity.findById");
+			Query query = session.getNamedQuery("PlansPlanoutofbundle.findById");
 			query.setParameter("id", id);
-			entity = (PlansPlanoutofbundleEntity)(query.list().get(0));
+			entity = (PlansPlanoutofbundle)(query.list().get(0));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {

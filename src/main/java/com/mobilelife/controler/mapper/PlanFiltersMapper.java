@@ -7,20 +7,20 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.mobilelife.controler.mapper.bean.PlanFilters;
+import com.mobilelife.controler.mapper.bean.PlanFiltersBean;
 import com.mobilelife.persistance.dao.PlansTypePlanDao;
-import com.mobilelife.persistance.entities.PlanFiltersEntity;
-import com.mobilelife.persistance.entities.PlansPlantypeEntity;
+import com.mobilelife.persistance.entities.PlanFilters;
+import com.mobilelife.persistance.entities.PlansPlantype;
 
 public class PlanFiltersMapper {
 	private static Logger logger = LoggerFactory.getLogger(PlanFiltersMapper.class);
 
-    public List<PlanFilters> mapBean(List<PlanFiltersEntity> entityList) {
-        List<PlanFilters> retBean = new ArrayList<PlanFilters>();
+    public List<PlanFiltersBean> mapBean(List<PlanFilters> entityList) {
+        List<PlanFiltersBean> retBean = new ArrayList<PlanFiltersBean>();
         for (int i=0; i<entityList.size();i++)
         {
-            PlanFiltersEntity entity = entityList.get(i);
-            PlanFilters bean = new PlanFilters();
+            PlanFilters entity = entityList.get(i);
+            PlanFiltersBean bean = new PlanFiltersBean();
             bean.setId(entity.getId());
             bean.setActive(entity.isActive());
             bean.setPlanType(entity.getPlanType().getId());
@@ -49,8 +49,8 @@ public class PlanFiltersMapper {
         return retBean;
     }
     
-    public PlanFilters mapBean(PlanFiltersEntity entity) {
-        PlanFilters bean = new PlanFilters();
+    public PlanFiltersBean mapBean(PlanFilters entity) {
+        PlanFiltersBean bean = new PlanFiltersBean();
         bean.setId(entity.getId());
         bean.setActive(entity.isActive());
         bean.setPlanType(entity.getPlanType().getId());
@@ -77,9 +77,9 @@ public class PlanFiltersMapper {
         return bean;
     }
 
-    public PlanFiltersEntity mapBeanToEntity(PlanFilters bean, PlanFiltersEntity existEntity) {
-        PlanFiltersEntity updateEntity = existEntity;
-        PlansPlantypeEntity plantypeentity = new PlansTypePlanDao().findById(bean.getPlanType());
+    public PlanFilters mapBeanToEntity(PlanFiltersBean bean, PlanFilters existEntity) {
+        PlanFilters updateEntity = existEntity;
+        PlansPlantype plantypeentity = new PlansTypePlanDao().findById(bean.getPlanType());
         updateEntity.setActive(bean.isActive());
         updateEntity.setPlanType(plantypeentity);
         updateEntity.setAddon(bean.isAddon());
@@ -105,9 +105,9 @@ public class PlanFiltersMapper {
         return updateEntity;
     }
 
-    public PlanFiltersEntity mapBeanToEntity(PlanFilters bean) {
-        PlanFiltersEntity updateEntity = new PlanFiltersEntity();
-        PlansPlantypeEntity plantypeentity = new PlansTypePlanDao().findById(bean.getPlanType());
+    public PlanFilters mapBeanToEntity(PlanFiltersBean bean) {
+        PlanFilters updateEntity = new PlanFilters();
+        PlansPlantype plantypeentity = new PlansTypePlanDao().findById(bean.getPlanType());
         updateEntity.setActive(bean.isActive());
         updateEntity.setPlanType(plantypeentity);
         updateEntity.setAddon(bean.isAddon());

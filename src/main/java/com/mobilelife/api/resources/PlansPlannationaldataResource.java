@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.services.PlansPlannationaldataServices;
 import com.mobilelife.common.CommonUtils;
-import com.mobilelife.controler.mapper.bean.PlansPlannationaldata;
+import com.mobilelife.controler.mapper.bean.PlansPlannationaldataBean;
 import com.mobilelife.controler.mapper.request.PlansPlannationaldataRequest;
 
 @Path("/planNationaldata")
@@ -30,9 +30,9 @@ public class PlansPlannationaldataResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createNew(PlansPlannationaldataRequest request) {
-        PlansPlannationaldata bean = (PlansPlannationaldata)request.getRequest();
+        PlansPlannationaldataBean bean = (PlansPlannationaldataBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlannationaldata country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlannationaldataBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }
@@ -42,7 +42,7 @@ public class PlansPlannationaldataResource {
     @Path("/{authtoken}/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") Integer id) {
-        PlansPlannationaldata bean  = service.getByPlanId(id);
+        PlansPlannationaldataBean bean  = service.getByPlanId(id);
         Response response = commonUtils.buildResponse(bean);
         return response;
     }
@@ -52,9 +52,9 @@ public class PlansPlannationaldataResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateExisting(PlansPlannationaldataRequest request) {
-        PlansPlannationaldata bean = (PlansPlannationaldata)request.getRequest();
+        PlansPlannationaldataBean bean = (PlansPlannationaldataBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlannationaldata country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlannationaldataBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }

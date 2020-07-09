@@ -7,20 +7,20 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.mobilelife.controler.mapper.bean.PlansPlanpreferrednumbers;
+import com.mobilelife.controler.mapper.bean.PlansPlanpreferrednumbersBean;
 import com.mobilelife.persistance.dao.PlansPlanprimaryDao;
-import com.mobilelife.persistance.entities.PlansPlanpreferrednumbersEntity;
-import com.mobilelife.persistance.entities.PlansPlanprimaryEntity;
+import com.mobilelife.persistance.entities.PlansPlanpreferrednumbers;
+import com.mobilelife.persistance.entities.PlansPlanprimary;
 
 public class PlansPlanpreferrednumbersMapper {
 	private static Logger logger = LoggerFactory.getLogger(PlansPlanpreferrednumbersMapper.class);
 
-    public List<PlansPlanpreferrednumbers> mapBean(List<PlansPlanpreferrednumbersEntity> entityList) {
-        List<PlansPlanpreferrednumbers> retBean = new ArrayList<PlansPlanpreferrednumbers>();
+    public List<PlansPlanpreferrednumbersBean> mapBean(List<PlansPlanpreferrednumbers> entityList) {
+        List<PlansPlanpreferrednumbersBean> retBean = new ArrayList<PlansPlanpreferrednumbersBean>();
         for (int i=0; i<entityList.size();i++)
         {
-            PlansPlanpreferrednumbersEntity entity = entityList.get(i);
-            PlansPlanpreferrednumbers bean = new PlansPlanpreferrednumbers();
+            PlansPlanpreferrednumbers entity = entityList.get(i);
+            PlansPlanpreferrednumbersBean bean = new PlansPlanpreferrednumbersBean();
             bean.setId(entity.getId());
             bean.setIsActive(entity.getIsActive());
             bean.setPlanPrimaryId(entity.getPlanPrimaryId().getId());
@@ -38,8 +38,8 @@ public class PlansPlanpreferrednumbersMapper {
         return retBean;
     }
     
-    public PlansPlanpreferrednumbers mapBean(PlansPlanpreferrednumbersEntity entity) {
-        PlansPlanpreferrednumbers bean = new PlansPlanpreferrednumbers();
+    public PlansPlanpreferrednumbersBean mapBean(PlansPlanpreferrednumbers entity) {
+        PlansPlanpreferrednumbersBean bean = new PlansPlanpreferrednumbersBean();
         bean.setId(entity.getId());
         bean.setIsActive(entity.getIsActive());
         bean.setPlanPrimaryId(entity.getPlanPrimaryId().getId());
@@ -56,8 +56,8 @@ public class PlansPlanpreferrednumbersMapper {
         return bean;
     }
 
-    public PlansPlanpreferrednumbersEntity mapBeanToEntity(PlansPlanpreferrednumbers bean, PlansPlanpreferrednumbersEntity existEntity) {
-        PlansPlanpreferrednumbersEntity updateEntity = existEntity;
+    public PlansPlanpreferrednumbers mapBeanToEntity(PlansPlanpreferrednumbersBean bean, PlansPlanpreferrednumbers existEntity) {
+        PlansPlanpreferrednumbers updateEntity = existEntity;
         updateEntity.setIsActive(bean.getIsActive());
         updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setPreferredNumbersCallsmin(bean.getPreferredNumbersCallsmin());
@@ -73,10 +73,10 @@ public class PlansPlanpreferrednumbersMapper {
         return updateEntity;
     }
 
-    public PlansPlanpreferrednumbersEntity mapBeanToEntity(PlansPlanpreferrednumbers bean) {
+    public PlansPlanpreferrednumbers mapBeanToEntity(PlansPlanpreferrednumbersBean bean) {
         PlansPlanprimaryDao planrepository = new PlansPlanprimaryDao();
-        PlansPlanprimaryEntity plansPlanprimaryEntity = planrepository.findById(bean.getPlanPrimaryId());
-        PlansPlanpreferrednumbersEntity updateEntity = new PlansPlanpreferrednumbersEntity();
+        PlansPlanprimary plansPlanprimaryEntity = planrepository.findById(bean.getPlanPrimaryId());
+        PlansPlanpreferrednumbers updateEntity = new PlansPlanpreferrednumbers();
         updateEntity.setCreationDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setPlanPrimaryId(plansPlanprimaryEntity);

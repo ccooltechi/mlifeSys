@@ -5,11 +5,11 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.exception.RecordNotFoundException;
 import com.mobilelife.controler.mapper.PlansPlanwifiMapper;
-import com.mobilelife.controler.mapper.bean.PlansPlanwifi;
+import com.mobilelife.controler.mapper.bean.PlansPlanwifiBean;
 import com.mobilelife.persistance.dao.PlansPlanprimaryDao;
 import com.mobilelife.persistance.dao.PlansPlanwifiDao;
-import com.mobilelife.persistance.entities.PlansPlanprimaryEntity;
-import com.mobilelife.persistance.entities.PlansPlanwifiEntity;
+import com.mobilelife.persistance.entities.PlansPlanprimary;
+import com.mobilelife.persistance.entities.PlansPlanwifi;
 
 
 public class PlansPlanwifiServices {
@@ -19,31 +19,31 @@ public class PlansPlanwifiServices {
 	PlansPlanwifiMapper mapper = new PlansPlanwifiMapper();
 	PlansPlanprimaryDao planrepository = new PlansPlanprimaryDao();
 
-    public PlansPlanwifi getByPlanId(Integer id)
+    public PlansPlanwifiBean getByPlanId(Integer id)
     {
-    	PlansPlanprimaryEntity plansPlanprimaryEntity = planrepository.findById(id);
-    	PlansPlanwifiEntity entity = plansPlanprimaryEntity.getPlansPlanwifi();
+    	PlansPlanprimary plansPlanprimaryEntity = planrepository.findById(id);
+    	PlansPlanwifi entity = plansPlanprimaryEntity.getPlansPlanwifi();
         if(null!=entity) {
-        	PlansPlanwifi bean = mapper.mapBean(entity);
+        	PlansPlanwifiBean bean = mapper.mapBean(entity);
             return bean;
         } else {
             throw new RecordNotFoundException("No record exist for given id "+id);
         }
     }
      
-    public boolean createOrUpdate(PlansPlanwifi bean)
+    public boolean createOrUpdate(PlansPlanwifiBean bean)
     {
     	boolean retVal = false;
     	if ((bean.getId()!=null) && (bean.getId()>0))
     	{
-    		PlansPlanwifiEntity existEntity = repository.findById(bean.getId());
+    		PlansPlanwifi existEntity = repository.findById(bean.getId());
     		if(null!=existEntity)
 	        {
-    			PlansPlanwifiEntity entity = mapper.mapBeanToEntity(bean, existEntity);
+    			PlansPlanwifi entity = mapper.mapBeanToEntity(bean, existEntity);
 	            retVal = repository.updateData(entity);
 	            return retVal;
 	        } else {
-	        	PlansPlanwifiEntity entity = mapper.mapBeanToEntity(bean);
+	        	PlansPlanwifi entity = mapper.mapBeanToEntity(bean);
     			int id = repository.findId()+1;
     			entity.setId(id);		
 	        	retVal = repository.saveData(entity);
@@ -52,7 +52,7 @@ public class PlansPlanwifiServices {
     	}
     	else
     	{
-    		PlansPlanwifiEntity entity = mapper.mapBeanToEntity(bean);
+    		PlansPlanwifi entity = mapper.mapBeanToEntity(bean);
 			int id = repository.findId()+1;
 			entity.setId(id);		
     		retVal = repository.saveData(entity);

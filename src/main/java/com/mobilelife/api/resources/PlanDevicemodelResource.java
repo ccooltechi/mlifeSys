@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.services.PlanDevicemodelServices;
 import com.mobilelife.common.CommonUtils;
-import com.mobilelife.controler.mapper.bean.PlanDevicemodel;
+import com.mobilelife.controler.mapper.bean.PlanDevicemodelBean;
 import com.mobilelife.controler.mapper.request.PlanDevicemodelRequest;
 
 @Path("/devicemodel")
@@ -32,9 +32,9 @@ public class PlanDevicemodelResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createNew(PlanDevicemodelRequest request) {
-    	PlanDevicemodel bean = (PlanDevicemodel)request.getRequest();
+    	PlanDevicemodelBean bean = (PlanDevicemodelBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        List<PlanDevicemodel> country = service.getAll();
+        List<PlanDevicemodelBean> country = service.getAll();
         Response response = commonUtils.buildResponse(country);
         return response;
     }
@@ -45,7 +45,7 @@ public class PlanDevicemodelResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll(@PathParam("authtoken") String authtoken)
     {
-        List<PlanDevicemodel> bean = service.getAll();
+        List<PlanDevicemodelBean> bean = service.getAll();
         Response response = commonUtils.buildResponse(bean);
         return response;
     }
@@ -55,7 +55,7 @@ public class PlanDevicemodelResource {
     @Path("/{authtoken}/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") Integer id) {
-    	PlanDevicemodel bean  = service.getById(id);
+    	PlanDevicemodelBean bean  = service.getById(id);
         Response response = commonUtils.buildResponse(bean);
         return response;
     }
@@ -65,9 +65,9 @@ public class PlanDevicemodelResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateExisting(PlanDevicemodelRequest request) {
-    	PlanDevicemodel bean = (PlanDevicemodel)request.getRequest();
+    	PlanDevicemodelBean bean = (PlanDevicemodelBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        List<PlanDevicemodel> country = service.getAll();
+        List<PlanDevicemodelBean> country = service.getAll();
         Response response = commonUtils.buildResponse(country);
         return response;
     }
@@ -78,7 +78,7 @@ public class PlanDevicemodelResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteExisting(@PathParam("id") Integer id) {
         boolean status = service.delete(id);
-        List<PlanDevicemodel> bean = service.getAll();
+        List<PlanDevicemodelBean> bean = service.getAll();
         Response response = commonUtils.buildResponse(bean);
         return response;
     }

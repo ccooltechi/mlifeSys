@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.services.PlansPlansmsoffnetServices;
 import com.mobilelife.common.CommonUtils;
-import com.mobilelife.controler.mapper.bean.PlansPlansmsoffnet;
+import com.mobilelife.controler.mapper.bean.PlansPlansmsoffnetBean;
 import com.mobilelife.controler.mapper.request.PlansPlansmsoffnetRequest;
 
 @Path("/plansmsoffnet")
@@ -30,9 +30,9 @@ public class PlansPlansmsoffnetResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createNew(PlansPlansmsoffnetRequest request) {
-        PlansPlansmsoffnet bean = (PlansPlansmsoffnet)request.getRequest();
+        PlansPlansmsoffnetBean bean = (PlansPlansmsoffnetBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlansmsoffnet country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlansmsoffnetBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }
@@ -42,7 +42,7 @@ public class PlansPlansmsoffnetResource {
     @Path("/{authtoken}/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") Integer id) {
-        PlansPlansmsoffnet bean  = service.getByPlanId(id);
+        PlansPlansmsoffnetBean bean  = service.getByPlanId(id);
         Response response = commonUtils.buildResponse(bean);
         return response;
     }
@@ -52,9 +52,9 @@ public class PlansPlansmsoffnetResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateExisting(PlansPlansmsoffnetRequest request) {
-        PlansPlansmsoffnet bean = (PlansPlansmsoffnet)request.getRequest();
+        PlansPlansmsoffnetBean bean = (PlansPlansmsoffnetBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlansmsoffnet country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlansmsoffnetBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }

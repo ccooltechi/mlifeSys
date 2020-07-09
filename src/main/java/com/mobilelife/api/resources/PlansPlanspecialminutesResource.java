@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.services.PlansPlanspecialminutesServices;
 import com.mobilelife.common.CommonUtils;
-import com.mobilelife.controler.mapper.bean.PlansPlanspecialminutes;
+import com.mobilelife.controler.mapper.bean.PlansPlanspecialminutesBean;
 import com.mobilelife.controler.mapper.request.PlansPlanspecialminutesRequest;
 
 @Path("/planspecialminutes")
@@ -30,9 +30,9 @@ public class PlansPlanspecialminutesResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createNew(PlansPlanspecialminutesRequest request) {
-        PlansPlanspecialminutes bean = (PlansPlanspecialminutes)request.getRequest();
+        PlansPlanspecialminutesBean bean = (PlansPlanspecialminutesBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlanspecialminutes country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlanspecialminutesBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }
@@ -42,7 +42,7 @@ public class PlansPlanspecialminutesResource {
     @Path("/{authtoken}/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") Integer id) {
-        PlansPlanspecialminutes bean  = service.getByPlanId(id);
+        PlansPlanspecialminutesBean bean  = service.getByPlanId(id);
         Response response = commonUtils.buildResponse(bean);
         return response;
     }
@@ -52,9 +52,9 @@ public class PlansPlanspecialminutesResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateExisting(PlansPlanspecialminutesRequest request) {
-        PlansPlanspecialminutes bean = (PlansPlanspecialminutes)request.getRequest();
+        PlansPlanspecialminutesBean bean = (PlansPlanspecialminutesBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlanspecialminutes country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlanspecialminutesBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }

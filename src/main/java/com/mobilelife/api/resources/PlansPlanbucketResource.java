@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.services.PlansPlanbucketServices;
 import com.mobilelife.common.CommonUtils;
-import com.mobilelife.controler.mapper.bean.PlansPlanbucket;
+import com.mobilelife.controler.mapper.bean.PlansPlanbucketBean;
 import com.mobilelife.controler.mapper.request.PlansPlanbucketRequest;
 
 public class PlansPlanbucketResource {

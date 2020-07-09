@@ -5,11 +5,11 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.exception.RecordNotFoundException;
 import com.mobilelife.controler.mapper.PlansPlanroamingincomingminsMapper;
-import com.mobilelife.controler.mapper.bean.PlansPlanroamingincomingmins;
+import com.mobilelife.controler.mapper.bean.PlansPlanroamingincomingminsBean;
 import com.mobilelife.persistance.dao.PlansPlanprimaryDao;
 import com.mobilelife.persistance.dao.PlansPlanroamingincomingminsDao;
-import com.mobilelife.persistance.entities.PlansPlanprimaryEntity;
-import com.mobilelife.persistance.entities.PlansPlanroamingincomingminsEntity;
+import com.mobilelife.persistance.entities.PlansPlanprimary;
+import com.mobilelife.persistance.entities.PlansPlanroamingincomingmins;
 
 
 public class PlansPlanroamingincomingminsServices {
@@ -19,31 +19,31 @@ public class PlansPlanroamingincomingminsServices {
 	PlansPlanroamingincomingminsMapper mapper = new PlansPlanroamingincomingminsMapper();
 	PlansPlanprimaryDao planrepository = new PlansPlanprimaryDao();
 
-    public PlansPlanroamingincomingmins getByPlanId(Integer id)
+    public PlansPlanroamingincomingminsBean getByPlanId(Integer id)
     {
-    	PlansPlanprimaryEntity plansPlanprimaryEntity = planrepository.findById(id);
-    	PlansPlanroamingincomingminsEntity entity = plansPlanprimaryEntity.getPlansPlanroamingincomingmins();
+    	PlansPlanprimary plansPlanprimaryEntity = planrepository.findById(id);
+    	PlansPlanroamingincomingmins entity = plansPlanprimaryEntity.getPlansPlanroamingincomingmins();
         if(null!=entity) {
-        	PlansPlanroamingincomingmins bean = mapper.mapBean(entity);
+        	PlansPlanroamingincomingminsBean bean = mapper.mapBean(entity);
             return bean;
         } else {
             throw new RecordNotFoundException("No record exist for given id "+id);
         }
     }
      
-    public boolean createOrUpdate(PlansPlanroamingincomingmins bean)
+    public boolean createOrUpdate(PlansPlanroamingincomingminsBean bean)
     {
     	boolean retVal = false;
     	if ((bean.getId()!=null) && (bean.getId()>0))
     	{
-    		PlansPlanroamingincomingminsEntity existEntity = repository.findById(bean.getId());
+    		PlansPlanroamingincomingmins existEntity = repository.findById(bean.getId());
     		if(null!=existEntity)
 	        {
-    			PlansPlanroamingincomingminsEntity entity = mapper.mapBeanToEntity(bean, existEntity);
+    			PlansPlanroamingincomingmins entity = mapper.mapBeanToEntity(bean, existEntity);
 	            retVal = repository.updateData(entity);
 	            return retVal;
 	        } else {
-	        	PlansPlanroamingincomingminsEntity entity = mapper.mapBeanToEntity(bean);
+	        	PlansPlanroamingincomingmins entity = mapper.mapBeanToEntity(bean);
     			int id = repository.findId()+1;
     			entity.setId(id);		
 	        	retVal = repository.saveData(entity);
@@ -52,7 +52,7 @@ public class PlansPlanroamingincomingminsServices {
     	}
     	else
     	{
-    		PlansPlanroamingincomingminsEntity entity = mapper.mapBeanToEntity(bean);
+    		PlansPlanroamingincomingmins entity = mapper.mapBeanToEntity(bean);
 			int id = repository.findId()+1;
 			entity.setId(id);		
     		retVal = repository.saveData(entity);

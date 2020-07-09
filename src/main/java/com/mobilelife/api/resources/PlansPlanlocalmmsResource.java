@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.services.PlansPlanlocalmmsServices;
 import com.mobilelife.common.CommonUtils;
-import com.mobilelife.controler.mapper.bean.PlansPlanlocalmms;
+import com.mobilelife.controler.mapper.bean.PlansPlanlocalmmsBean;
 import com.mobilelife.controler.mapper.request.PlansPlanlocalmmsRequest;
 
 @Path("/planlocalcallmms")
@@ -30,9 +30,9 @@ public class PlansPlanlocalmmsResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createNew(PlansPlanlocalmmsRequest request) {
-        PlansPlanlocalmms bean = (PlansPlanlocalmms)request.getRequest();
+        PlansPlanlocalmmsBean bean = (PlansPlanlocalmmsBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlanlocalmms country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlanlocalmmsBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }
@@ -42,7 +42,7 @@ public class PlansPlanlocalmmsResource {
     @Path("/{authtoken}/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") Integer id) {
-        PlansPlanlocalmms bean  = service.getByPlanId(id);
+        PlansPlanlocalmmsBean bean  = service.getByPlanId(id);
         Response response = commonUtils.buildResponse(bean);
         return response;
     }
@@ -52,9 +52,9 @@ public class PlansPlanlocalmmsResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateExisting(PlansPlanlocalmmsRequest request) {
-        PlansPlanlocalmms bean = (PlansPlanlocalmms)request.getRequest();
+        PlansPlanlocalmmsBean bean = (PlansPlanlocalmmsBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlanlocalmms country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlanlocalmmsBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }

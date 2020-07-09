@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.PlanDevicemodelEntity;
+import com.mobilelife.persistance.entities.PlanDevicemodel;
 
 public class PlanDevicemodelDao {
 	private static Logger logger = LoggerFactory.getLogger(PlanDevicemodelDao.class);
@@ -20,11 +20,11 @@ public class PlanDevicemodelDao {
 		
 	}
 	
-	public List<PlanDevicemodelEntity> findAllBrands()
+	public List<PlanDevicemodel> findAllBrands()
 	{
 		Session session = HibernateSessionManager.getSession();
-		List<PlanDevicemodelEntity> planDevicebrand = null;
-		Query query = session.getNamedQuery("PlanDevicemodelEntity.findAll");
+		List<PlanDevicemodel> planDevicebrand = null;
+		Query query = session.getNamedQuery("PlanDevicemodel.findAll");
 		System.out.println("Size = "+query.list().size());
 		planDevicebrand = query.list();
 //		System.out.println("operator ID = "+plansOperator.getId());
@@ -32,27 +32,27 @@ public class PlanDevicemodelDao {
 		return planDevicebrand;
 	}
 
-	public PlanDevicemodelEntity findBrandByName(String deviceBrand)
+	public PlanDevicemodel findBrandByName(String deviceBrand)
 	{
 		Session session = HibernateSessionManager.getSession();
-		PlanDevicemodelEntity planDevicebrand = null;
-		Query query = session.getNamedQuery("PlanDevicemodelEntity.findByDeviceModel");
+		PlanDevicemodel planDevicebrand = null;
+		Query query = session.getNamedQuery("PlanDevicemodel.findByDeviceModel");
 		query.setParameter("deviceModel", deviceBrand);
 		System.out.println("deviceModel = "+deviceBrand);
 		System.out.println("Size = "+query.list().size());
-		planDevicebrand = (PlanDevicemodelEntity)query.list().get(0);
+		planDevicebrand = (PlanDevicemodel)query.list().get(0);
 		System.out.println("planDevicebrand ID = "+planDevicebrand.getId());
 		System.out.println("planDevicebrand Name = "+planDevicebrand.getDeviceModel());
 		return planDevicebrand;
 	}
 	
 
-	public List<PlanDevicemodelEntity> findAll()
+	public List<PlanDevicemodel> findAll()
 	{
 		Session session = HibernateSessionManager.getSession();
-		List<PlanDevicemodelEntity> planDevicebrand = null;
+		List<PlanDevicemodel> planDevicebrand = null;
 		try {
-			Query query = session.getNamedQuery("PlanDevicemodelEntity.findAll");
+			Query query = session.getNamedQuery("PlanDevicemodel.findAll");
 			planDevicebrand = query.list();
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -64,14 +64,14 @@ public class PlanDevicemodelDao {
 		return planDevicebrand;
 	}
 
-	public PlanDevicemodelEntity findByName(String deviceBrand)
+	public PlanDevicemodel findByName(String deviceBrand)
 	{
 		Session session = HibernateSessionManager.getSession();
-		PlanDevicemodelEntity planDevicebrand = null;
+		PlanDevicemodel planDevicebrand = null;
 		try {
-			Query query = session.getNamedQuery("PlanDevicemodelEntity.findByDeviceModel");
+			Query query = session.getNamedQuery("PlanDevicemodel.findByDeviceModel");
 			query.setParameter("deviceBrand", deviceBrand);
-			planDevicebrand = (PlanDevicemodelEntity)query.list().get(0);
+			planDevicebrand = (PlanDevicemodel)query.list().get(0);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
@@ -82,13 +82,13 @@ public class PlanDevicemodelDao {
 		return planDevicebrand;
 	}
 
-	public PlanDevicemodelEntity findById(Integer id) {
+	public PlanDevicemodel findById(Integer id) {
 		Session session = HibernateSessionManager.getSession();
-		PlanDevicemodelEntity entity = null;
+		PlanDevicemodel entity = null;
 		try {
-			Query query = session.getNamedQuery("PlanDevicemodelEntity.findById");
+			Query query = session.getNamedQuery("PlanDevicemodel.findById");
 			query.setParameter("id", id);
-			entity = (PlanDevicemodelEntity)(query.list().get(0));
+			entity = (PlanDevicemodel)(query.list().get(0));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
@@ -100,7 +100,7 @@ public class PlanDevicemodelDao {
 		return entity;
 	}
 	
-	public boolean saveData(PlanDevicemodelEntity entityObj) {
+	public boolean saveData(PlanDevicemodel entityObj) {
 		boolean retVal = false;
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -118,7 +118,7 @@ public class PlanDevicemodelDao {
 		return retVal;
 	}
 
-	public boolean updateData(PlanDevicemodelEntity entityObj) {
+	public boolean updateData(PlanDevicemodel entityObj) {
 		boolean retVal = false;
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -136,7 +136,7 @@ public class PlanDevicemodelDao {
 		return retVal;
 	}
 
-	public boolean deleteData(PlanDevicemodelEntity entityObj) {
+	public boolean deleteData(PlanDevicemodel entityObj) {
 		boolean retVal = false;
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -159,11 +159,11 @@ public class PlanDevicemodelDao {
 		Session session = HibernateSessionManager.getSession();
 		int rid = 0;
 		try {
-			List<PlanDevicemodelEntity> plansPlanfeeList = null;
+			List<PlanDevicemodel> plansPlanfeeList = null;
 
 			String query = "Select * from plan_devicemodel order by id desc limit 1";
 			logger.debug("query in findID in  findId " + query);
-			plansPlanfeeList = new HibernateDAO().findBySQLQuery(session, PlanDevicemodelEntity.class, query,"plan_devicemodel");
+			plansPlanfeeList = new HibernateDAO().findBySQLQuery(session, PlanDevicemodel.class, query,"plan_devicemodel");
 
 			logger.debug("findID  in  findId Size = "+plansPlanfeeList.size());
 			if ((null!=plansPlanfeeList) && (plansPlanfeeList.size()>0))

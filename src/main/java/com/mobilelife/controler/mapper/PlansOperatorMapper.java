@@ -7,20 +7,20 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.mobilelife.controler.mapper.bean.Countries;
-import com.mobilelife.controler.mapper.bean.PlansOperator;
-import com.mobilelife.persistance.entities.CountriesEntity;
-import com.mobilelife.persistance.entities.PlansOperatorEntity;
+import com.mobilelife.controler.mapper.bean.CountriesBean;
+import com.mobilelife.controler.mapper.bean.PlansOperatorBean;
+import com.mobilelife.persistance.entities.Countries;
+import com.mobilelife.persistance.entities.PlansOperator;
 
 public class PlansOperatorMapper {
 	private static Logger logger = LoggerFactory.getLogger(PlansOperatorMapper.class);
 
-	public List<PlansOperator> mapBean(List<PlansOperatorEntity> entityList) {
-		List<PlansOperator> retBean = new ArrayList<PlansOperator>();
+	public List<PlansOperatorBean> mapBean(List<PlansOperator> entityList) {
+		List<PlansOperatorBean> retBean = new ArrayList<PlansOperatorBean>();
 		for (int i=0; i<entityList.size();i++)
 		{
-			PlansOperatorEntity entity = entityList.get(i);
-			PlansOperator bean = new PlansOperator();
+			PlansOperator entity = entityList.get(i);
+			PlansOperatorBean bean = new PlansOperatorBean();
 			bean.setId(entity.getId());
 			bean.setLogo(entity.getLogo());
 			bean.setIsActive(entity.getIsActive());
@@ -32,8 +32,8 @@ public class PlansOperatorMapper {
 		return retBean;
 	}
 	
-	public PlansOperator mapBean(PlansOperatorEntity entity) {
-		PlansOperator bean = new PlansOperator();
+	public PlansOperatorBean mapBean(PlansOperator entity) {
+		PlansOperatorBean bean = new PlansOperatorBean();
 		bean.setId(entity.getId());
 		bean.setLogo(entity.getLogo());
 		bean.setIsActive(entity.getIsActive());
@@ -43,8 +43,8 @@ public class PlansOperatorMapper {
 		return bean;
 	}
 
-	public PlansOperatorEntity mapBeanToEntity(PlansOperator bean, PlansOperatorEntity existEntity) {
-		PlansOperatorEntity updateEntity = existEntity;
+	public PlansOperator mapBeanToEntity(PlansOperatorBean bean, PlansOperator existEntity) {
+		PlansOperator updateEntity = existEntity;
 		updateEntity.setIsActive(bean.getIsActive());
 		updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
 		updateEntity.setLogo(bean.getLogo());
@@ -53,8 +53,8 @@ public class PlansOperatorMapper {
 		return updateEntity;
 	}
 
-	public PlansOperatorEntity mapBeanToEntity(PlansOperator bean) {
-		PlansOperatorEntity updateEntity = new PlansOperatorEntity();
+	public PlansOperator mapBeanToEntity(PlansOperatorBean bean) {
+		PlansOperator updateEntity = new PlansOperator();
 		updateEntity.setCreationDatetime(new Timestamp(System.currentTimeMillis()));
 		updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
 		updateEntity.setOperatorName(bean.getOperatorName());

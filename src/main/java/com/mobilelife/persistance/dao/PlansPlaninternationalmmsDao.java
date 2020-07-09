@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.PlansPlaninternationalmmsEntity;
+import com.mobilelife.persistance.entities.PlansPlaninternationalmms;
 
 public class PlansPlaninternationalmmsDao {
 	private static Logger logger = LoggerFactory.getLogger(PlansPlaninternationalmmsDao.class);
@@ -25,11 +25,11 @@ public class PlansPlaninternationalmmsDao {
 		Session session = HibernateSessionManager.getSession();
 		int rid = 0;
 		try {
-			List<PlansPlaninternationalmmsEntity> resultList = null;
+			List<PlansPlaninternationalmms> resultList = null;
 
 			String query = "Select * from plans_planinternationalmms order by id desc";
 			logger.debug("query in findID in  PlansPlaninternationalmms " + query);
-			resultList = new HibernateDAO().findBySQLQuery(session, PlansPlaninternationalmmsEntity.class, query,"plans_planinternationalmms");
+			resultList = new HibernateDAO().findBySQLQuery(session, PlansPlaninternationalmms.class, query,"plans_planinternationalmms");
 
 			logger.debug("findID  in  PlansPlaninternationalmms Size = "+resultList.size());
 			if ((null!=resultList) && (resultList.size()>0))
@@ -47,13 +47,13 @@ public class PlansPlaninternationalmmsDao {
 		return rid;
 	}
 
-	public PlansPlaninternationalmmsEntity findById(Integer id) {
+	public PlansPlaninternationalmms findById(Integer id) {
 		Session session = HibernateSessionManager.getSession();
-		PlansPlaninternationalmmsEntity entity = null;
+		PlansPlaninternationalmms entity = null;
 		try {
-			Query query = session.getNamedQuery("PlansPlaninternationalmmsEntity.findById");
+			Query query = session.getNamedQuery("PlansPlaninternationalmms.findById");
 			query.setParameter("id", id);
-			entity = (PlansPlaninternationalmmsEntity)(query.list().get(0));
+			entity = (PlansPlaninternationalmms)(query.list().get(0));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
@@ -65,7 +65,7 @@ public class PlansPlaninternationalmmsDao {
 		return entity;
 	}
 
-	public boolean saveData(PlansPlaninternationalmmsEntity entityObj) {
+	public boolean saveData(PlansPlaninternationalmms entityObj) {
 		boolean retVal = false; 
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -84,7 +84,7 @@ public class PlansPlaninternationalmmsDao {
 		return retVal;
 	}
 
-	public boolean updateData(PlansPlaninternationalmmsEntity entityObj) {
+	public boolean updateData(PlansPlaninternationalmms entityObj) {
 		boolean retVal = false; 
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;

@@ -7,20 +7,20 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.mobilelife.controler.mapper.bean.PlansPlanlocalcallsms;
+import com.mobilelife.controler.mapper.bean.PlansPlanlocalcallsmsBean;
 import com.mobilelife.persistance.dao.PlansPlanprimaryDao;
-import com.mobilelife.persistance.entities.PlansPlanlocalcallsmsEntity;
-import com.mobilelife.persistance.entities.PlansPlanprimaryEntity;
+import com.mobilelife.persistance.entities.PlansPlanlocalcallsms;
+import com.mobilelife.persistance.entities.PlansPlanprimary;
 
 public class PlansPlanlocalcallsmsMapper {
 	private static Logger logger = LoggerFactory.getLogger(PlansPlanlocalcallsmsMapper.class);
 
-    public List<PlansPlanlocalcallsms> mapBean(List<PlansPlanlocalcallsmsEntity> entityList) {
-        List<PlansPlanlocalcallsms> retBean = new ArrayList<PlansPlanlocalcallsms>();
+    public List<PlansPlanlocalcallsmsBean> mapBean(List<PlansPlanlocalcallsms> entityList) {
+        List<PlansPlanlocalcallsmsBean> retBean = new ArrayList<PlansPlanlocalcallsmsBean>();
         for (int i=0; i<entityList.size();i++)
         {
-            PlansPlanlocalcallsmsEntity entity = entityList.get(i);
-            PlansPlanlocalcallsms bean = new PlansPlanlocalcallsms();
+            PlansPlanlocalcallsms entity = entityList.get(i);
+            PlansPlanlocalcallsmsBean bean = new PlansPlanlocalcallsmsBean();
             bean.setId(entity.getId());
             bean.setIsActive(entity.getIsActive());
             bean.setPlanPrimaryId(entity.getPlanPrimaryId().getId());
@@ -31,8 +31,8 @@ public class PlansPlanlocalcallsmsMapper {
         return retBean;
     }
     
-    public PlansPlanlocalcallsms mapBean(PlansPlanlocalcallsmsEntity entity) {
-        PlansPlanlocalcallsms bean = new PlansPlanlocalcallsms();
+    public PlansPlanlocalcallsmsBean mapBean(PlansPlanlocalcallsms entity) {
+        PlansPlanlocalcallsmsBean bean = new PlansPlanlocalcallsmsBean();
         bean.setId(entity.getId());
         bean.setIsActive(entity.getIsActive());
         bean.setPlanPrimaryId(entity.getPlanPrimaryId().getId());
@@ -42,8 +42,8 @@ public class PlansPlanlocalcallsmsMapper {
         return bean;
     }
 
-    public PlansPlanlocalcallsmsEntity mapBeanToEntity(PlansPlanlocalcallsms bean, PlansPlanlocalcallsmsEntity existEntity) {
-        PlansPlanlocalcallsmsEntity updateEntity = existEntity;
+    public PlansPlanlocalcallsms mapBeanToEntity(PlansPlanlocalcallsmsBean bean, PlansPlanlocalcallsms existEntity) {
+        PlansPlanlocalcallsms updateEntity = existEntity;
         updateEntity.setIsActive(bean.getIsActive());
         updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setLocalCallSms(bean.getLocalCallSms());
@@ -52,10 +52,10 @@ public class PlansPlanlocalcallsmsMapper {
         return updateEntity;
     }
 
-    public PlansPlanlocalcallsmsEntity mapBeanToEntity(PlansPlanlocalcallsms bean) {
+    public PlansPlanlocalcallsms mapBeanToEntity(PlansPlanlocalcallsmsBean bean) {
         PlansPlanprimaryDao planrepository = new PlansPlanprimaryDao();
-        PlansPlanprimaryEntity plansPlanprimaryEntity = planrepository.findById(bean.getPlanPrimaryId());
-        PlansPlanlocalcallsmsEntity updateEntity = new PlansPlanlocalcallsmsEntity();
+        PlansPlanprimary plansPlanprimaryEntity = planrepository.findById(bean.getPlanPrimaryId());
+        PlansPlanlocalcallsms updateEntity = new PlansPlanlocalcallsms();
         updateEntity.setCreationDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setPlanPrimaryId(plansPlanprimaryEntity);

@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.PlansDeviceplansEntity;
+import com.mobilelife.persistance.entities.PlansDeviceplans;
 
 public class PlansDevicePlanDao {
 	private static Logger logger = LoggerFactory.getLogger(PlansDevicePlanDao.class);
@@ -20,11 +20,11 @@ public class PlansDevicePlanDao {
 		Session session = HibernateSessionManager.getSession();
 		int rid = 0;
 		try {
-			List<PlansDeviceplansEntity> resultList = null;
+			List<PlansDeviceplans> resultList = null;
 
 			String query = "Select * from plans_deviceplans order by id desc limit 2";
 			logger.debug("query in findID in  PlansDevicePlanDao " + query);
-			resultList = new HibernateDAO().findBySQLQuery(session, PlansDeviceplansEntity.class, query,"plans_deviceplans");
+			resultList = new HibernateDAO().findBySQLQuery(session, PlansDeviceplans.class, query,"plans_deviceplans");
 
 			logger.debug("findID  in  PlansDeviceprimary Size = ");
 			if ((null!=resultList) && (resultList.size()>0))
@@ -42,16 +42,16 @@ public class PlansDevicePlanDao {
 		return rid;
 	}
 
-	public PlansDeviceplansEntity findPlansDevicePlan(String id)
+	public PlansDeviceplans findPlansDevicePlan(String id)
 	{
 		Session session = HibernateSessionManager.getSession();
-		PlansDeviceplansEntity plansDeviceplans = null;
+		PlansDeviceplans plansDeviceplans = null;
 		try {
-			List<PlansDeviceplansEntity> resultList = null;
+			List<PlansDeviceplans> resultList = null;
 
 			String query = "Select * from plans_deviceplans where id='"+id+"'";
 			logger.debug("query in findID in  PlansDevicePlanDao " + query);
-			resultList = new HibernateDAO().findBySQLQuery(session, PlansDeviceplansEntity.class, query,"plans_deviceplans");
+			resultList = new HibernateDAO().findBySQLQuery(session, PlansDeviceplans.class, query,"plans_deviceplans");
 
 			logger.debug("findID  in  PlansDeviceprimary Size = ");
 			if ((null!=resultList) && (resultList.size()>0))
@@ -69,15 +69,15 @@ public class PlansDevicePlanDao {
 		return plansDeviceplans;
 	}
 
-	public List<PlansDeviceplansEntity> findAllPlansDevicePlan()
+	public List<PlansDeviceplans> findAllPlansDevicePlan()
 	{
 		Session session = HibernateSessionManager.getSession();
-		List<PlansDeviceplansEntity> resultListRet = null;
+		List<PlansDeviceplans> resultListRet = null;
 		try {
-			List<PlansDeviceplansEntity> resultList = null;
+			List<PlansDeviceplans> resultList = null;
 			String query = "Select * from plans_deviceplans where is_active=1";
 			logger.debug("query in findID in  PlansDevicePlanDao " + query);
-			resultList = new HibernateDAO().findBySQLQuery(session, PlansDeviceplansEntity.class, query,"plans_deviceplans");
+			resultList = new HibernateDAO().findBySQLQuery(session, PlansDeviceplans.class, query,"plans_deviceplans");
 
 			logger.debug("findID  in  PlansDeviceprimary Size = ");
 			if ((null!=resultList) && (resultList.size()>0))
@@ -95,7 +95,7 @@ public class PlansDevicePlanDao {
 		return resultListRet;
 	}
 	
-	public void saveData(PlansDeviceplansEntity entityObj) {
+	public void saveData(PlansDeviceplans entityObj) {
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
 		try {
@@ -110,7 +110,7 @@ public class PlansDevicePlanDao {
 		}
 	}
 
-	public void updateData(PlansDeviceplansEntity entityObj) {
+	public void updateData(PlansDeviceplans entityObj) {
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
 		try {

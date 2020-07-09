@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.PlansPlanlocalmmsEntity;
-import com.mobilelife.persistance.entities.PlansPlanlocalvideocallEntity;
+import com.mobilelife.persistance.entities.PlansPlanlocalmms;
+import com.mobilelife.persistance.entities.PlansPlanlocalvideocall;
 
 public class PlansPlanlocalvideocallDao {
 	private static Logger logger = LoggerFactory.getLogger(PlansPlanlocalvideocallDao.class);
@@ -26,11 +26,11 @@ public class PlansPlanlocalvideocallDao {
 		Session session = HibernateSessionManager.getSession();
 		int rid = 0;
 		try {
-			List<PlansPlanlocalvideocallEntity> resultList = null;
+			List<PlansPlanlocalvideocall> resultList = null;
 
 			String query = "Select * from plans_planlocalvideocall order by id desc";
 			logger.debug("query in findID in  PlansPlanlocalvideocall " + query);
-			resultList = new HibernateDAO().findBySQLQuery(session, PlansPlanlocalvideocallEntity.class, query,"plans_planlocalvideocall");
+			resultList = new HibernateDAO().findBySQLQuery(session, PlansPlanlocalvideocall.class, query,"plans_planlocalvideocall");
 
 			logger.debug("findID  in  PlansPlanlocalvideocall Size = "+resultList.size());
 			if ((null!=resultList) && (resultList.size()>0))
@@ -48,7 +48,7 @@ public class PlansPlanlocalvideocallDao {
 		return rid;
 	}
 
-	public boolean saveData(PlansPlanlocalvideocallEntity entityObj) {
+	public boolean saveData(PlansPlanlocalvideocall entityObj) {
 		boolean retVal = false; 
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -67,7 +67,7 @@ public class PlansPlanlocalvideocallDao {
 		return retVal;
 	}
 
-	public boolean updateData(PlansPlanlocalvideocallEntity entityObj) {
+	public boolean updateData(PlansPlanlocalvideocall entityObj) {
 		boolean retVal = false; 
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -86,13 +86,13 @@ public class PlansPlanlocalvideocallDao {
 		return retVal;
 	}
 
-	public PlansPlanlocalvideocallEntity findById(Integer id) {
+	public PlansPlanlocalvideocall findById(Integer id) {
 		Session session = HibernateSessionManager.getSession();
-		PlansPlanlocalvideocallEntity entity = null;
+		PlansPlanlocalvideocall entity = null;
 		try {
-			Query query = session.getNamedQuery("PlansPlanlocalvideocallEntity.findById");
+			Query query = session.getNamedQuery("PlansPlanlocalvideocall.findById");
 			query.setParameter("id", id);
-			entity = (PlansPlanlocalvideocallEntity)(query.list().get(0));
+			entity = (PlansPlanlocalvideocall)(query.list().get(0));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {

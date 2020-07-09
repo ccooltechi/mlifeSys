@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.services.PlansPlanprimaryServices;
 import com.mobilelife.common.CommonUtils;
-import com.mobilelife.controler.mapper.bean.PlansPlanprimary;
+import com.mobilelife.controler.mapper.bean.PlansPlanprimaryBean;
 import com.mobilelife.controler.mapper.request.PlansPlanprimaryRequest;
 
 @Path("/plans")
@@ -33,30 +33,54 @@ public class PlansPlanprimaryResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createNew(PlansPlanprimaryRequest request) {
-        PlansPlanprimary bean = (PlansPlanprimary)request.getRequest();
+        PlansPlanprimaryBean bean = (PlansPlanprimaryBean)request.getRequest();
         Integer planrefid = service.createOrUpdate(bean);
-        PlansPlanprimary country = service.getById(planrefid);
+        PlansPlanprimaryBean country = service.getById(planrefid);
         Response response = commonUtils.buildResponse(country);
         return response;
     }
  
     // CRUD -- READ operation
     @GET
-    @Path("/{authtoken}")
+    @Path("/{authtoken}/{operator}/{pageno}/{resultperpage}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAll(@PathParam("authtoken") String authtoken)
+    public Response getPlanOperatorWiseAll(@PathParam("authtoken") String authtoken, @PathParam("operator") int operator
+    		, @PathParam("pageno") int pageno, @PathParam("resultperpage") int resultperpage)
     {
-        List<PlansPlanprimary> bean = service.getAll();
+        List<PlansPlanprimaryBean> bean = service.getAll(pageno, resultperpage, operator, 0);
+        Response response = commonUtils.buildResponse(bean);
+        return response;
+    }
+
+    @GET
+    @Path("/{authtoken}/{operator}/{plantype}/{pageno}/{resultperpage}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPlanOperatorPlanTypeWiseAll(@PathParam("authtoken") String authtoken, @PathParam("operator") int operator
+    		, @PathParam("plantype") int plantype, @PathParam("pageno") int pageno, @PathParam("resultperpage") int resultperpage)
+    {
+        List<PlansPlanprimaryBean> bean = service.getAll(pageno, resultperpage, operator, plantype);
+        Response response = commonUtils.buildResponse(bean);
+        return response;
+    }
+
+    // CRUD -- READ operation
+    @GET
+    @Path("/{authtoken}/{pageno}/{resultperpage}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAll(@PathParam("authtoken") String authtoken, @PathParam("pageno") int pageno, @PathParam("resultperpage") int resultperpage)
+    {
+        List<PlansPlanprimaryBean> bean = service.getAll(pageno, resultperpage, 0, 0);
         Response response = commonUtils.buildResponse(bean);
         return response;
     }
  
+
     // CRUD -- READ operation
     @GET
     @Path("/{authtoken}/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") Integer id) {
-        PlansPlanprimary bean  = service.getById(id);
+        PlansPlanprimaryBean bean  = service.getById(id);
         Response response = commonUtils.buildResponse(bean);
         return response;
     }
@@ -66,10 +90,10 @@ public class PlansPlanprimaryResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateExisting(PlansPlanprimaryRequest request) {
-        PlansPlanprimary bean = (PlansPlanprimary)request.getRequest();
+        PlansPlanprimaryBean bean = (PlansPlanprimaryBean)request.getRequest();
         Integer planrefid = service.createOrUpdate(bean);
-        PlansPlanprimary country = service.getById(planrefid);
-        Response response = commonUtils.buildResponse(country);
+        PlansPlanprimaryBean retObj = service.getById(planrefid);
+        Response response = commonUtils.buildResponse(retObj);
         return response;
     }
  
@@ -79,8 +103,8 @@ public class PlansPlanprimaryResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteExisting(@PathParam("id") Integer id) {
         boolean status = service.delete(id);
-        List<PlansPlanprimary> bean = service.getAll();
-        Response response = commonUtils.buildResponse(bean);
+//        List<PlansPlanprimary> bean = service.getAll();
+        Response response = commonUtils.buildResponse(status);
         return response;
     }
  

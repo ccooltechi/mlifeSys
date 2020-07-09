@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.PlansPlanlocalvideocallEntity;
-import com.mobilelife.persistance.entities.PlansPlanmiscellaneousEntity;
+import com.mobilelife.persistance.entities.PlansPlanlocalvideocall;
+import com.mobilelife.persistance.entities.PlansPlanmiscellaneous;
 
 public class PlansPlanmiscellaneousDao {
 	private static Logger logger = LoggerFactory.getLogger(PlansPlanmiscellaneousDao.class);
@@ -26,11 +26,11 @@ public class PlansPlanmiscellaneousDao {
 		Session session = HibernateSessionManager.getSession();
 		int rid = 0;
 		try {
-			List<PlansPlanmiscellaneousEntity> resultList = null;
+			List<PlansPlanmiscellaneous> resultList = null;
 
 			String query = "Select * from plans_planmiscellaneous order by id desc";
 			logger.debug("query in findID in  PlansPlanmiscellaneous " + query);
-			resultList = new HibernateDAO().findBySQLQuery(session, PlansPlanmiscellaneousEntity.class, query,"plans_planmiscellaneous");
+			resultList = new HibernateDAO().findBySQLQuery(session, PlansPlanmiscellaneous.class, query,"plans_planmiscellaneous");
 
 			logger.debug("findID  in  PlansPlanmiscellaneous Size = "+resultList.size());
 			if ((null!=resultList) && (resultList.size()>0))
@@ -48,13 +48,13 @@ public class PlansPlanmiscellaneousDao {
 		return rid;
 	}
 
-	public PlansPlanmiscellaneousEntity findById(Integer id) {
+	public PlansPlanmiscellaneous findById(Integer id) {
 		Session session = HibernateSessionManager.getSession();
-		PlansPlanmiscellaneousEntity entity = null;
+		PlansPlanmiscellaneous entity = null;
 		try {
-			Query query = session.getNamedQuery("PlansPlanmiscellaneousEntity.findById");
+			Query query = session.getNamedQuery("PlansPlanmiscellaneous.findById");
 			query.setParameter("id", id);
-			entity = (PlansPlanmiscellaneousEntity)(query.list().get(0));
+			entity = (PlansPlanmiscellaneous)(query.list().get(0));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
@@ -66,7 +66,7 @@ public class PlansPlanmiscellaneousDao {
 		return entity;
 	}
 
-	public boolean saveData(PlansPlanmiscellaneousEntity entityObj) {
+	public boolean saveData(PlansPlanmiscellaneous entityObj) {
 		boolean retVal = false; 
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -85,7 +85,7 @@ public class PlansPlanmiscellaneousDao {
 		return retVal;
 	}
 
-	public boolean updateData(PlansPlanmiscellaneousEntity entityObj) {
+	public boolean updateData(PlansPlanmiscellaneous entityObj) {
 		boolean retVal = false; 
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;

@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.PlansPlanroamingdataEntity;
-import com.mobilelife.persistance.entities.PlansPlanroamingincomingminsEntity;
+import com.mobilelife.persistance.entities.PlansPlanroamingdata;
+import com.mobilelife.persistance.entities.PlansPlanroamingincomingmins;
 
 public class PlansPlanroamingincomingminsDao {
 	private static Logger logger = LoggerFactory.getLogger(PlansPlanroamingincomingminsDao.class);
@@ -26,11 +26,11 @@ public class PlansPlanroamingincomingminsDao {
 		Session session = HibernateSessionManager.getSession();
 		int rid = 0;
 		try {
-			List<PlansPlanroamingincomingminsEntity> resultList = null;
+			List<PlansPlanroamingincomingmins> resultList = null;
 
 			String query = "Select * from plans_planroamingincomingmins order by id desc";
 			logger.debug("query in findID in  PlansPlanroamingincomingmins " + query);
-			resultList = new HibernateDAO().findBySQLQuery(session, PlansPlanroamingincomingminsEntity.class, query,"plans_planroamingincomingmins");
+			resultList = new HibernateDAO().findBySQLQuery(session, PlansPlanroamingincomingmins.class, query,"plans_planroamingincomingmins");
 
 			logger.debug("findID  in  PlansPlanroamingincomingmins Size = "+resultList.size());
 			if ((null!=resultList) && (resultList.size()>0))
@@ -48,13 +48,13 @@ public class PlansPlanroamingincomingminsDao {
 		return rid;
 	}
 
-	public PlansPlanroamingincomingminsEntity findById(Integer id) {
+	public PlansPlanroamingincomingmins findById(Integer id) {
 		Session session = HibernateSessionManager.getSession();
-		PlansPlanroamingincomingminsEntity entity = null;
+		PlansPlanroamingincomingmins entity = null;
 		try {
-			Query query = session.getNamedQuery("PlansPlanroamingincomingminsEntity.findById");
+			Query query = session.getNamedQuery("PlansPlanroamingincomingmins.findById");
 			query.setParameter("id", id);
-			entity = (PlansPlanroamingincomingminsEntity)(query.list().get(0));
+			entity = (PlansPlanroamingincomingmins)(query.list().get(0));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
@@ -66,7 +66,7 @@ public class PlansPlanroamingincomingminsDao {
 		return entity;
 	}
 
-	public boolean saveData(PlansPlanroamingincomingminsEntity entityObj) {
+	public boolean saveData(PlansPlanroamingincomingmins entityObj) {
 		boolean retVal = false; 
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -85,7 +85,7 @@ public class PlansPlanroamingincomingminsDao {
 		return retVal;
 	}
 
-	public boolean updateData(PlansPlanroamingincomingminsEntity entityObj) {
+	public boolean updateData(PlansPlanroamingincomingmins entityObj) {
 		boolean retVal = false; 
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;

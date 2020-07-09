@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.PlansPlansmsonnetEntity;
-import com.mobilelife.persistance.entities.PlansPlansocialdataEntity;
+import com.mobilelife.persistance.entities.PlansPlansmsonnet;
+import com.mobilelife.persistance.entities.PlansPlansocialdata;
 
 public class PlansPlansocialdataDao {
 	private static Logger logger = LoggerFactory.getLogger(PlansPlansocialdataDao.class);
@@ -26,11 +26,11 @@ public class PlansPlansocialdataDao {
 		Session session = HibernateSessionManager.getSession();
 		int rid = 0;
 		try {
-			List<PlansPlansocialdataEntity> resultList = null;
+			List<PlansPlansocialdata> resultList = null;
 
 			String query = "Select * from plans_plansocialdata order by id desc";
 			logger.debug("query in findID in  PlansPlansocialdata " + query);
-			resultList = new HibernateDAO().findBySQLQuery(session, PlansPlansocialdataEntity.class, query,"plans_plansocialdata");
+			resultList = new HibernateDAO().findBySQLQuery(session, PlansPlansocialdata.class, query,"plans_plansocialdata");
 
 			logger.debug("findID  in  PlansPlansocialdata Size = "+resultList.size());
 			if ((null!=resultList) && (resultList.size()>0))
@@ -48,13 +48,13 @@ public class PlansPlansocialdataDao {
 		return rid;
 	}
 
-	public PlansPlansocialdataEntity findById(Integer id) {
+	public PlansPlansocialdata findById(Integer id) {
 		Session session = HibernateSessionManager.getSession();
-		PlansPlansocialdataEntity entity = null;
+		PlansPlansocialdata entity = null;
 		try {
-			Query query = session.getNamedQuery("PlansPlansocialdataEntity.findById");
+			Query query = session.getNamedQuery("PlansPlansocialdata.findById");
 			query.setParameter("id", id);
-			entity = (PlansPlansocialdataEntity)(query.list().get(0));
+			entity = (PlansPlansocialdata)(query.list().get(0));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
@@ -66,7 +66,7 @@ public class PlansPlansocialdataDao {
 		return entity;
 	}
 
-	public boolean saveData(PlansPlansocialdataEntity entityObj) {
+	public boolean saveData(PlansPlansocialdata entityObj) {
 		boolean retVal = false; 
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -85,7 +85,7 @@ public class PlansPlansocialdataDao {
 		return retVal;
 	}
 
-	public boolean updateData(PlansPlansocialdataEntity entityObj) {
+	public boolean updateData(PlansPlansocialdata entityObj) {
 		boolean retVal = false; 
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;

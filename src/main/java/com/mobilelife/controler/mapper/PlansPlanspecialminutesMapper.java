@@ -7,20 +7,20 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.mobilelife.controler.mapper.bean.PlansPlanspecialminutes;
+import com.mobilelife.controler.mapper.bean.PlansPlanspecialminutesBean;
 import com.mobilelife.persistance.dao.PlansPlanprimaryDao;
-import com.mobilelife.persistance.entities.PlansPlanprimaryEntity;
-import com.mobilelife.persistance.entities.PlansPlanspecialminutesEntity;
+import com.mobilelife.persistance.entities.PlansPlanprimary;
+import com.mobilelife.persistance.entities.PlansPlanspecialminutes;
 
 public class PlansPlanspecialminutesMapper {
 	private static Logger logger = LoggerFactory.getLogger(PlansPlanspecialminutesMapper.class);
 
-    public List<PlansPlanspecialminutes> mapBean(List<PlansPlanspecialminutesEntity> entityList) {
-        List<PlansPlanspecialminutes> retBean = new ArrayList<PlansPlanspecialminutes>();
+    public List<PlansPlanspecialminutesBean> mapBean(List<PlansPlanspecialminutes> entityList) {
+        List<PlansPlanspecialminutesBean> retBean = new ArrayList<PlansPlanspecialminutesBean>();
         for (int i=0; i<entityList.size();i++)
         {
-            PlansPlanspecialminutesEntity entity = entityList.get(i);
-            PlansPlanspecialminutes bean = new PlansPlanspecialminutes();
+            PlansPlanspecialminutes entity = entityList.get(i);
+            PlansPlanspecialminutesBean bean = new PlansPlanspecialminutesBean();
             bean.setId(entity.getId());
             bean.setIsActive(entity.getIsActive());
             bean.setPlanPrimaryId(entity.getPlanPrimaryId().getId());
@@ -31,8 +31,8 @@ public class PlansPlanspecialminutesMapper {
         return retBean;
     }
     
-    public PlansPlanspecialminutes mapBean(PlansPlanspecialminutesEntity entity) {
-        PlansPlanspecialminutes bean = new PlansPlanspecialminutes();
+    public PlansPlanspecialminutesBean mapBean(PlansPlanspecialminutes entity) {
+        PlansPlanspecialminutesBean bean = new PlansPlanspecialminutesBean();
         bean.setId(entity.getId());
         bean.setIsActive(entity.getIsActive());
         bean.setPlanPrimaryId(entity.getPlanPrimaryId().getId());
@@ -42,8 +42,8 @@ public class PlansPlanspecialminutesMapper {
         return bean;
     }
 
-    public PlansPlanspecialminutesEntity mapBeanToEntity(PlansPlanspecialminutes bean, PlansPlanspecialminutesEntity existEntity) {
-        PlansPlanspecialminutesEntity updateEntity = existEntity;
+    public PlansPlanspecialminutes mapBeanToEntity(PlansPlanspecialminutesBean bean, PlansPlanspecialminutes existEntity) {
+        PlansPlanspecialminutes updateEntity = existEntity;
         updateEntity.setIsActive(bean.getIsActive());
         updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setSpecialMinutes(bean.getSpecialMinutes());
@@ -52,10 +52,10 @@ public class PlansPlanspecialminutesMapper {
         return updateEntity;
     }
 
-    public PlansPlanspecialminutesEntity mapBeanToEntity(PlansPlanspecialminutes bean) {
+    public PlansPlanspecialminutes mapBeanToEntity(PlansPlanspecialminutesBean bean) {
         PlansPlanprimaryDao planrepository = new PlansPlanprimaryDao();
-        PlansPlanprimaryEntity plansPlanprimaryEntity = planrepository.findById(bean.getPlanPrimaryId());
-        PlansPlanspecialminutesEntity updateEntity = new PlansPlanspecialminutesEntity();
+        PlansPlanprimary plansPlanprimaryEntity = planrepository.findById(bean.getPlanPrimaryId());
+        PlansPlanspecialminutes updateEntity = new PlansPlanspecialminutes();
         updateEntity.setCreationDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setPlanPrimaryId(plansPlanprimaryEntity);

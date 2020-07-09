@@ -7,20 +7,20 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.mobilelife.controler.mapper.bean.PlansPlannationalminutes;
+import com.mobilelife.controler.mapper.bean.PlansPlannationalminutesBean;
 import com.mobilelife.persistance.dao.PlansPlanprimaryDao;
-import com.mobilelife.persistance.entities.PlansPlannationalminutesEntity;
-import com.mobilelife.persistance.entities.PlansPlanprimaryEntity;
+import com.mobilelife.persistance.entities.PlansPlannationalminutes;
+import com.mobilelife.persistance.entities.PlansPlanprimary;
 
 public class PlansPlannationalminutesMapper {
 	private static Logger logger = LoggerFactory.getLogger(PlansPlannationalminutesMapper.class);
 
-    public List<PlansPlannationalminutes> mapBean(List<PlansPlannationalminutesEntity> entityList) {
-        List<PlansPlannationalminutes> retBean = new ArrayList<PlansPlannationalminutes>();
+    public List<PlansPlannationalminutesBean> mapBean(List<PlansPlannationalminutes> entityList) {
+        List<PlansPlannationalminutesBean> retBean = new ArrayList<PlansPlannationalminutesBean>();
         for (int i=0; i<entityList.size();i++)
         {
-            PlansPlannationalminutesEntity entity = entityList.get(i);
-            PlansPlannationalminutes bean = new PlansPlannationalminutes();
+            PlansPlannationalminutes entity = entityList.get(i);
+            PlansPlannationalminutesBean bean = new PlansPlannationalminutesBean();
             bean.setId(entity.getId());
             bean.setIsActive(entity.getIsActive());
             bean.setPlanPrimaryId(entity.getPlanPrimaryId().getId());
@@ -34,8 +34,8 @@ public class PlansPlannationalminutesMapper {
         return retBean;
     }
     
-    public PlansPlannationalminutes mapBean(PlansPlannationalminutesEntity entity) {
-        PlansPlannationalminutes bean = new PlansPlannationalminutes();
+    public PlansPlannationalminutesBean mapBean(PlansPlannationalminutes entity) {
+        PlansPlannationalminutesBean bean = new PlansPlannationalminutesBean();
         bean.setId(entity.getId());
         bean.setIsActive(entity.getIsActive());
         bean.setPlanPrimaryId(entity.getPlanPrimaryId().getId());
@@ -48,8 +48,8 @@ public class PlansPlannationalminutesMapper {
         return bean;
     }
 
-    public PlansPlannationalminutesEntity mapBeanToEntity(PlansPlannationalminutes bean, PlansPlannationalminutesEntity existEntity) {
-        PlansPlannationalminutesEntity updateEntity = existEntity;
+    public PlansPlannationalminutes mapBeanToEntity(PlansPlannationalminutesBean bean, PlansPlannationalminutes existEntity) {
+        PlansPlannationalminutes updateEntity = existEntity;
         updateEntity.setIsActive(bean.getIsActive());
         updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setNationalMinutes(bean.getNationalMinutes());
@@ -61,10 +61,10 @@ public class PlansPlannationalminutesMapper {
         return updateEntity;
     }
 
-    public PlansPlannationalminutesEntity mapBeanToEntity(PlansPlannationalminutes bean) {
+    public PlansPlannationalminutes mapBeanToEntity(PlansPlannationalminutesBean bean) {
         PlansPlanprimaryDao planrepository = new PlansPlanprimaryDao();
-        PlansPlanprimaryEntity plansPlanprimaryEntity = planrepository.findById(bean.getPlanPrimaryId());
-        PlansPlannationalminutesEntity updateEntity = new PlansPlannationalminutesEntity();
+        PlansPlanprimary plansPlanprimaryEntity = planrepository.findById(bean.getPlanPrimaryId());
+        PlansPlannationalminutes updateEntity = new PlansPlannationalminutes();
         updateEntity.setCreationDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setPlanPrimaryId(plansPlanprimaryEntity);

@@ -5,11 +5,11 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.exception.RecordNotFoundException;
 import com.mobilelife.controler.mapper.PlansPlanroamingdataMapper;
-import com.mobilelife.controler.mapper.bean.PlansPlanroamingdata;
+import com.mobilelife.controler.mapper.bean.PlansPlanroamingdataBean;
 import com.mobilelife.persistance.dao.PlansPlanprimaryDao;
 import com.mobilelife.persistance.dao.PlansPlanroamingdataDao;
-import com.mobilelife.persistance.entities.PlansPlanprimaryEntity;
-import com.mobilelife.persistance.entities.PlansPlanroamingdataEntity;
+import com.mobilelife.persistance.entities.PlansPlanprimary;
+import com.mobilelife.persistance.entities.PlansPlanroamingdata;
 
 
 public class PlansPlanroamingdataServices {

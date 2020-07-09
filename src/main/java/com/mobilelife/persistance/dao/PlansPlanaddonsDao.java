@@ -10,10 +10,10 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.CountriesEntity;
-import com.mobilelife.persistance.entities.PlansPlanaddonsEntity;
-import com.mobilelife.persistance.entities.PlansPlanflexiEntity;
-import com.mobilelife.persistance.entities.PlansPlanprimaryEntity;
+import com.mobilelife.persistance.entities.Countries;
+import com.mobilelife.persistance.entities.PlansPlanaddons;
+import com.mobilelife.persistance.entities.PlansPlanflexi;
+import com.mobilelife.persistance.entities.PlansPlanprimary;
 
 public class PlansPlanaddonsDao {
 	private static Logger logger = LoggerFactory.getLogger(PlansPlanaddonsDao.class);
@@ -28,11 +28,11 @@ public class PlansPlanaddonsDao {
 		Session session = HibernateSessionManager.getSession();
 		int rid = 0;
 		try {
-			List<PlansPlanaddonsEntity> resultList = null;
+			List<PlansPlanaddons> resultList = null;
 
 			String query = "Select * from plans_planaddons order by id desc limit 1";
 			logger.debug("query in findID in  PlansPlanaddons " + query);
-			resultList = new HibernateDAO().findBySQLQuery(session, PlansPlanaddonsEntity.class, query,"plans_planaddons");
+			resultList = new HibernateDAO().findBySQLQuery(session, PlansPlanaddons.class, query,"plans_planaddons");
 
 			logger.debug("findID  in  PlansPlanaddons Size = ");
 			if ((null!=resultList) && (resultList.size()>0))
@@ -50,7 +50,7 @@ public class PlansPlanaddonsDao {
 		return rid;
 	}
 
-	public void saveData(PlansPlanaddonsEntity entityObj) {
+	public void saveData(PlansPlanaddons entityObj) {
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
 		try {
@@ -65,13 +65,13 @@ public class PlansPlanaddonsDao {
 		}
 	}
 	
-    public List<PlansPlanaddonsEntity> findCustomPlansByFilter(String filterSqlQuery) {
+    public List<PlansPlanaddons> findCustomPlansByFilter(String filterSqlQuery) {
         Session session = HibernateSessionManager.getSession();
-        List<PlansPlanaddonsEntity> plansPlanaddons = null;
+        List<PlansPlanaddons> plansPlanaddons = null;
 		logger.debug("query in findCustomPlansByFilter " + filterSqlQuery);
         try {
-            List<PlansPlanaddonsEntity> plansPlanaddonsList = null;
-            plansPlanaddonsList = new HibernateDAO().findBySQLQuery(session, PlansPlanaddonsEntity.class, filterSqlQuery, "plans_planaddons");
+            List<PlansPlanaddons> plansPlanaddonsList = null;
+            plansPlanaddonsList = new HibernateDAO().findBySQLQuery(session, PlansPlanaddons.class, filterSqlQuery, "plans_planaddons");
 
             logger.debug("findCustomPlansByFilter Size = "+plansPlanaddonsList.size());
             if ((null!=plansPlanaddonsList) && (plansPlanaddonsList.size()>0))
@@ -89,14 +89,14 @@ public class PlansPlanaddonsDao {
         return plansPlanaddons;
     }
 
-	public List<PlansPlanaddonsEntity> findCustomPlansID(int custPlanID)
+	public List<PlansPlanaddons> findCustomPlansID(int custPlanID)
 	{
 		Session session = HibernateSessionManager.getSession();
-		List<PlansPlanaddonsEntity> plansPlanaddonsList = null;
+		List<PlansPlanaddons> plansPlanaddonsList = null;
 		Query query = session.getNamedQuery("PlansPlanaddons.findById");
 		query.setParameter("id", custPlanID);
 		System.out.println("Size = "+query.list().size());
-		plansPlanaddonsList = (List<PlansPlanaddonsEntity>)query.list();
+		plansPlanaddonsList = (List<PlansPlanaddons>)query.list();
 		return plansPlanaddonsList;
 	}
 

@@ -3,7 +3,7 @@ package com.mobilelife.controler.mapper.request;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
-import com.mobilelife.controler.mapper.bean.PlansPlanlocalmms;
+import com.mobilelife.controler.mapper.bean.PlansPlanlocalmmsBean;
 import com.wordnik.swagger.annotations.ApiModel;
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
@@ -17,7 +17,7 @@ public class PlansPlanlocalmmsRequest {
 	private String userEmail;
 
     @XmlElement
-	private PlansPlanlocalmms request;
+	private PlansPlanlocalmmsBean request;
     
     @ApiModelProperty(value = "authtoken")
 	public String getAuthtoken() {
@@ -28,10 +28,10 @@ public class PlansPlanlocalmmsRequest {
 	}
 
 	@ApiModelProperty(value = "request")
-	public PlansPlanlocalmms getRequest() {
+	public PlansPlanlocalmmsBean getRequest() {
 		return request;
 	}
-	public void setRequest(PlansPlanlocalmms request) {
+	public void setRequest(PlansPlanlocalmmsBean request) {
 		this.request = request;
 	}
 	public String getUserID() {

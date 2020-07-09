@@ -7,11 +7,11 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.exception.RecordNotFoundException;
 import com.mobilelife.controler.mapper.PlansPlanfeeMapper;
-import com.mobilelife.controler.mapper.bean.PlansPlanfee;
+import com.mobilelife.controler.mapper.bean.PlansPlanfeeBean;
 import com.mobilelife.persistance.dao.PlansPlanfeeDao;
 import com.mobilelife.persistance.dao.PlansPlanprimaryDao;
-import com.mobilelife.persistance.entities.PlansPlanfeeEntity;
-import com.mobilelife.persistance.entities.PlansPlanprimaryEntity;
+import com.mobilelife.persistance.entities.PlansPlanfee;
+import com.mobilelife.persistance.entities.PlansPlanprimary;
 
 
 public class PlansPlanfeeServices {
@@ -21,31 +21,31 @@ public class PlansPlanfeeServices {
 	PlansPlanprimaryDao planrepository = new PlansPlanprimaryDao();
 	PlansPlanfeeMapper mapper = new PlansPlanfeeMapper();
 
-    public PlansPlanfee getByPlanId(Integer id)
+    public PlansPlanfeeBean getByPlanId(Integer id)
     {
-    	PlansPlanprimaryEntity plansPlanprimaryEntity = planrepository.findById(id);
-    	PlansPlanfeeEntity entity = plansPlanprimaryEntity.getPlansPlanfee();
+    	PlansPlanprimary plansPlanprimaryEntity = planrepository.findById(id);
+    	PlansPlanfee entity = plansPlanprimaryEntity.getPlansPlanfee();
         if(null!=entity) {
-        	PlansPlanfee bean = mapper.mapBean(entity);
+        	PlansPlanfeeBean bean = mapper.mapBean(entity);
             return bean;
         } else {
             throw new RecordNotFoundException("No record exist for given id "+id);
         }
     }
      
-    public boolean createOrUpdate(PlansPlanfee bean)
+    public boolean createOrUpdate(PlansPlanfeeBean bean)
     {
     	boolean retVal = false;
     	if ((bean.getId()!=null) && (bean.getId()>0))
     	{
-    		PlansPlanfeeEntity existEntity = repository.findById(bean.getId());
+    		PlansPlanfee existEntity = repository.findById(bean.getId());
     		if(null!=existEntity)
 	        {
-    			PlansPlanfeeEntity entity = mapper.mapBeanToEntity(bean, existEntity);
+    			PlansPlanfee entity = mapper.mapBeanToEntity(bean, existEntity);
 	            retVal = repository.updateData(entity);
 	            return retVal;
 	        } else {
-	        	PlansPlanfeeEntity entity = mapper.mapBeanToEntity(bean);
+	        	PlansPlanfee entity = mapper.mapBeanToEntity(bean);
     			int id = repository.findId()+1;
     			entity.setId(id);		
 	        	retVal = repository.saveData(entity);
@@ -54,7 +54,7 @@ public class PlansPlanfeeServices {
     	}
     	else
     	{
-    		PlansPlanfeeEntity entity = mapper.mapBeanToEntity(bean);
+    		PlansPlanfee entity = mapper.mapBeanToEntity(bean);
 			int id = repository.findId()+1;
 			entity.setId(id);		
     		retVal = repository.saveData(entity);

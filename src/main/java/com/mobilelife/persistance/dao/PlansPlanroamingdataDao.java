@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.PlansPlanpreferrednumbersEntity;
-import com.mobilelife.persistance.entities.PlansPlanroamingdataEntity;
+import com.mobilelife.persistance.entities.PlansPlanpreferrednumbers;
+import com.mobilelife.persistance.entities.PlansPlanroamingdata;
 
 public class PlansPlanroamingdataDao {
 	private static Logger logger = LoggerFactory.getLogger(PlansPlanroamingdataDao.class);
@@ -26,11 +26,11 @@ public class PlansPlanroamingdataDao {
 		Session session = HibernateSessionManager.getSession();
 		int rid = 0;
 		try {
-			List<PlansPlanroamingdataEntity> resultList = null;
+			List<PlansPlanroamingdata> resultList = null;
 
 			String query = "Select * from plans_planroamingdata order by id desc";
 			logger.debug("query in findID in  PlansPlanroamingdata " + query);
-			resultList = new HibernateDAO().findBySQLQuery(session, PlansPlanroamingdataEntity.class, query,"plans_planroamingdata");
+			resultList = new HibernateDAO().findBySQLQuery(session, PlansPlanroamingdata.class, query,"plans_planroamingdata");
 
 			logger.debug("findID  in  PlansPlanroamingdata Size = "+resultList.size());
 			if ((null!=resultList) && (resultList.size()>0))
@@ -48,7 +48,7 @@ public class PlansPlanroamingdataDao {
 		return rid;
 	}
 
-	public boolean saveData(PlansPlanroamingdataEntity entityObj) {
+	public boolean saveData(PlansPlanroamingdata entityObj) {
 		boolean retVal = false; 
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -67,7 +67,7 @@ public class PlansPlanroamingdataDao {
 		return retVal;
 	}
 
-	public boolean updateData(PlansPlanroamingdataEntity entityObj) {
+	public boolean updateData(PlansPlanroamingdata entityObj) {
 		boolean retVal = false; 
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -86,13 +86,13 @@ public class PlansPlanroamingdataDao {
 		return retVal;
 	}
 
-	public PlansPlanroamingdataEntity findById(Integer id) {
+	public PlansPlanroamingdata findById(Integer id) {
 		Session session = HibernateSessionManager.getSession();
-		PlansPlanroamingdataEntity entity = null;
+		PlansPlanroamingdata entity = null;
 		try {
-			Query query = session.getNamedQuery("PlansPlanroamingdataEntity.findById");
+			Query query = session.getNamedQuery("PlansPlanroamingdata.findById");
 			query.setParameter("id", id);
-			entity = (PlansPlanroamingdataEntity)(query.list().get(0));
+			entity = (PlansPlanroamingdata)(query.list().get(0));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {

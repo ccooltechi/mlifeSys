@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.exception.RecordNotFoundException;
 import com.mobilelife.controler.mapper.PlanDevicecolorMapper;
-import com.mobilelife.controler.mapper.bean.PlanDevicecolor;
+import com.mobilelife.controler.mapper.bean.PlanDevicecolorBean;
 import com.mobilelife.persistance.dao.PlanDevicecolorDao;
-import com.mobilelife.persistance.entities.PlanDevicecolorEntity;
+import com.mobilelife.persistance.entities.PlanDevicecolor;
 
 
 public class PlanDevicecolorServices {
@@ -18,36 +18,36 @@ public class PlanDevicecolorServices {
 	PlanDevicecolorDao repository = new PlanDevicecolorDao();
 	PlanDevicecolorMapper mapper = new PlanDevicecolorMapper();
 
-	public List<PlanDevicecolor> getAll() {
-        List<PlanDevicecolorEntity> entityList = repository.findAll();
-        List<PlanDevicecolor> bean = mapper.mapBean(entityList);
+	public List<PlanDevicecolorBean> getAll() {
+        List<PlanDevicecolor> entityList = repository.findAll();
+        List<PlanDevicecolorBean> bean = mapper.mapBean(entityList);
 		return bean;
 	}
 
-    public PlanDevicecolor getById(Integer id)
+    public PlanDevicecolorBean getById(Integer id)
     {
-    	PlanDevicecolorEntity entity = repository.findById(id);
+    	PlanDevicecolor entity = repository.findById(id);
         if(null!=entity) {
-        	PlanDevicecolor bean = mapper.mapBean(entity);
+        	PlanDevicecolorBean bean = mapper.mapBean(entity);
             return bean;
         } else {
             throw new RecordNotFoundException("No record exist for given id "+id);
         }
     }
      
-    public boolean createOrUpdate(PlanDevicecolor bean)
+    public boolean createOrUpdate(PlanDevicecolorBean bean)
     {
     	boolean retVal = false;
     	if ((bean.getId()!=null) && (bean.getId()>0))
     	{
-    		PlanDevicecolorEntity existEntity = repository.findById(bean.getId());
+    		PlanDevicecolor existEntity = repository.findById(bean.getId());
     		if(null!=existEntity)
 	        {
-    			PlanDevicecolorEntity entity = mapper.mapBeanToEntity(bean, existEntity);
+    			PlanDevicecolor entity = mapper.mapBeanToEntity(bean, existEntity);
 	            retVal = repository.updateData(entity);
 	            return retVal;
 	        } else {
-	        	PlanDevicecolorEntity entity = mapper.mapBeanToEntity(bean);
+	        	PlanDevicecolor entity = mapper.mapBeanToEntity(bean);
     			int id = repository.findId()+1;
     			entity.setId(id);		
 	        	retVal = repository.saveData(entity);
@@ -56,7 +56,7 @@ public class PlanDevicecolorServices {
     	}
     	else
     	{
-    		PlanDevicecolorEntity entity = mapper.mapBeanToEntity(bean);
+    		PlanDevicecolor entity = mapper.mapBeanToEntity(bean);
 			int id = repository.findId()+1;
 			entity.setId(id);		
     		retVal = repository.saveData(entity);
@@ -67,7 +67,7 @@ public class PlanDevicecolorServices {
     public boolean delete(Integer id)
     {
     	boolean retVal =false;
-    	PlanDevicecolorEntity entity = repository.findById(id);
+    	PlanDevicecolor entity = repository.findById(id);
 		if(null!=entity)
         {
 			retVal = repository.deleteData(entity);

@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.services.PlansPlansocialdataServices;
 import com.mobilelife.common.CommonUtils;
-import com.mobilelife.controler.mapper.bean.PlansPlansocialdata;
+import com.mobilelife.controler.mapper.bean.PlansPlansocialdataBean;
 import com.mobilelife.controler.mapper.request.PlansPlansocialdataRequest;
 
 @Path("/plansocialdata")
@@ -30,9 +30,9 @@ public class PlansPlansocialdataResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createNew(PlansPlansocialdataRequest request) {
-        PlansPlansocialdata bean = (PlansPlansocialdata)request.getRequest();
+        PlansPlansocialdataBean bean = (PlansPlansocialdataBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlansocialdata country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlansocialdataBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }
@@ -42,7 +42,7 @@ public class PlansPlansocialdataResource {
     @Path("/{authtoken}/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") Integer id) {
-        PlansPlansocialdata bean  = service.getByPlanId(id);
+        PlansPlansocialdataBean bean  = service.getByPlanId(id);
         Response response = commonUtils.buildResponse(bean);
         return response;
     }
@@ -52,9 +52,9 @@ public class PlansPlansocialdataResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateExisting(PlansPlansocialdataRequest request) {
-        PlansPlansocialdata bean = (PlansPlansocialdata)request.getRequest();
+        PlansPlansocialdataBean bean = (PlansPlansocialdataBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlansocialdata country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlansocialdataBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }

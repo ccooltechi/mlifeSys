@@ -7,21 +7,22 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.mobilelife.controler.mapper.bean.PlansPlanprimary;
+import com.mobilelife.controler.mapper.bean.PlansPlanprimaryBean;
 import com.mobilelife.persistance.dao.OperatorDao;
 import com.mobilelife.persistance.dao.PlansTypePlanDao;
-import com.mobilelife.persistance.entities.PlansOperatorEntity;
-import com.mobilelife.persistance.entities.PlansPlanprimaryEntity;
-import com.mobilelife.persistance.entities.PlansPlantypeEntity;
+import com.mobilelife.persistance.entities.PlansOperator;
+import com.mobilelife.persistance.entities.PlansPlanprimary;
+import com.mobilelife.persistance.entities.PlansPlanprimaryLocale;
+import com.mobilelife.persistance.entities.PlansPlantype;
 public class PlansPlanprimaryMapper {
 	private static Logger logger = LoggerFactory.getLogger(PlansPlanprimaryMapper.class);
 
-    public List<PlansPlanprimary> mapBean(List<PlansPlanprimaryEntity> entityList) {
-        List<PlansPlanprimary> retBean = new ArrayList<PlansPlanprimary>();
+    public List<PlansPlanprimaryBean> mapBean(List<PlansPlanprimary> entityList) {
+        List<PlansPlanprimaryBean> retBean = new ArrayList<PlansPlanprimaryBean>();
         for (int i=0; i<entityList.size();i++)
         {
-            PlansPlanprimaryEntity entity = entityList.get(i);
-            PlansPlanprimary bean = new PlansPlanprimary();
+            PlansPlanprimary entity = entityList.get(i);
+            PlansPlanprimaryBean bean = new PlansPlanprimaryBean();
             bean.setId(entity.getId());
             bean.setActive(entity.getIsActive());
             bean.setAddon(entity.getIsAddon());
@@ -65,8 +66,8 @@ public class PlansPlanprimaryMapper {
         return retBean;
     }
     
-    public PlansPlanprimary mapBean(PlansPlanprimaryEntity entity) {
-        PlansPlanprimary bean = new PlansPlanprimary();
+    public PlansPlanprimaryBean mapBean(PlansPlanprimary entity) {
+        PlansPlanprimaryBean bean = new PlansPlanprimaryBean();
         bean.setId(entity.getId());
         bean.setActive(entity.getIsActive());
         bean.setAddon(entity.getIsAddon());
@@ -108,8 +109,8 @@ public class PlansPlanprimaryMapper {
         return bean;
     }
 
-    public PlansPlanprimaryEntity mapBeanToEntity(PlansPlanprimary bean, PlansPlanprimaryEntity existEntity) {
-        PlansPlanprimaryEntity updateEntity = existEntity;
+    public PlansPlanprimary mapBeanToEntity(PlansPlanprimaryBean bean, PlansPlanprimary existEntity) {
+        PlansPlanprimary updateEntity = existEntity;
         updateEntity.setIsActive(bean.isActive());
         updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setIsAddon(bean.isAddon());
@@ -148,11 +149,11 @@ public class PlansPlanprimaryMapper {
         return updateEntity;
     }
 
-    public PlansPlanprimaryEntity mapBeanToEntity(PlansPlanprimary bean) {
-        PlansPlanprimaryEntity updateEntity = new PlansPlanprimaryEntity();
+    public PlansPlanprimary mapBeanToEntity(PlansPlanprimaryBean bean) {
+        PlansPlanprimary updateEntity = new PlansPlanprimary();
         
-        PlansPlantypeEntity plantypeentity = new PlansTypePlanDao().findById(bean.getPlanType());
-        PlansOperatorEntity operatoreentity = new OperatorDao().findById(bean.getOperatorId());
+        PlansPlantype plantypeentity = new PlansTypePlanDao().findById(bean.getPlanType());
+        PlansOperator operatoreentity = new OperatorDao().findById(bean.getOperatorId());
 
         updateEntity.setCreationDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
@@ -195,5 +196,10 @@ public class PlansPlanprimaryMapper {
         updateEntity.setTopupsallowedFlag(bean.isTopupsallowedFlag());           
         return updateEntity;
     }
+
+	public PlansPlanprimaryLocale mapLocaleBeanToEntity(PlansPlanprimaryBean bean) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 

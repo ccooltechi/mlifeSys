@@ -9,8 +9,8 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.OrderOffersMapEntity;
-import com.mobilelife.persistance.entities.PlansPlanfeeEntity;
+import com.mobilelife.persistance.entities.OrderOffersMap;
+import com.mobilelife.persistance.entities.PlansPlanfee;
 
 public class OrderOffersMapDao {
 	private static Logger logger = LoggerFactory.getLogger(OrderOffersMapDao.class);
@@ -24,11 +24,11 @@ public class OrderOffersMapDao {
 		Session session = HibernateSessionManager.getSession();
 		int rid = 0;
 		try {
-			List<OrderOffersMapEntity> orderOffersMapList = null;
+			List<OrderOffersMap> orderOffersMapList = null;
 
 			String query = "Select * from order_offers_map order by id desc limit 1";
 			logger.debug("query in findID in  OrderOffersMapDao " + query);
-			orderOffersMapList = new HibernateDAO().findBySQLQuery(session, OrderOffersMapEntity.class, query,"order_offers_map");
+			orderOffersMapList = new HibernateDAO().findBySQLQuery(session, OrderOffersMap.class, query,"order_offers_map");
 
 			logger.debug("findID  in  OrderOffersMapDao Size = "+orderOffersMapList.size());
 			if ((null!=orderOffersMapList) && (orderOffersMapList.size()>0))
@@ -45,7 +45,7 @@ public class OrderOffersMapDao {
 		}
 		return rid;
 	}
-	public void saveData(OrderOffersMapEntity entityObj) {
+	public void saveData(OrderOffersMap entityObj) {
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
 		try {

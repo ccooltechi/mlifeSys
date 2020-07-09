@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.services.PlansPlandataServices;
 import com.mobilelife.common.CommonUtils;
-import com.mobilelife.controler.mapper.bean.PlansPlandata;
+import com.mobilelife.controler.mapper.bean.PlansPlandataBean;
 import com.mobilelife.controler.mapper.request.PlansPlandataRequest;
 
 @Path("/plandata")
@@ -29,9 +29,9 @@ public class PlansPlandataResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createNew(PlansPlandataRequest request) {
-        PlansPlandata bean = (PlansPlandata)request.getRequest();
+        PlansPlandataBean bean = (PlansPlandataBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlandata country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlandataBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }
@@ -41,7 +41,7 @@ public class PlansPlandataResource {
     @Path("/{authtoken}/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") Integer id) {
-        PlansPlandata bean  = service.getByPlanId(id);
+        PlansPlandataBean bean  = service.getByPlanId(id);
         Response response = commonUtils.buildResponse(bean);
         return response;
     }
@@ -51,9 +51,9 @@ public class PlansPlandataResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateExisting(PlansPlandataRequest request) {
-        PlansPlandata bean = (PlansPlandata)request.getRequest();
+        PlansPlandataBean bean = (PlansPlandataBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlandata country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlandataBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }

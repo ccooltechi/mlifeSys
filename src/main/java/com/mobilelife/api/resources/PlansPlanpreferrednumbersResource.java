@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.services.PlansPlanpreferrednumbersServices;
 import com.mobilelife.common.CommonUtils;
-import com.mobilelife.controler.mapper.bean.PlansPlanpreferrednumbers;
+import com.mobilelife.controler.mapper.bean.PlansPlanpreferrednumbersBean;
 import com.mobilelife.controler.mapper.request.PlansPlanpreferrednumbersRequest;
 
 @Path("/planpreferrednumbers")
@@ -30,9 +30,9 @@ public class PlansPlanpreferrednumbersResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createNew(PlansPlanpreferrednumbersRequest request) {
-        PlansPlanpreferrednumbers bean = (PlansPlanpreferrednumbers)request.getRequest();
+        PlansPlanpreferrednumbersBean bean = (PlansPlanpreferrednumbersBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlanpreferrednumbers country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlanpreferrednumbersBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }
@@ -42,7 +42,7 @@ public class PlansPlanpreferrednumbersResource {
     @Path("/{authtoken}/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") Integer id) {
-        PlansPlanpreferrednumbers bean  = service.getByPlanId(id);
+        PlansPlanpreferrednumbersBean bean  = service.getByPlanId(id);
         Response response = commonUtils.buildResponse(bean);
         return response;
     }
@@ -52,9 +52,9 @@ public class PlansPlanpreferrednumbersResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateExisting(PlansPlanpreferrednumbersRequest request) {
-        PlansPlanpreferrednumbers bean = (PlansPlanpreferrednumbers)request.getRequest();
+        PlansPlanpreferrednumbersBean bean = (PlansPlanpreferrednumbersBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlanpreferrednumbers country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlanpreferrednumbersBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }

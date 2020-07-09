@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.PlansPlannationaldataEntity;
-import com.mobilelife.persistance.entities.PlansPlannationalminutesEntity;
+import com.mobilelife.persistance.entities.PlansPlannationaldata;
+import com.mobilelife.persistance.entities.PlansPlannationalminutes;
 
 public class PlansPlannationalminutesDao {
 	private static Logger logger = LoggerFactory.getLogger(PlansPlannationalminutesDao.class);
@@ -26,11 +26,11 @@ public class PlansPlannationalminutesDao {
 		Session session = HibernateSessionManager.getSession();
 		int rid = 0;
 		try {
-			List<PlansPlannationalminutesEntity> resultList = null;
+			List<PlansPlannationalminutes> resultList = null;
 
 			String query = "Select * from plans_plannationalminutes order by id desc";
 			logger.debug("query in findID in  PlansPlannationalminutes " + query);
-			resultList = new HibernateDAO().findBySQLQuery(session, PlansPlannationalminutesEntity.class, query,"plans_plannationalminutes");
+			resultList = new HibernateDAO().findBySQLQuery(session, PlansPlannationalminutes.class, query,"plans_plannationalminutes");
 
 			logger.debug("findID  in  PlansPlannationalminutes Size = "+resultList.size());
 			if ((null!=resultList) && (resultList.size()>0))
@@ -48,13 +48,13 @@ public class PlansPlannationalminutesDao {
 		return rid;
 	}
 
-	public PlansPlannationalminutesEntity findById(Integer id) {
+	public PlansPlannationalminutes findById(Integer id) {
 		Session session = HibernateSessionManager.getSession();
-		PlansPlannationalminutesEntity entity = null;
+		PlansPlannationalminutes entity = null;
 		try {
-			Query query = session.getNamedQuery("PlansPlannationalminutesEntity.findById");
+			Query query = session.getNamedQuery("PlansPlannationalminutes.findById");
 			query.setParameter("id", id);
-			entity = (PlansPlannationalminutesEntity)(query.list().get(0));
+			entity = (PlansPlannationalminutes)(query.list().get(0));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
@@ -67,7 +67,7 @@ public class PlansPlannationalminutesDao {
 	}
 
 	
-	public boolean saveData(PlansPlannationalminutesEntity entityObj) {
+	public boolean saveData(PlansPlannationalminutes entityObj) {
 		boolean retVal = false; 
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -85,7 +85,7 @@ public class PlansPlannationalminutesDao {
 		}
 		return retVal;	}
 
-	public boolean updateData(PlansPlannationalminutesEntity entityObj) {
+	public boolean updateData(PlansPlannationalminutes entityObj) {
 		boolean retVal = false; 
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;

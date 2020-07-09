@@ -7,27 +7,30 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.exception.RecordNotFoundException;
 import com.mobilelife.controler.mapper.PlansPlanprimaryMapper;
-import com.mobilelife.controler.mapper.bean.PlansPlanprimary;
+import com.mobilelife.controler.mapper.bean.PlansPlanprimaryBean;
 import com.mobilelife.persistance.dao.PlansPlanprimaryDao;
-import com.mobilelife.persistance.entities.PlansPlanprimaryEntity;
+import com.mobilelife.persistance.dao.PlansPlanprimaryLocaleDao;
+import com.mobilelife.persistance.entities.PlansPlanprimary;
+import com.mobilelife.persistance.entities.PlansPlanprimaryLocale;
 
 
 public class PlansPlanprimaryServices {
 
 	private static Logger logger = LoggerFactory.getLogger(PlansPlanprimaryServices.class);
 	PlansPlanprimaryDao repository = new PlansPlanprimaryDao();
+	PlansPlanprimaryLocaleDao localerepository = new PlansPlanprimaryLocaleDao();
 	PlansPlanprimaryMapper mapper = new PlansPlanprimaryMapper();
 
-	public List<PlansPlanprimary> getAll() {
-        List<PlansPlanprimaryEntity> entityList = repository.findAll();
-        List<PlansPlanprimary> bean = mapper.mapBean(entityList);
+	public List<PlansPlanprimaryBean> getAll(int pageno, int resultperpage, int operatorid, int plantype) {
+        List<PlansPlanprimary> entityList = repository.findAll(pageno, resultperpage, operatorid, plantype);
+        List<PlansPlanprimaryBean> bean = mapper.mapBean(entityList);
 		return bean;
 	}
 
-    public PlansPlanprimary getById(Integer id)
+    public PlansPlanprimaryBean getById(Integer id)
     {
-    	PlansPlanprimaryEntity entity = repository.findById(id);
-    	PlansPlanprimary bean = mapper.mapBean(entity);
+    	PlansPlanprimary entity = repository.findById(id);
+    	PlansPlanprimaryBean bean = mapper.mapBean(entity);
         if(null!=entity) {
             return bean;
         } else {
@@ -35,19 +38,19 @@ public class PlansPlanprimaryServices {
         }
     }
      
-    public Integer createOrUpdate(PlansPlanprimary bean)
+    public Integer createOrUpdate(PlansPlanprimaryBean bean)
     {
     	boolean retVal = false;
     	if ((bean.getId()!=null) && (bean.getId()>0))
     	{
-    		PlansPlanprimaryEntity existEntity = repository.findById(bean.getId());
+    		PlansPlanprimary existEntity = repository.findById(bean.getId());
     		if(null!=existEntity)
 	        {
-    			PlansPlanprimaryEntity entity = mapper.mapBeanToEntity(bean, existEntity);
+    			PlansPlanprimary entity = mapper.mapBeanToEntity(bean, existEntity);
 	            retVal = repository.updateData(entity);
 	            return entity.getId();
 	        } else {
-	        	PlansPlanprimaryEntity entity = mapper.mapBeanToEntity(bean);
+	        	PlansPlanprimary entity = mapper.mapBeanToEntity(bean);
     			int id = repository.findId()+1;
     			entity.setId(id);		
 	        	retVal = repository.saveData(entity);
@@ -56,18 +59,22 @@ public class PlansPlanprimaryServices {
     	}
     	else
     	{
-    		PlansPlanprimaryEntity entity = mapper.mapBeanToEntity(bean);
+    		PlansPlanprimary entity = mapper.mapBeanToEntity(bean);
 			int id = repository.findId()+1;
 			entity.setId(id);		
     		retVal = repository.saveData(entity);
-            return entity.getId();
+    		PlansPlanprimaryLocale localeentity = mapper.mapLocaleBeanToEntity(bean);
+			id = localerepository.findId()+1;
+			localeentity.setId(id);		
+
+    		return entity.getId();
     	}	    
     }
     
     public boolean delete(Integer id)
     {
     	boolean retVal =false;
-    	PlansPlanprimaryEntity entity = repository.findById(id);
+    	PlansPlanprimary entity = repository.findById(id);
 		if(null!=entity)
         {
 			retVal = repository.deleteData(entity);

@@ -7,7 +7,7 @@ import org.hibernate.Session;
 
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.PlansPlanprimaryEntity;
+import com.mobilelife.persistance.entities.PlansPlanprimary;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,37 +20,37 @@ public class SearchPlansDao {
 		
 	}
 	
-	public List<PlansPlanprimaryEntity> findAllPlans()
+	public List<PlansPlanprimary> findAllPlans()
 	{
 		Session session = HibernateSessionManager.getSession();
-		List<PlansPlanprimaryEntity> plansPlanprimary = null;
+		List<PlansPlanprimary> plansPlanprimary = null;
 		Query query = session.getNamedQuery("PlansPlanprimary.findAll");
 		logger.debug("findAllPlans Size = "+query.list().size());
-		plansPlanprimary = (List<PlansPlanprimaryEntity>)query.list();
+		plansPlanprimary = (List<PlansPlanprimary>)query.list();
 		return plansPlanprimary;
 	}
 
-	public List<PlansPlanprimaryEntity> findPlansByID(String planID)
+	public List<PlansPlanprimary> findPlansByID(String planID)
 	{
 		Session session = HibernateSessionManager.getSession();
-		List<PlansPlanprimaryEntity> plansPlanprimary = null;
+		List<PlansPlanprimary> plansPlanprimary = null;
 		Query query = session.getNamedQuery("PlansPlanprimary.findByPlanId");
 		query.setParameter("planId", planID);
 		logger.debug("findPlansByID Size = "+query.list().size());
-		plansPlanprimary = (List<PlansPlanprimaryEntity>)query.list();
+		plansPlanprimary = (List<PlansPlanprimary>)query.list();
 		return plansPlanprimary;
 	}
 
-	public List<PlansPlanprimaryEntity> findPlansByOperatorID(String operatorID)
+	public List<PlansPlanprimary> findPlansByOperatorID(String operatorID)
 	{
 		Session session = HibernateSessionManager.getSession();
-		List<PlansPlanprimaryEntity> plansPlanprimary = null;
+		List<PlansPlanprimary> plansPlanprimary = null;
 		try {
-			List<PlansPlanprimaryEntity> plansPlanprimaryList = null;
+			List<PlansPlanprimary> plansPlanprimaryList = null;
 
 			String query = "Select * from plans_planprimary where is_active=0 and operator_id ="+operatorID;
 			logger.debug("query in findPlansByOperatorID for all " + query);
-			plansPlanprimaryList = new HibernateDAO().findBySQLQuery(session, PlansPlanprimaryEntity.class, query,"plans_planprimary");
+			plansPlanprimaryList = new HibernateDAO().findBySQLQuery(session, PlansPlanprimary.class, query,"plans_planprimary");
 
 			logger.debug("findPlansByOperatorID Size = "+plansPlanprimaryList.size());
 			if ((null!=plansPlanprimaryList) && (plansPlanprimaryList.size()>0))
@@ -75,12 +75,12 @@ public class SearchPlansDao {
 //		searchPlan.findPlansByOperatorID("1");
 	}
 
-	public List<PlansPlanprimaryEntity> findPlansByFilter(String filterSqlQuery) {
+	public List<PlansPlanprimary> findPlansByFilter(String filterSqlQuery) {
 		Session session = HibernateSessionManager.getSession();
-		List<PlansPlanprimaryEntity> plansPlanprimary = null;
+		List<PlansPlanprimary> plansPlanprimary = null;
 		try {
-			List<PlansPlanprimaryEntity> plansPlanprimaryList = null;
-			plansPlanprimaryList = new HibernateDAO().findBySQLQuery(session, PlansPlanprimaryEntity.class, filterSqlQuery,"plans_planprimary");
+			List<PlansPlanprimary> plansPlanprimaryList = null;
+			plansPlanprimaryList = new HibernateDAO().findBySQLQuery(session, PlansPlanprimary.class, filterSqlQuery,"plans_planprimary");
 
 			logger.debug("findPlansByFilter Size = "+plansPlanprimaryList.size());
 			if ((null!=plansPlanprimaryList) && (plansPlanprimaryList.size()>0))

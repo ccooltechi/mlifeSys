@@ -7,10 +7,10 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.exception.RecordNotFoundException;
 import com.mobilelife.controler.mapper.PlansPlantypeMapper;
-import com.mobilelife.controler.mapper.bean.PlansOperator;
-import com.mobilelife.controler.mapper.bean.PlansPlantype;
+import com.mobilelife.controler.mapper.bean.PlansOperatorBean;
+import com.mobilelife.controler.mapper.bean.PlansPlantypeBean;
 import com.mobilelife.persistance.dao.PlansTypePlanDao;
-import com.mobilelife.persistance.entities.PlansPlantypeEntity;
+import com.mobilelife.persistance.entities.PlansPlantype;
 
 
 public class PlansPlantypeServices {
@@ -19,16 +19,16 @@ public class PlansPlantypeServices {
 	PlansTypePlanDao repository = new PlansTypePlanDao();
 	PlansPlantypeMapper mapper = new PlansPlantypeMapper();
 
-	public List<PlansPlantype> getAll() {
-        List<PlansPlantypeEntity> entityList = repository.findAll();
-        List<PlansPlantype> bean = mapper.mapBean(entityList);
+	public List<PlansPlantypeBean> getAll() {
+        List<PlansPlantype> entityList = repository.findAll();
+        List<PlansPlantypeBean> bean = mapper.mapBean(entityList);
 		return bean;
 	}
 
-    public PlansPlantype getById(Integer id)
+    public PlansPlantypeBean getById(Integer id)
     {
-    	PlansPlantypeEntity entity = repository.findById(id);
-    	PlansPlantype bean = mapper.mapBean(entity);
+    	PlansPlantype entity = repository.findById(id);
+    	PlansPlantypeBean bean = mapper.mapBean(entity);
         if(null!=entity) {
             return bean;
         } else {
@@ -36,19 +36,19 @@ public class PlansPlantypeServices {
         }
     }
      
-    public boolean createOrUpdate(PlansPlantype bean)
+    public boolean createOrUpdate(PlansPlantypeBean bean)
     {
     	boolean retVal = false;
     	if ((bean.getId()!=null) && (bean.getId()>0))
     	{
-    		PlansPlantypeEntity existEntity = repository.findById(bean.getId());
+    		PlansPlantype existEntity = repository.findById(bean.getId());
     		if(null!=existEntity)
 	        {
-    			PlansPlantypeEntity entity = mapper.mapBeanToEntity(bean, existEntity);
+    			PlansPlantype entity = mapper.mapBeanToEntity(bean, existEntity);
 	            retVal = repository.updateData(entity);
 	            return retVal;
 	        } else {
-	        	PlansPlantypeEntity entity = mapper.mapBeanToEntity(bean);
+	        	PlansPlantype entity = mapper.mapBeanToEntity(bean);
     			int id = repository.findId()+1;
     			entity.setId(id);		
 	        	retVal = repository.saveData(entity);
@@ -57,7 +57,7 @@ public class PlansPlantypeServices {
     	}
     	else
     	{
-    		PlansPlantypeEntity entity = mapper.mapBeanToEntity(bean);
+    		PlansPlantype entity = mapper.mapBeanToEntity(bean);
 			int id = repository.findId()+1;
 			entity.setId(id);		
     		retVal = repository.saveData(entity);
@@ -68,7 +68,7 @@ public class PlansPlantypeServices {
     public boolean delete(Integer id)
     {
     	boolean retVal =false;
-    	PlansPlantypeEntity entity = repository.findById(id);
+    	PlansPlantype entity = repository.findById(id);
 		if(null!=entity)
         {
 			retVal = repository.deleteData(entity);

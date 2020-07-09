@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.services.PlansPlanunitsServices;
 import com.mobilelife.common.CommonUtils;
-import com.mobilelife.controler.mapper.bean.PlansPlanunits;
+import com.mobilelife.controler.mapper.bean.PlansPlanunitsBean;
 import com.mobilelife.controler.mapper.request.PlansPlanunitsRequest;
 
 @Path("/planunits")
@@ -30,9 +30,9 @@ public class PlansPlanunitsResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createNew(PlansPlanunitsRequest request) {
-        PlansPlanunits bean = (PlansPlanunits)request.getRequest();
+        PlansPlanunitsBean bean = (PlansPlanunitsBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlanunits country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlanunitsBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }
@@ -42,7 +42,7 @@ public class PlansPlanunitsResource {
     @Path("/{authtoken}/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") Integer id) {
-        PlansPlanunits bean  = service.getByPlanId(id);
+        PlansPlanunitsBean bean  = service.getByPlanId(id);
         Response response = commonUtils.buildResponse(bean);
         return response;
     }
@@ -52,9 +52,9 @@ public class PlansPlanunitsResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateExisting(PlansPlanunitsRequest request) {
-        PlansPlanunits bean = (PlansPlanunits)request.getRequest();
+        PlansPlanunitsBean bean = (PlansPlanunitsBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlanunits country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlanunitsBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }

@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.services.PlansPlaninternationalmmsServices;
 import com.mobilelife.common.CommonUtils;
-import com.mobilelife.controler.mapper.bean.PlansPlaninternationalmms;
+import com.mobilelife.controler.mapper.bean.PlansPlaninternationalmmsBean;
 import com.mobilelife.controler.mapper.request.PlansPlaninternationalmmsRequest;
 
 @Path("/planInternationalmms")
@@ -31,9 +31,9 @@ public class PlansPlaninternationalmmsResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createNew(PlansPlaninternationalmmsRequest request) {
-        PlansPlaninternationalmms bean = (PlansPlaninternationalmms)request.getRequest();
+        PlansPlaninternationalmmsBean bean = (PlansPlaninternationalmmsBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlaninternationalmms country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlaninternationalmmsBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }
@@ -43,7 +43,7 @@ public class PlansPlaninternationalmmsResource {
     @Path("/{authtoken}/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") Integer id) {
-        PlansPlaninternationalmms bean  = service.getByPlanId(id);
+        PlansPlaninternationalmmsBean bean  = service.getByPlanId(id);
         Response response = commonUtils.buildResponse(bean);
         return response;
     }
@@ -53,9 +53,9 @@ public class PlansPlaninternationalmmsResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateExisting(PlansPlaninternationalmmsRequest request) {
-        PlansPlaninternationalmms bean = (PlansPlaninternationalmms)request.getRequest();
+        PlansPlaninternationalmmsBean bean = (PlansPlaninternationalmmsBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlaninternationalmms country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlaninternationalmmsBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }

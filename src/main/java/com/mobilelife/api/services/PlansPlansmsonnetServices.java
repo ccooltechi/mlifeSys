@@ -5,11 +5,11 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.exception.RecordNotFoundException;
 import com.mobilelife.controler.mapper.PlansPlansmsonnetMapper;
-import com.mobilelife.controler.mapper.bean.PlansPlansmsonnet;
+import com.mobilelife.controler.mapper.bean.PlansPlansmsonnetBean;
 import com.mobilelife.persistance.dao.PlansPlanprimaryDao;
 import com.mobilelife.persistance.dao.PlansPlansmsonnetDao;
-import com.mobilelife.persistance.entities.PlansPlanprimaryEntity;
-import com.mobilelife.persistance.entities.PlansPlansmsonnetEntity;
+import com.mobilelife.persistance.entities.PlansPlanprimary;
+import com.mobilelife.persistance.entities.PlansPlansmsonnet;
 
 
 public class PlansPlansmsonnetServices {
@@ -19,31 +19,31 @@ public class PlansPlansmsonnetServices {
 	PlansPlansmsonnetMapper mapper = new PlansPlansmsonnetMapper();
 	PlansPlanprimaryDao planrepository = new PlansPlanprimaryDao();
 
-    public PlansPlansmsonnet getByPlanId(Integer id)
+    public PlansPlansmsonnetBean getByPlanId(Integer id)
     {
-    	PlansPlanprimaryEntity plansPlanprimaryEntity = planrepository.findById(id);
-    	PlansPlansmsonnetEntity entity = plansPlanprimaryEntity.getPlansPlansmsonnet();
+    	PlansPlanprimary plansPlanprimaryEntity = planrepository.findById(id);
+    	PlansPlansmsonnet entity = plansPlanprimaryEntity.getPlansPlansmsonnet();
         if(null!=entity) {
-        	PlansPlansmsonnet bean = mapper.mapBean(entity);
+        	PlansPlansmsonnetBean bean = mapper.mapBean(entity);
             return bean;
         } else {
             throw new RecordNotFoundException("No record exist for given id "+id);
         }
     }
      
-    public boolean createOrUpdate(PlansPlansmsonnet bean)
+    public boolean createOrUpdate(PlansPlansmsonnetBean bean)
     {
     	boolean retVal = false;
     	if ((bean.getId()!=null) && (bean.getId()>0))
     	{
-    		PlansPlansmsonnetEntity existEntity = repository.findById(bean.getId());
+    		PlansPlansmsonnet existEntity = repository.findById(bean.getId());
     		if(null!=existEntity)
 	        {
-    			PlansPlansmsonnetEntity entity = mapper.mapBeanToEntity(bean, existEntity);
+    			PlansPlansmsonnet entity = mapper.mapBeanToEntity(bean, existEntity);
 	            retVal = repository.updateData(entity);
 	            return retVal;
 	        } else {
-	        	PlansPlansmsonnetEntity entity = mapper.mapBeanToEntity(bean);
+	        	PlansPlansmsonnet entity = mapper.mapBeanToEntity(bean);
     			int id = repository.findId()+1;
     			entity.setId(id);		
 	        	retVal = repository.saveData(entity);
@@ -52,7 +52,7 @@ public class PlansPlansmsonnetServices {
     	}
     	else
     	{
-    		PlansPlansmsonnetEntity entity = mapper.mapBeanToEntity(bean);
+    		PlansPlansmsonnet entity = mapper.mapBeanToEntity(bean);
 			int id = repository.findId()+1;
 			entity.setId(id);		
     		retVal = repository.saveData(entity);

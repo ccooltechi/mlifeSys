@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.services.PlansPlaninternationalvideocallServices;
 import com.mobilelife.common.CommonUtils;
-import com.mobilelife.controler.mapper.bean.PlansPlaninternationalvideocall;
+import com.mobilelife.controler.mapper.bean.PlansPlaninternationalvideocallBean;
 import com.mobilelife.controler.mapper.request.PlansPlaninternationalvideocallRequest;
 
 @Path("/planInternationalvideocall")
@@ -30,9 +30,9 @@ public class PlansPlaninternationalvideocallResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createNew(PlansPlaninternationalvideocallRequest request) {
-        PlansPlaninternationalvideocall bean = (PlansPlaninternationalvideocall)request.getRequest();
+        PlansPlaninternationalvideocallBean bean = (PlansPlaninternationalvideocallBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlaninternationalvideocall country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlaninternationalvideocallBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }
@@ -42,7 +42,7 @@ public class PlansPlaninternationalvideocallResource {
     @Path("/{authtoken}/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") Integer id) {
-        PlansPlaninternationalvideocall bean  = service.getByPlanId(id);
+        PlansPlaninternationalvideocallBean bean  = service.getByPlanId(id);
         Response response = commonUtils.buildResponse(bean);
         return response;
     }
@@ -52,9 +52,9 @@ public class PlansPlaninternationalvideocallResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateExisting(PlansPlaninternationalvideocallRequest request) {
-        PlansPlaninternationalvideocall bean = (PlansPlaninternationalvideocall)request.getRequest();
+        PlansPlaninternationalvideocallBean bean = (PlansPlaninternationalvideocallBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlaninternationalvideocall country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlaninternationalvideocallBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }

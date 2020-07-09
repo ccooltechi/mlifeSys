@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.exception.RecordNotFoundException;
 import com.mobilelife.controler.mapper.PlanDevicebrandMapper;
-import com.mobilelife.controler.mapper.bean.PlanDevicebrand;
+import com.mobilelife.controler.mapper.bean.PlanDevicebrandBean;
 import com.mobilelife.persistance.dao.PlanDevicebrandDao;
-import com.mobilelife.persistance.entities.PlanDevicebrandEntity;
+import com.mobilelife.persistance.entities.PlanDevicebrand;
 
 
 public class PlanDevicebrandServices {
@@ -19,36 +19,36 @@ public class PlanDevicebrandServices {
 	PlanDevicebrandMapper mapper = new PlanDevicebrandMapper();
 	
 
-	public List<PlanDevicebrand> getAll() {
-        List<PlanDevicebrandEntity> entityList = repository.findAll();
-        List<PlanDevicebrand> bean = mapper.mapBean(entityList);
+	public List<PlanDevicebrandBean> getAll() {
+        List<PlanDevicebrand> entityList = repository.findAll();
+        List<PlanDevicebrandBean> bean = mapper.mapBean(entityList);
 		return bean;
 	}
 
-    public PlanDevicebrand getById(Integer id)
+    public PlanDevicebrandBean getById(Integer id)
     {
-    	PlanDevicebrandEntity entity = repository.findById(id);
+    	PlanDevicebrand entity = repository.findById(id);
         if(null!=entity) {
-        	PlanDevicebrand bean = mapper.mapBean(entity);
+        	PlanDevicebrandBean bean = mapper.mapBean(entity);
             return bean;
         } else {
             throw new RecordNotFoundException("No record exist for given id "+id);
         }
     }
      
-    public boolean createOrUpdate(PlanDevicebrand bean)
+    public boolean createOrUpdate(PlanDevicebrandBean bean)
     {
     	boolean retVal = false;
     	if ((bean.getId()!=null) && (bean.getId()>0))
     	{
-    		PlanDevicebrandEntity existEntity = repository.findById(bean.getId());
+    		PlanDevicebrand existEntity = repository.findById(bean.getId());
     		if(null!=existEntity)
 	        {
-    			PlanDevicebrandEntity entity = mapper.mapBeanToEntity(bean, existEntity);
+    			PlanDevicebrand entity = mapper.mapBeanToEntity(bean, existEntity);
 	            retVal = repository.updateData(entity);
 	            return retVal;
 	        } else {
-	        	PlanDevicebrandEntity entity = mapper.mapBeanToEntity(bean);
+	        	PlanDevicebrand entity = mapper.mapBeanToEntity(bean);
     			int id = repository.findId()+1;
     			entity.setId(id);		
 	        	retVal = repository.saveData(entity);
@@ -57,7 +57,7 @@ public class PlanDevicebrandServices {
     	}
     	else
     	{
-    		PlanDevicebrandEntity entity = mapper.mapBeanToEntity(bean);
+    		PlanDevicebrand entity = mapper.mapBeanToEntity(bean);
 			int id = repository.findId()+1;
 			entity.setId(id);		
     		retVal = repository.saveData(entity);
@@ -68,7 +68,7 @@ public class PlanDevicebrandServices {
     public boolean delete(Integer id)
     {
     	boolean retVal =false;
-    	PlanDevicebrandEntity entity = repository.findById(id);
+    	PlanDevicebrand entity = repository.findById(id);
 		if(null!=entity)
         {
 			retVal = repository.deleteData(entity);

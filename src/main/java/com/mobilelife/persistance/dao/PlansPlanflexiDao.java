@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.PlansPlandataEntity;
-import com.mobilelife.persistance.entities.PlansPlanflexiEntity;
+import com.mobilelife.persistance.entities.PlansPlandata;
+import com.mobilelife.persistance.entities.PlansPlanflexi;
 
 public class PlansPlanflexiDao {
 	private static Logger logger = LoggerFactory.getLogger(PlansPlanflexiDao.class);
@@ -26,11 +26,11 @@ public class PlansPlanflexiDao {
 		Session session = HibernateSessionManager.getSession();
 		int rid = 0;
 		try {
-			List<PlansPlanflexiEntity> resultList = null;
+			List<PlansPlanflexi> resultList = null;
 
 			String query = "Select * from plans_planflexi order by id desc limit 1";
 			logger.debug("query in findID in  PlansPlanflexiDao " + query);
-			resultList = new HibernateDAO().findBySQLQuery(session, PlansPlanflexiEntity.class, query,"plans_planflexi");
+			resultList = new HibernateDAO().findBySQLQuery(session, PlansPlanflexi.class, query,"plans_planflexi");
 
 			logger.debug("findID  in  PlansPlanflexiDao Size = "+resultList.size());
 			if ((null!=resultList) && (resultList.size()>0))
@@ -48,7 +48,7 @@ public class PlansPlanflexiDao {
 		return rid;
 	}
 
-	public boolean saveData(PlansPlanflexiEntity entityObj) {
+	public boolean saveData(PlansPlanflexi entityObj) {
 		boolean retVal = false;
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -67,7 +67,7 @@ public class PlansPlanflexiDao {
 		return retVal;
 	}
 
-	public boolean updateData(PlansPlanflexiEntity entityObj) {
+	public boolean updateData(PlansPlanflexi entityObj) {
 		boolean retVal = false;
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -86,13 +86,13 @@ public class PlansPlanflexiDao {
 		return retVal;
 	}
 
-	public PlansPlanflexiEntity findById(Integer id) {
+	public PlansPlanflexi findById(Integer id) {
 		Session session = HibernateSessionManager.getSession();
-		PlansPlanflexiEntity entity = null;
+		PlansPlanflexi entity = null;
 		try {
-			Query query = session.getNamedQuery("PlansPlanflexiEntity.findById");
+			Query query = session.getNamedQuery("PlansPlanflexi.findById");
 			query.setParameter("id", id);
-			entity = (PlansPlanflexiEntity)(query.list().get(0));
+			entity = (PlansPlanflexi)(query.list().get(0));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {

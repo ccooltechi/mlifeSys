@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.services.PlansPlanroamingoutgoingminsServices;
 import com.mobilelife.common.CommonUtils;
-import com.mobilelife.controler.mapper.bean.PlansPlanroamingoutgoingmins;
+import com.mobilelife.controler.mapper.bean.PlansPlanroamingoutgoingminsBean;
 import com.mobilelife.controler.mapper.request.PlansPlanroamingoutgoingminsRequest;
 
 @Path("/planroamingoutgoingmins")
@@ -30,9 +30,9 @@ public class PlansPlanroamingoutgoingminsResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createNew(PlansPlanroamingoutgoingminsRequest request) {
-        PlansPlanroamingoutgoingmins bean = (PlansPlanroamingoutgoingmins)request.getRequest();
+        PlansPlanroamingoutgoingminsBean bean = (PlansPlanroamingoutgoingminsBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlanroamingoutgoingmins country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlanroamingoutgoingminsBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }
@@ -42,7 +42,7 @@ public class PlansPlanroamingoutgoingminsResource {
     @Path("/{authtoken}/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") Integer id) {
-        PlansPlanroamingoutgoingmins bean  = service.getByPlanId(id);
+        PlansPlanroamingoutgoingminsBean bean  = service.getByPlanId(id);
         Response response = commonUtils.buildResponse(bean);
         return response;
     }
@@ -52,9 +52,9 @@ public class PlansPlanroamingoutgoingminsResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateExisting(PlansPlanroamingoutgoingminsRequest request) {
-        PlansPlanroamingoutgoingmins bean = (PlansPlanroamingoutgoingmins)request.getRequest();
+        PlansPlanroamingoutgoingminsBean bean = (PlansPlanroamingoutgoingminsBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlanroamingoutgoingmins country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlanroamingoutgoingminsBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }

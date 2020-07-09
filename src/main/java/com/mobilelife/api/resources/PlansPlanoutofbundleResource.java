@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.services.PlansPlanoutofbundleServices;
 import com.mobilelife.common.CommonUtils;
-import com.mobilelife.controler.mapper.bean.PlansPlanoutofbundle;
+import com.mobilelife.controler.mapper.bean.PlansPlanoutofbundleBean;
 import com.mobilelife.controler.mapper.request.PlansPlanoutofbundleRequest;
 
 @Path("/planoutofbundle")
@@ -30,9 +30,9 @@ public class PlansPlanoutofbundleResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createNew(PlansPlanoutofbundleRequest request) {
-        PlansPlanoutofbundle bean = (PlansPlanoutofbundle)request.getRequest();
+        PlansPlanoutofbundleBean bean = (PlansPlanoutofbundleBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlanoutofbundle country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlanoutofbundleBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }
@@ -42,7 +42,7 @@ public class PlansPlanoutofbundleResource {
     @Path("/{authtoken}/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") Integer id) {
-        PlansPlanoutofbundle bean  = service.getByPlanId(id);
+        PlansPlanoutofbundleBean bean  = service.getByPlanId(id);
         Response response = commonUtils.buildResponse(bean);
         return response;
     }
@@ -52,9 +52,9 @@ public class PlansPlanoutofbundleResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateExisting(PlansPlanoutofbundleRequest request) {
-        PlansPlanoutofbundle bean = (PlansPlanoutofbundle)request.getRequest();
+        PlansPlanoutofbundleBean bean = (PlansPlanoutofbundleBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlanoutofbundle country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlanoutofbundleBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }

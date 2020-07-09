@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.PlansOperatorEntity;
+import com.mobilelife.persistance.entities.PlansOperator;
 
 public class SearchOperatorDao {
 	private static Logger logger = LoggerFactory.getLogger(SearchOperatorDao.class);
@@ -18,10 +18,10 @@ public class SearchOperatorDao {
 		
 	}
 	
-	public List<PlansOperatorEntity> findAllOperators()
+	public List<PlansOperator> findAllOperators()
 	{
 		Session session = HibernateSessionManager.getSession();
-		List<PlansOperatorEntity> plansOperator = null;
+		List<PlansOperator> plansOperator = null;
 		Query query = session.getNamedQuery("PlansOperator.findAll");
 		System.out.println("Size = "+query.list().size());
 		plansOperator = query.list();
@@ -30,14 +30,14 @@ public class SearchOperatorDao {
 		return plansOperator;
 	}
 
-	private PlansOperatorEntity findPlansByOperator(String operator_name)
+	private PlansOperator findPlansByOperator(String operator_name)
 	{
 		Session session = HibernateSessionManager.getSession();
-		PlansOperatorEntity plansOperator = null;
+		PlansOperator plansOperator = null;
 		Query query = session.getNamedQuery("PlansOperator.findByOperatorName");
 		query.setParameter("operatorName", operator_name);
 		System.out.println("Size = "+query.list().size());
-		plansOperator = (PlansOperatorEntity)query.list().get(0);
+		plansOperator = (PlansOperator)query.list().get(0);
 		System.out.println("operator ID = "+plansOperator.getId());
 		System.out.println("operator Name = "+plansOperator.getOperatorName());
 		return plansOperator;

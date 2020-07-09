@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.services.PlansPlannationalminutesonnetServices;
 import com.mobilelife.common.CommonUtils;
-import com.mobilelife.controler.mapper.bean.PlansPlannationalminutesonnet;
+import com.mobilelife.controler.mapper.bean.PlansPlannationalminutesonnetBean;
 import com.mobilelife.controler.mapper.request.PlansPlannationalminutesonnetRequest;
 
 @Path("/planNationalonnetminutes")
@@ -30,9 +30,9 @@ public class PlansPlannationalminutesonnetResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createNew(PlansPlannationalminutesonnetRequest request) {
-        PlansPlannationalminutesonnet bean = (PlansPlannationalminutesonnet)request.getRequest();
+        PlansPlannationalminutesonnetBean bean = (PlansPlannationalminutesonnetBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlannationalminutesonnet country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlannationalminutesonnetBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }
@@ -42,7 +42,7 @@ public class PlansPlannationalminutesonnetResource {
     @Path("/{authtoken}/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") Integer id) {
-        PlansPlannationalminutesonnet bean  = service.getByPlanId(id);
+        PlansPlannationalminutesonnetBean bean  = service.getByPlanId(id);
         Response response = commonUtils.buildResponse(bean);
         return response;
     }
@@ -52,9 +52,9 @@ public class PlansPlannationalminutesonnetResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateExisting(PlansPlannationalminutesonnetRequest request) {
-        PlansPlannationalminutesonnet bean = (PlansPlannationalminutesonnet)request.getRequest();
+        PlansPlannationalminutesonnetBean bean = (PlansPlannationalminutesonnetBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlannationalminutesonnet country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlannationalminutesonnetBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }

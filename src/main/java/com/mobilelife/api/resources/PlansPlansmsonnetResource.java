@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.services.PlansPlansmsonnetServices;
 import com.mobilelife.common.CommonUtils;
-import com.mobilelife.controler.mapper.bean.PlansPlansmsonnet;
+import com.mobilelife.controler.mapper.bean.PlansPlansmsonnetBean;
 import com.mobilelife.controler.mapper.request.PlansPlansmsonnetRequest;
 
 @Path("/plansmsonnet")
@@ -30,9 +30,9 @@ public class PlansPlansmsonnetResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createNew(PlansPlansmsonnetRequest request) {
-        PlansPlansmsonnet bean = (PlansPlansmsonnet)request.getRequest();
+        PlansPlansmsonnetBean bean = (PlansPlansmsonnetBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlansmsonnet country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlansmsonnetBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }
@@ -42,7 +42,7 @@ public class PlansPlansmsonnetResource {
     @Path("/{authtoken}/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") Integer id) {
-        PlansPlansmsonnet bean  = service.getByPlanId(id);
+        PlansPlansmsonnetBean bean  = service.getByPlanId(id);
         Response response = commonUtils.buildResponse(bean);
         return response;
     }
@@ -52,9 +52,9 @@ public class PlansPlansmsonnetResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateExisting(PlansPlansmsonnetRequest request) {
-        PlansPlansmsonnet bean = (PlansPlansmsonnet)request.getRequest();
+        PlansPlansmsonnetBean bean = (PlansPlansmsonnetBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlansmsonnet country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlansmsonnetBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }

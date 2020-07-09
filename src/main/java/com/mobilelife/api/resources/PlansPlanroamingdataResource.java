@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.services.PlansPlanroamingdataServices;
 import com.mobilelife.common.CommonUtils;
-import com.mobilelife.controler.mapper.bean.PlansPlanroamingdata;
+import com.mobilelife.controler.mapper.bean.PlansPlanroamingdataBean;
 import com.mobilelife.controler.mapper.request.PlansPlanroamingdataRequest;
 
 @Path("/planroamingdata")

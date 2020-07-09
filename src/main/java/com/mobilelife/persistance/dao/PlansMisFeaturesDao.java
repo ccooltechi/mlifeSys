@@ -10,11 +10,11 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.CountriesEntity;
-import com.mobilelife.persistance.entities.PlansMisFeaturesEntity;
-import com.mobilelife.persistance.entities.PlansPlanaddonsEntity;
-import com.mobilelife.persistance.entities.PlansPlanflexiEntity;
-import com.mobilelife.persistance.entities.PlansPlanprimaryEntity;
+import com.mobilelife.persistance.entities.Countries;
+import com.mobilelife.persistance.entities.PlansMisFeatures;
+import com.mobilelife.persistance.entities.PlansPlanaddons;
+import com.mobilelife.persistance.entities.PlansPlanflexi;
+import com.mobilelife.persistance.entities.PlansPlanprimary;
 
 public class PlansMisFeaturesDao {
 	private static Logger logger = LoggerFactory.getLogger(PlansMisFeaturesDao.class);
@@ -29,11 +29,11 @@ public class PlansMisFeaturesDao {
 		Session session = HibernateSessionManager.getSession();
 		int rid = 0;
 		try {
-			List<PlansMisFeaturesEntity> resultList = null;
+			List<PlansMisFeatures> resultList = null;
 
 			String query = "Select * from plans_mis_features order by id desc limit 1";
 			logger.debug("query in findID in  plans_mis_features " + query);
-			resultList = new HibernateDAO().findBySQLQuery(session, PlansMisFeaturesEntity.class, query,"plans_mis_features");
+			resultList = new HibernateDAO().findBySQLQuery(session, PlansMisFeatures.class, query,"plans_mis_features");
 
 			logger.debug("findID  in  plans_mis_features Size = ");
 			if ((null!=resultList) && (resultList.size()>0))
@@ -52,7 +52,7 @@ public class PlansMisFeaturesDao {
 	}
 
 
-	public void saveData(PlansMisFeaturesEntity entityObj) {
+	public void saveData(PlansMisFeatures entityObj) {
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
 		try {
@@ -68,15 +68,15 @@ public class PlansMisFeaturesDao {
 	}
 	
 
-	public List<PlansMisFeaturesEntity> findMisFeaturebyPlansID(Integer planid)
+	public List<PlansMisFeatures> findMisFeaturebyPlansID(Integer planid)
 	{
 		Session session = HibernateSessionManager.getSession();
-		List<PlansMisFeaturesEntity> resultList = null;
+		List<PlansMisFeatures> resultList = null;
 		try {
 
 			String query = "Select * from plans_mis_features where plan_primary_id="+planid;
 			logger.debug("query in findID in  plans_mis_features " + query);
-			resultList = new HibernateDAO().findBySQLQuery(session, PlansMisFeaturesEntity.class, query,"plans_mis_features");
+			resultList = new HibernateDAO().findBySQLQuery(session, PlansMisFeatures.class, query,"plans_mis_features");
 
 			logger.debug("findID  in  plans_mis_features Size = ");
 		} catch (Exception ex) {

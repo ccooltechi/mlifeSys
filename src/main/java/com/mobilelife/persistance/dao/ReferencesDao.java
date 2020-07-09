@@ -14,11 +14,11 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.PartnerRouteChildEntity;
-import com.mobilelife.persistance.entities.PartnerRouteMasterEntity;
-import com.mobilelife.persistance.entities.PlansPlanfeeEntity;
-import com.mobilelife.persistance.entities.ReferencesChildEntity;
-import com.mobilelife.persistance.entities.ReferencesMasterEntity;
+import com.mobilelife.persistance.entities.PartnerRouteChild;
+import com.mobilelife.persistance.entities.PartnerRouteMaster;
+import com.mobilelife.persistance.entities.PlansPlanfee;
+import com.mobilelife.persistance.entities.ReferencesChild;
+import com.mobilelife.persistance.entities.ReferencesMaster;
 
 public class ReferencesDao {
 	private static Logger logger = LoggerFactory.getLogger(ReferencesDao.class);
@@ -33,11 +33,11 @@ public class ReferencesDao {
 		Session session = HibernateSessionManager.getSession();
 		int rid = 0;
 		try {
-			List<ReferencesMasterEntity> referencesMaster = null;
+			List<ReferencesMaster> referencesMaster = null;
 
 			String query = "Select * from references_master order by id desc limit 1";
 			logger.debug("query in findIdreferencesMaster in  ReferencesDao " + query);
-			referencesMaster = new HibernateDAO().findBySQLQuery(session, ReferencesMasterEntity.class, query,"references_master");
+			referencesMaster = new HibernateDAO().findBySQLQuery(session, ReferencesMaster.class, query,"references_master");
 
 			logger.debug("findIdreferencesMaster in  ReferencesDao Size = "+referencesMaster.size());
 			if ((null!=referencesMaster) && (referencesMaster.size()>0))
@@ -60,11 +60,11 @@ public class ReferencesDao {
 		Session session = HibernateSessionManager.getSession();
 		int rid = 0;
 		try {
-			List<ReferencesChildEntity> referencesChild = null;
+			List<ReferencesChild> referencesChild = null;
 
 			String query = "Select * from references_child order by id desc limit 1";
 			logger.debug("query in findIdreferencesChild in  ReferencesDao " + query);
-			referencesChild = new HibernateDAO().findBySQLQuery(session, ReferencesChildEntity.class, query,"references_child");
+			referencesChild = new HibernateDAO().findBySQLQuery(session, ReferencesChild.class, query,"references_child");
 
 			logger.debug("findIdreferencesChild in  ReferencesDao Size = "+referencesChild.size());
 			if ((null!=referencesChild) && (referencesChild.size()>0))
@@ -82,7 +82,7 @@ public class ReferencesDao {
 		return rid;
 	}
 
-	public void saveData(ReferencesMasterEntity entityObj) {
+	public void saveData(ReferencesMaster entityObj) {
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
 		try {
@@ -97,7 +97,7 @@ public class ReferencesDao {
 		}
 	}
 
-	public void updateData(ReferencesMasterEntity entityObj) {
+	public void updateData(ReferencesMaster entityObj) {
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
 		try {
@@ -112,7 +112,7 @@ public class ReferencesDao {
 		}
 	}
 
-	public void saveData(ReferencesChildEntity entityObj) {
+	public void saveData(ReferencesChild entityObj) {
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
 		try {
@@ -127,7 +127,7 @@ public class ReferencesDao {
 		}
 	}
 
-	public void updateData(ReferencesChildEntity entityObj) {
+	public void updateData(ReferencesChild entityObj) {
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
 		try {

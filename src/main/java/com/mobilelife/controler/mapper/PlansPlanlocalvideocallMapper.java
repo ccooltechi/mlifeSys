@@ -7,20 +7,20 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.mobilelife.controler.mapper.bean.PlansPlanlocalvideocall;
+import com.mobilelife.controler.mapper.bean.PlansPlanlocalvideocallBean;
 import com.mobilelife.persistance.dao.PlansPlanprimaryDao;
-import com.mobilelife.persistance.entities.PlansPlanlocalvideocallEntity;
-import com.mobilelife.persistance.entities.PlansPlanprimaryEntity;
+import com.mobilelife.persistance.entities.PlansPlanlocalvideocall;
+import com.mobilelife.persistance.entities.PlansPlanprimary;
 
 public class PlansPlanlocalvideocallMapper {
 	private static Logger logger = LoggerFactory.getLogger(PlansPlanlocalvideocallMapper.class);
 
-    public List<PlansPlanlocalvideocall> mapBean(List<PlansPlanlocalvideocallEntity> entityList) {
-        List<PlansPlanlocalvideocall> retBean = new ArrayList<PlansPlanlocalvideocall>();
+    public List<PlansPlanlocalvideocallBean> mapBean(List<PlansPlanlocalvideocall> entityList) {
+        List<PlansPlanlocalvideocallBean> retBean = new ArrayList<PlansPlanlocalvideocallBean>();
         for (int i=0; i<entityList.size();i++)
         {
-            PlansPlanlocalvideocallEntity entity = entityList.get(i);
-            PlansPlanlocalvideocall bean = new PlansPlanlocalvideocall();
+            PlansPlanlocalvideocall entity = entityList.get(i);
+            PlansPlanlocalvideocallBean bean = new PlansPlanlocalvideocallBean();
             bean.setId(entity.getId());
             bean.setIsActive(entity.getIsActive());
             bean.setPlanPrimaryId(entity.getPlanPrimaryId().getId());
@@ -31,8 +31,8 @@ public class PlansPlanlocalvideocallMapper {
         return retBean;
     }
     
-    public PlansPlanlocalvideocall mapBean(PlansPlanlocalvideocallEntity entity) {
-        PlansPlanlocalvideocall bean = new PlansPlanlocalvideocall();
+    public PlansPlanlocalvideocallBean mapBean(PlansPlanlocalvideocall entity) {
+        PlansPlanlocalvideocallBean bean = new PlansPlanlocalvideocallBean();
         bean.setId(entity.getId());
         bean.setIsActive(entity.getIsActive());
         bean.setPlanPrimaryId(entity.getPlanPrimaryId().getId());
@@ -42,8 +42,8 @@ public class PlansPlanlocalvideocallMapper {
         return bean;
     }
 
-    public PlansPlanlocalvideocallEntity mapBeanToEntity(PlansPlanlocalvideocall bean, PlansPlanlocalvideocallEntity existEntity) {
-        PlansPlanlocalvideocallEntity updateEntity = existEntity;
+    public PlansPlanlocalvideocall mapBeanToEntity(PlansPlanlocalvideocallBean bean, PlansPlanlocalvideocall existEntity) {
+        PlansPlanlocalvideocall updateEntity = existEntity;
         updateEntity.setIsActive(bean.getIsActive());
         updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setLocalVideoCall(bean.getLocalVideoCall());
@@ -52,10 +52,10 @@ public class PlansPlanlocalvideocallMapper {
         return updateEntity;
     }
 
-    public PlansPlanlocalvideocallEntity mapBeanToEntity(PlansPlanlocalvideocall bean) {
+    public PlansPlanlocalvideocall mapBeanToEntity(PlansPlanlocalvideocallBean bean) {
         PlansPlanprimaryDao planrepository = new PlansPlanprimaryDao();
-        PlansPlanprimaryEntity plansPlanprimaryEntity = planrepository.findById(bean.getPlanPrimaryId());
-        PlansPlanlocalvideocallEntity updateEntity = new PlansPlanlocalvideocallEntity();
+        PlansPlanprimary plansPlanprimaryEntity = planrepository.findById(bean.getPlanPrimaryId());
+        PlansPlanlocalvideocall updateEntity = new PlansPlanlocalvideocall();
         updateEntity.setCreationDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setPlanPrimaryId(plansPlanprimaryEntity);

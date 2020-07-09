@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.PlansPlanspecialminutesEntity;
+import com.mobilelife.persistance.entities.PlansPlanspecialminutes;
 
 public class PlansPlanspecialminutesDao {
 
@@ -21,16 +21,16 @@ public class PlansPlanspecialminutesDao {
 		
 	}
 	
-	public List<PlansPlanspecialminutesEntity> findPlansPlanspecialminutesID(int planID)
+	public List<PlansPlanspecialminutes> findPlansPlanspecialminutesID(int planID)
 	{
 		Session session = HibernateSessionManager.getSession();
-		List<PlansPlanspecialminutesEntity> plansPlanprimary = null;
+		List<PlansPlanspecialminutes> plansPlanprimary = null;
 		try {
-			List<PlansPlanspecialminutesEntity> plansPlanprimaryList = null;
+			List<PlansPlanspecialminutes> plansPlanprimaryList = null;
 
 			String query = "Select a.* from plans_planspecialminutes a where a.is_active=1 and a.plan_primary_id ="+planID;
 			logger.debug("query in findPlansTncByPlanID for all " + query);
-			plansPlanprimaryList = new HibernateDAO().findBySQLQuery(session, PlansPlanspecialminutesEntity.class, query,"plans_planspecialminutes");
+			plansPlanprimaryList = new HibernateDAO().findBySQLQuery(session, PlansPlanspecialminutes.class, query,"plans_planspecialminutes");
 
 			logger.debug("findPlansTncByPlanID Size = "+plansPlanprimaryList.size());
 			if ((null!=plansPlanprimaryList) && (plansPlanprimaryList.size()>0))
@@ -53,11 +53,11 @@ public class PlansPlanspecialminutesDao {
 		Session session = HibernateSessionManager.getSession();
 		int rid = 0;
 		try {
-			List<PlansPlanspecialminutesEntity> plansPlanOperatorTncList = null;
+			List<PlansPlanspecialminutes> plansPlanOperatorTncList = null;
 
 			String query = "Select * from plans_planspecialminutes order by id desc limit 2";
 			logger.debug("query in findID in  PlansPlanOperatorTncDao " + query);
-			plansPlanOperatorTncList = new HibernateDAO().findBySQLQuery(session, PlansPlanspecialminutesEntity.class, query,"plans_planspecialminutes");
+			plansPlanOperatorTncList = new HibernateDAO().findBySQLQuery(session, PlansPlanspecialminutes.class, query,"plans_planspecialminutes");
 
 			logger.debug("findID  in  PlansPlanfeeDao Size = "+plansPlanOperatorTncList.size());
 			if ((null!=plansPlanOperatorTncList) && (plansPlanOperatorTncList.size()>0))
@@ -75,13 +75,13 @@ public class PlansPlanspecialminutesDao {
 		return rid;
 	}
 
-	public PlansPlanspecialminutesEntity findById(Integer id) {
+	public PlansPlanspecialminutes findById(Integer id) {
 		Session session = HibernateSessionManager.getSession();
-		PlansPlanspecialminutesEntity entity = null;
+		PlansPlanspecialminutes entity = null;
 		try {
-			Query query = session.getNamedQuery("PlansPlanspecialminutesEntity.findById");
+			Query query = session.getNamedQuery("PlansPlanspecialminutes.findById");
 			query.setParameter("id", id);
-			entity = (PlansPlanspecialminutesEntity)(query.list().get(0));
+			entity = (PlansPlanspecialminutes)(query.list().get(0));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
@@ -93,7 +93,7 @@ public class PlansPlanspecialminutesDao {
 		return entity;
 	}
 
-	public boolean saveData(PlansPlanspecialminutesEntity entityObj) {
+	public boolean saveData(PlansPlanspecialminutes entityObj) {
 		boolean retVal = false; 
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -112,7 +112,7 @@ public class PlansPlanspecialminutesDao {
 		return retVal;
 	}
 
-	public boolean updateData(PlansPlanspecialminutesEntity entityObj) {
+	public boolean updateData(PlansPlanspecialminutes entityObj) {
 		boolean retVal = false; 
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;

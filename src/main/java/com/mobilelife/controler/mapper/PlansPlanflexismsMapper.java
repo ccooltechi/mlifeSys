@@ -7,20 +7,20 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.mobilelife.controler.mapper.bean.PlansPlanflexisms;
+import com.mobilelife.controler.mapper.bean.PlansPlanflexismsBean;
 import com.mobilelife.persistance.dao.PlansPlanprimaryDao;
-import com.mobilelife.persistance.entities.PlansPlanflexismsEntity;
-import com.mobilelife.persistance.entities.PlansPlanprimaryEntity;
+import com.mobilelife.persistance.entities.PlansPlanflexisms;
+import com.mobilelife.persistance.entities.PlansPlanprimary;
 
 public class PlansPlanflexismsMapper {
 	private static Logger logger = LoggerFactory.getLogger(PlansPlanflexismsMapper.class);
 
-    public List<PlansPlanflexisms> mapBean(List<PlansPlanflexismsEntity> entityList) {
-        List<PlansPlanflexisms> retBean = new ArrayList<PlansPlanflexisms>();
+    public List<PlansPlanflexismsBean> mapBean(List<PlansPlanflexisms> entityList) {
+        List<PlansPlanflexismsBean> retBean = new ArrayList<PlansPlanflexismsBean>();
         for (int i=0; i<entityList.size();i++)
         {
-        	PlansPlanflexismsEntity entity = entityList.get(i);
-            PlansPlanflexisms bean = new PlansPlanflexisms();
+        	PlansPlanflexisms entity = entityList.get(i);
+            PlansPlanflexismsBean bean = new PlansPlanflexismsBean();
             bean.setId(entity.getId());
             bean.setIsActive(entity.getIsActive());
             bean.setPlanPrimaryId(entity.getPlanPrimaryId().getId());
@@ -31,8 +31,8 @@ public class PlansPlanflexismsMapper {
         return retBean;
     }
     
-    public PlansPlanflexisms mapBean(PlansPlanflexismsEntity entity) {
-    	PlansPlanflexisms bean = new PlansPlanflexisms();
+    public PlansPlanflexismsBean mapBean(PlansPlanflexisms entity) {
+    	PlansPlanflexismsBean bean = new PlansPlanflexismsBean();
         bean.setId(entity.getId());
         bean.setIsActive(entity.getIsActive());
         bean.setPlanPrimaryId(entity.getPlanPrimaryId().getId());
@@ -42,8 +42,8 @@ public class PlansPlanflexismsMapper {
         return bean;
     }
 
-    public PlansPlanflexismsEntity mapBeanToEntity(PlansPlanflexisms bean, PlansPlanflexismsEntity existEntity) {
-    	PlansPlanflexismsEntity updateEntity = existEntity;
+    public PlansPlanflexisms mapBeanToEntity(PlansPlanflexismsBean bean, PlansPlanflexisms existEntity) {
+    	PlansPlanflexisms updateEntity = existEntity;
         updateEntity.setIsActive(bean.getIsActive());
         updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setFlexiSms(bean.getFlexiSms());
@@ -52,10 +52,10 @@ public class PlansPlanflexismsMapper {
         return updateEntity;
     }
 
-    public PlansPlanflexismsEntity mapBeanToEntity(PlansPlanflexisms bean) {
+    public PlansPlanflexisms mapBeanToEntity(PlansPlanflexismsBean bean) {
         PlansPlanprimaryDao planrepository = new PlansPlanprimaryDao();
-        PlansPlanprimaryEntity plansPlanprimaryEntity = planrepository.findById(bean.getPlanPrimaryId());
-        PlansPlanflexismsEntity updateEntity = new PlansPlanflexismsEntity();
+        PlansPlanprimary plansPlanprimaryEntity = planrepository.findById(bean.getPlanPrimaryId());
+        PlansPlanflexisms updateEntity = new PlansPlanflexisms();
         updateEntity.setCreationDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setPlanPrimaryId(plansPlanprimaryEntity);

@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.DeviceFeedbackEntity;
+import com.mobilelife.persistance.entities.DeviceFeedback;
 
 public class DeviceFeedBackDao {
 	private static Logger logger = LoggerFactory.getLogger(DeviceFeedBackDao.class);
@@ -81,11 +81,11 @@ public class DeviceFeedBackDao {
 		Session session = HibernateSessionManager.getSession();
 		int rid = 0;
 		try {
-			List<DeviceFeedbackEntity> resultList = null;
+			List<DeviceFeedback> resultList = null;
 
 			String query = "Select * from device_feedback order by id desc";
 			logger.debug("query in findID in  device_feedback " + query);
-			resultList = new HibernateDAO().findBySQLQuery(session, DeviceFeedbackEntity.class, query,"device_feedback");
+			resultList = new HibernateDAO().findBySQLQuery(session, DeviceFeedback.class, query,"device_feedback");
 
 			logger.debug("findID  in  device_feedback Size = "+resultList.size());
 			if ((null!=resultList) && (resultList.size()>0))
@@ -103,7 +103,7 @@ public class DeviceFeedBackDao {
 		return rid;
 	}
 
-	public void saveData(DeviceFeedbackEntity entityObj) {
+	public void saveData(DeviceFeedback entityObj) {
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
 		try {

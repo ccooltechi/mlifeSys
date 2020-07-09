@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.PlansPlanlocalcallsmsEntity;
-import com.mobilelife.persistance.entities.PlansPlanlocalmmsEntity;
+import com.mobilelife.persistance.entities.PlansPlanlocalcallsms;
+import com.mobilelife.persistance.entities.PlansPlanlocalmms;
 
 public class PlansPlanlocalmmsDao {
 	private static Logger logger = LoggerFactory.getLogger(PlansPlanlocalmmsDao.class);
@@ -26,11 +26,11 @@ public class PlansPlanlocalmmsDao {
 		Session session = HibernateSessionManager.getSession();
 		int rid = 0;
 		try {
-			List<PlansPlanlocalmmsEntity> resultList = null;
+			List<PlansPlanlocalmms> resultList = null;
 
 			String query = "Select * from plans_planlocalmms order by id desc";
 			logger.debug("query in findID in  PlansPlanlocalmms " + query);
-			resultList = new HibernateDAO().findBySQLQuery(session, PlansPlanlocalmmsEntity.class, query,"plans_planlocalmms");
+			resultList = new HibernateDAO().findBySQLQuery(session, PlansPlanlocalmms.class, query,"plans_planlocalmms");
 
 			logger.debug("findID  in  PlansPlanlocalmms Size = "+resultList.size());
 			if ((null!=resultList) && (resultList.size()>0))
@@ -48,7 +48,7 @@ public class PlansPlanlocalmmsDao {
 		return rid;
 	}
 
-	public boolean saveData(PlansPlanlocalmmsEntity entityObj) {
+	public boolean saveData(PlansPlanlocalmms entityObj) {
 		boolean retVal = false; 
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -67,7 +67,7 @@ public class PlansPlanlocalmmsDao {
 		return retVal;
 	}
 
-	public boolean updateData(PlansPlanlocalmmsEntity entityObj) {
+	public boolean updateData(PlansPlanlocalmms entityObj) {
 		boolean retVal = false; 
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -86,13 +86,13 @@ public class PlansPlanlocalmmsDao {
 		return retVal;
 	}
 	
-	public PlansPlanlocalmmsEntity findById(Integer id) {
+	public PlansPlanlocalmms findById(Integer id) {
 		Session session = HibernateSessionManager.getSession();
-		PlansPlanlocalmmsEntity entity = null;
+		PlansPlanlocalmms entity = null;
 		try {
-			Query query = session.getNamedQuery("PlansPlanlocalmmsEntity.findById");
+			Query query = session.getNamedQuery("PlansPlanlocalmms.findById");
 			query.setParameter("id", id);
-			entity = (PlansPlanlocalmmsEntity)(query.list().get(0));
+			entity = (PlansPlanlocalmms)(query.list().get(0));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {

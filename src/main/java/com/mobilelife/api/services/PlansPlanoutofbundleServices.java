@@ -5,11 +5,11 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.exception.RecordNotFoundException;
 import com.mobilelife.controler.mapper.PlansPlanoutofbundleMapper;
-import com.mobilelife.controler.mapper.bean.PlansPlanoutofbundle;
+import com.mobilelife.controler.mapper.bean.PlansPlanoutofbundleBean;
 import com.mobilelife.persistance.dao.PlansPlanoutofbundleDao;
 import com.mobilelife.persistance.dao.PlansPlanprimaryDao;
-import com.mobilelife.persistance.entities.PlansPlanoutofbundleEntity;
-import com.mobilelife.persistance.entities.PlansPlanprimaryEntity;
+import com.mobilelife.persistance.entities.PlansPlanoutofbundle;
+import com.mobilelife.persistance.entities.PlansPlanprimary;
 
 
 public class PlansPlanoutofbundleServices {
@@ -19,31 +19,31 @@ public class PlansPlanoutofbundleServices {
 	PlansPlanoutofbundleMapper mapper = new PlansPlanoutofbundleMapper();
 	PlansPlanprimaryDao planrepository = new PlansPlanprimaryDao();
 
-    public PlansPlanoutofbundle getByPlanId(Integer id)
+    public PlansPlanoutofbundleBean getByPlanId(Integer id)
     {
-    	PlansPlanprimaryEntity plansPlanprimaryEntity = planrepository.findById(id);
-    	PlansPlanoutofbundleEntity entity = plansPlanprimaryEntity.getPlansPlanoutofbundle();
+    	PlansPlanprimary plansPlanprimaryEntity = planrepository.findById(id);
+    	PlansPlanoutofbundle entity = plansPlanprimaryEntity.getPlansPlanoutofbundle();
         if(null!=entity) {
-        	PlansPlanoutofbundle bean = mapper.mapBean(entity);
+        	PlansPlanoutofbundleBean bean = mapper.mapBean(entity);
             return bean;
         } else {
             throw new RecordNotFoundException("No record exist for given id "+id);
         }
     }
      
-    public boolean createOrUpdate(PlansPlanoutofbundle bean)
+    public boolean createOrUpdate(PlansPlanoutofbundleBean bean)
     {
     	boolean retVal = false;
     	if ((bean.getId()!=null) && (bean.getId()>0))
     	{
-    		PlansPlanoutofbundleEntity existEntity = repository.findById(bean.getId());
+    		PlansPlanoutofbundle existEntity = repository.findById(bean.getId());
     		if(null!=existEntity)
 	        {
-    			PlansPlanoutofbundleEntity entity = mapper.mapBeanToEntity(bean, existEntity);
+    			PlansPlanoutofbundle entity = mapper.mapBeanToEntity(bean, existEntity);
 	            retVal = repository.updateData(entity);
 	            return retVal;
 	        } else {
-	        	PlansPlanoutofbundleEntity entity = mapper.mapBeanToEntity(bean);
+	        	PlansPlanoutofbundle entity = mapper.mapBeanToEntity(bean);
     			int id = repository.findId()+1;
     			entity.setId(id);		
 	        	retVal = repository.saveData(entity);
@@ -52,7 +52,7 @@ public class PlansPlanoutofbundleServices {
     	}
     	else
     	{
-    		PlansPlanoutofbundleEntity entity = mapper.mapBeanToEntity(bean);
+    		PlansPlanoutofbundle entity = mapper.mapBeanToEntity(bean);
 			int id = repository.findId()+1;
 			entity.setId(id);		
     		retVal = repository.saveData(entity);

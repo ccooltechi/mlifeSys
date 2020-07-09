@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.PlansPlansmsoffnetEntity;
-import com.mobilelife.persistance.entities.PlansPlansmsonnetEntity;
+import com.mobilelife.persistance.entities.PlansPlansmsoffnet;
+import com.mobilelife.persistance.entities.PlansPlansmsonnet;
 
 public class PlansPlansmsonnetDao {
 	private static Logger logger = LoggerFactory.getLogger(PlansPlansmsonnetDao.class);
@@ -26,11 +26,11 @@ public class PlansPlansmsonnetDao {
 		Session session = HibernateSessionManager.getSession();
 		int rid = 0;
 		try {
-			List<PlansPlansmsonnetEntity> resultList = null;
+			List<PlansPlansmsonnet> resultList = null;
 
 			String query = "Select * from plans_plansmsonnet order by id desc";
 			logger.debug("query in findID in  PlansPlansmsonnet " + query);
-			resultList = new HibernateDAO().findBySQLQuery(session, PlansPlansmsonnetEntity.class, query,"plans_plansmsonnet");
+			resultList = new HibernateDAO().findBySQLQuery(session, PlansPlansmsonnet.class, query,"plans_plansmsonnet");
 
 			logger.debug("findID  in  PlansPlansmsonnet Size = "+resultList.size());
 			if ((null!=resultList) && (resultList.size()>0))
@@ -48,13 +48,13 @@ public class PlansPlansmsonnetDao {
 		return rid;
 	}
 
-	public PlansPlansmsonnetEntity findById(Integer id) {
+	public PlansPlansmsonnet findById(Integer id) {
 		Session session = HibernateSessionManager.getSession();
-		PlansPlansmsonnetEntity entity = null;
+		PlansPlansmsonnet entity = null;
 		try {
-			Query query = session.getNamedQuery("PlansPlansmsonnetEntity.findById");
+			Query query = session.getNamedQuery("PlansPlansmsonnet.findById");
 			query.setParameter("id", id);
-			entity = (PlansPlansmsonnetEntity)(query.list().get(0));
+			entity = (PlansPlansmsonnet)(query.list().get(0));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
@@ -66,7 +66,7 @@ public class PlansPlansmsonnetDao {
 		return entity;
 	}
 
-	public boolean saveData(PlansPlansmsonnetEntity entityObj) {
+	public boolean saveData(PlansPlansmsonnet entityObj) {
 		boolean retVal = false; 
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -85,7 +85,7 @@ public class PlansPlansmsonnetDao {
 		return retVal;
 	}
 
-	public boolean updateData(PlansPlansmsonnetEntity entityObj) {
+	public boolean updateData(PlansPlansmsonnet entityObj) {
 		boolean retVal = false; 
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;

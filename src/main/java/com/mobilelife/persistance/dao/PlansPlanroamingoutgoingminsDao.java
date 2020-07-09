@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.PlansPlanroamingincomingminsEntity;
-import com.mobilelife.persistance.entities.PlansPlanroamingoutgoingminsEntity;
+import com.mobilelife.persistance.entities.PlansPlanroamingincomingmins;
+import com.mobilelife.persistance.entities.PlansPlanroamingoutgoingmins;
 
 public class PlansPlanroamingoutgoingminsDao {
 	private static Logger logger = LoggerFactory.getLogger(PlansPlanroamingoutgoingminsDao.class);
@@ -26,11 +26,11 @@ public class PlansPlanroamingoutgoingminsDao {
 		Session session = HibernateSessionManager.getSession();
 		int rid = 0;
 		try {
-			List<PlansPlanroamingoutgoingminsEntity> resultList = null;
+			List<PlansPlanroamingoutgoingmins> resultList = null;
 
 			String query = "Select * from plans_planroamingoutgoingmins order by id desc";
 			logger.debug("query in findID in  PlansPlanroamingoutgoingmins " + query);
-			resultList = new HibernateDAO().findBySQLQuery(session, PlansPlanroamingoutgoingminsEntity.class, query,"plans_planroamingoutgoingmins");
+			resultList = new HibernateDAO().findBySQLQuery(session, PlansPlanroamingoutgoingmins.class, query,"plans_planroamingoutgoingmins");
 
 			logger.debug("findID  in  PlansPlanroamingoutgoingmins Size = "+resultList.size());
 			if ((null!=resultList) && (resultList.size()>0))
@@ -48,13 +48,13 @@ public class PlansPlanroamingoutgoingminsDao {
 		return rid;
 	}
 
-	public PlansPlanroamingoutgoingminsEntity findById(Integer id) {
+	public PlansPlanroamingoutgoingmins findById(Integer id) {
 		Session session = HibernateSessionManager.getSession();
-		PlansPlanroamingoutgoingminsEntity entity = null;
+		PlansPlanroamingoutgoingmins entity = null;
 		try {
-			Query query = session.getNamedQuery("PlansPlanroamingoutgoingminsEntity.findById");
+			Query query = session.getNamedQuery("PlansPlanroamingoutgoingmins.findById");
 			query.setParameter("id", id);
-			entity = (PlansPlanroamingoutgoingminsEntity)(query.list().get(0));
+			entity = (PlansPlanroamingoutgoingmins)(query.list().get(0));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
@@ -66,7 +66,7 @@ public class PlansPlanroamingoutgoingminsDao {
 		return entity;
 	}
 
-	public boolean saveData(PlansPlanroamingoutgoingminsEntity entityObj) {
+	public boolean saveData(PlansPlanroamingoutgoingmins entityObj) {
 		boolean retVal = false; 
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -85,7 +85,7 @@ public class PlansPlanroamingoutgoingminsDao {
 		return retVal;
 	}
 
-	public boolean updateData(PlansPlanroamingoutgoingminsEntity entityObj) {
+	public boolean updateData(PlansPlanroamingoutgoingmins entityObj) {
 		boolean retVal = false; 
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;

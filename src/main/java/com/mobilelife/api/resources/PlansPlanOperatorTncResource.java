@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.services.PlansPlanOperatorTncServices;
 import com.mobilelife.common.CommonUtils;
-import com.mobilelife.controler.mapper.bean.PlansPlanOperatorTnc;
+import com.mobilelife.controler.mapper.bean.PlansPlanOperatorTncBean;
 import com.mobilelife.controler.mapper.request.PlansPlanOperatorTncRequest;
 
 public class PlansPlanOperatorTncResource {

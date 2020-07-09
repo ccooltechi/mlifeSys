@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.PlansPlanfeeEntity;
+import com.mobilelife.persistance.entities.PlansPlanfee;
 
 public class AlianceCampaignAgeDao {
 	private static Logger logger = LoggerFactory.getLogger(AlianceCampaignAgeDao.class);
@@ -23,11 +23,11 @@ public class AlianceCampaignAgeDao {
 		Session session = HibernateSessionManager.getSession();
 		int rid = 0;
 		try {
-			List<PlansPlanfeeEntity> plansPlanfeeList = null;
+			List<PlansPlanfee> plansPlanfeeList = null;
 
 			String query = "Select * from plans_planfee order by id desc";
 			logger.debug("query in findID in  PlansPlanfeeDao " + query);
-			plansPlanfeeList = new HibernateDAO().findBySQLQuery(session, PlansPlanfeeEntity.class, query,"plans_planfee");
+			plansPlanfeeList = new HibernateDAO().findBySQLQuery(session, PlansPlanfee.class, query,"plans_planfee");
 
 			logger.debug("findID  in  PlansPlanfeeDao Size = "+plansPlanfeeList.size());
 			if ((null!=plansPlanfeeList) && (plansPlanfeeList.size()>0))
@@ -44,7 +44,7 @@ public class AlianceCampaignAgeDao {
 		}
 		return rid;
 	}
-	public void saveData(PlansPlanfeeEntity entityObj) {
+	public void saveData(PlansPlanfee entityObj) {
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
 		try {

@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.PlansPlanoutofbundleEntity;
-import com.mobilelife.persistance.entities.PlansPlanpreferrednumbersEntity;
+import com.mobilelife.persistance.entities.PlansPlanoutofbundle;
+import com.mobilelife.persistance.entities.PlansPlanpreferrednumbers;
 
 public class PlansPlanpreferrednumbersDao {
 	private static Logger logger = LoggerFactory.getLogger(PlansPlanpreferrednumbersDao.class);
@@ -26,11 +26,11 @@ public class PlansPlanpreferrednumbersDao {
 		Session session = HibernateSessionManager.getSession();
 		int rid = 0;
 		try {
-			List<PlansPlanpreferrednumbersEntity> resultList = null;
+			List<PlansPlanpreferrednumbers> resultList = null;
 
 			String query = "Select * from plans_planpreferrednumbers order by id desc";
 			logger.debug("query in findID in  PlansPlanpreferrednumbers " + query);
-			resultList = new HibernateDAO().findBySQLQuery(session, PlansPlanpreferrednumbersEntity.class, query,"plans_planpreferrednumbers");
+			resultList = new HibernateDAO().findBySQLQuery(session, PlansPlanpreferrednumbers.class, query,"plans_planpreferrednumbers");
 
 			logger.debug("findID  in  PlansPlanpreferrednumbers Size = "+resultList.size());
 			if ((null!=resultList) && (resultList.size()>0))
@@ -48,7 +48,7 @@ public class PlansPlanpreferrednumbersDao {
 		return rid;
 	}
 
-	public boolean saveData(PlansPlanpreferrednumbersEntity entityObj) {
+	public boolean saveData(PlansPlanpreferrednumbers entityObj) {
 		boolean retVal = false; 
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -67,7 +67,7 @@ public class PlansPlanpreferrednumbersDao {
 		return retVal;
 	}
 
-	public boolean updateData(PlansPlanpreferrednumbersEntity entityObj) {
+	public boolean updateData(PlansPlanpreferrednumbers entityObj) {
 		boolean retVal = false; 
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
@@ -86,13 +86,13 @@ public class PlansPlanpreferrednumbersDao {
 		return retVal;
 	}
 
-	public PlansPlanpreferrednumbersEntity findById(Integer id) {
+	public PlansPlanpreferrednumbers findById(Integer id) {
 		Session session = HibernateSessionManager.getSession();
-		PlansPlanpreferrednumbersEntity entity = null;
+		PlansPlanpreferrednumbers entity = null;
 		try {
-			Query query = session.getNamedQuery("PlansPlanpreferrednumbersEntity.findById");
+			Query query = session.getNamedQuery("PlansPlanpreferrednumbers.findById");
 			query.setParameter("id", id);
-			entity = (PlansPlanpreferrednumbersEntity)(query.list().get(0));
+			entity = (PlansPlanpreferrednumbers)(query.list().get(0));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {

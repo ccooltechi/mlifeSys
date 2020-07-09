@@ -7,20 +7,20 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.mobilelife.controler.mapper.bean.PlansPlaninternationalminutes;
+import com.mobilelife.controler.mapper.bean.PlansPlaninternationalminutesBean;
 import com.mobilelife.persistance.dao.PlansPlanprimaryDao;
-import com.mobilelife.persistance.entities.PlansPlaninternationalminutesEntity;
-import com.mobilelife.persistance.entities.PlansPlanprimaryEntity;
+import com.mobilelife.persistance.entities.PlansPlaninternationalminutes;
+import com.mobilelife.persistance.entities.PlansPlanprimary;
 
 public class PlansPlaninternationalminutesMapper {
 	private static Logger logger = LoggerFactory.getLogger(PlansPlaninternationalminutesMapper.class);
 
-    public List<PlansPlaninternationalminutes> mapBean(List<PlansPlaninternationalminutesEntity> entityList) {
-        List<PlansPlaninternationalminutes> retBean = new ArrayList<PlansPlaninternationalminutes>();
+    public List<PlansPlaninternationalminutesBean> mapBean(List<PlansPlaninternationalminutes> entityList) {
+        List<PlansPlaninternationalminutesBean> retBean = new ArrayList<PlansPlaninternationalminutesBean>();
         for (int i=0; i<entityList.size();i++)
         {
-            PlansPlaninternationalminutesEntity entity = entityList.get(i);
-            PlansPlaninternationalminutes bean = new PlansPlaninternationalminutes();
+            PlansPlaninternationalminutes entity = entityList.get(i);
+            PlansPlaninternationalminutesBean bean = new PlansPlaninternationalminutesBean();
             bean.setId(entity.getId());
             bean.setIsActive(entity.getIsActive());
             bean.setPlanPrimaryId(entity.getPlanPrimaryId().getId());
@@ -36,8 +36,8 @@ public class PlansPlaninternationalminutesMapper {
         return retBean;
     }
     
-    public PlansPlaninternationalminutes mapBean(PlansPlaninternationalminutesEntity entity) {
-        PlansPlaninternationalminutes bean = new PlansPlaninternationalminutes();
+    public PlansPlaninternationalminutesBean mapBean(PlansPlaninternationalminutes entity) {
+        PlansPlaninternationalminutesBean bean = new PlansPlaninternationalminutesBean();
         bean.setId(entity.getId());
         bean.setIsActive(entity.getIsActive());
         bean.setPlanPrimaryId(entity.getPlanPrimaryId().getId());
@@ -52,8 +52,8 @@ public class PlansPlaninternationalminutesMapper {
         return bean;
     }
 
-    public PlansPlaninternationalminutesEntity mapBeanToEntity(PlansPlaninternationalminutes bean, PlansPlaninternationalminutesEntity existEntity) {
-        PlansPlaninternationalminutesEntity updateEntity = existEntity;
+    public PlansPlaninternationalminutes mapBeanToEntity(PlansPlaninternationalminutesBean bean, PlansPlaninternationalminutes existEntity) {
+        PlansPlaninternationalminutes updateEntity = existEntity;
         updateEntity.setIsActive(bean.getIsActive());
         updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setCallingCardBucket(bean.getCallingCardBucket());
@@ -67,10 +67,10 @@ public class PlansPlaninternationalminutesMapper {
         return updateEntity;
     }
 
-    public PlansPlaninternationalminutesEntity mapBeanToEntity(PlansPlaninternationalminutes bean) {
+    public PlansPlaninternationalminutes mapBeanToEntity(PlansPlaninternationalminutesBean bean) {
         PlansPlanprimaryDao planrepository = new PlansPlanprimaryDao();
-        PlansPlanprimaryEntity plansPlanprimaryEntity = planrepository.findById(bean.getPlanPrimaryId());
-        PlansPlaninternationalminutesEntity updateEntity = new PlansPlaninternationalminutesEntity();
+        PlansPlanprimary plansPlanprimaryEntity = planrepository.findById(bean.getPlanPrimaryId());
+        PlansPlaninternationalminutes updateEntity = new PlansPlaninternationalminutes();
         updateEntity.setCreationDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setPlanPrimaryId(plansPlanprimaryEntity);

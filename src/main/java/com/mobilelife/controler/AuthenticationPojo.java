@@ -18,8 +18,8 @@ import org.slf4j.LoggerFactory;
 import com.mobilelife.common.GeekCodes;
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.UserAccessEntity;
-import com.mobilelife.persistance.entities.UserAccessTokenEntity;
+import com.mobilelife.persistance.entities.UserAccess;
+import com.mobilelife.persistance.entities.UserAccessToken;
 
 public class AuthenticationPojo {
 	private static Logger logger = LoggerFactory.getLogger(AuthenticationPojo.class);

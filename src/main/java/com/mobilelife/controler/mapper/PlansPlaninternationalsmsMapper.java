@@ -7,20 +7,20 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.mobilelife.controler.mapper.bean.PlansPlaninternationalsms;
+import com.mobilelife.controler.mapper.bean.PlansPlaninternationalsmsBean;
 import com.mobilelife.persistance.dao.PlansPlanprimaryDao;
-import com.mobilelife.persistance.entities.PlansPlaninternationalsmsEntity;
-import com.mobilelife.persistance.entities.PlansPlanprimaryEntity;
+import com.mobilelife.persistance.entities.PlansPlaninternationalsms;
+import com.mobilelife.persistance.entities.PlansPlanprimary;
 
 public class PlansPlaninternationalsmsMapper {
 	private static Logger logger = LoggerFactory.getLogger(PlansPlaninternationalsmsMapper.class);
 
-    public List<PlansPlaninternationalsms> mapBean(List<PlansPlaninternationalsmsEntity> entityList) {
-        List<PlansPlaninternationalsms> retBean = new ArrayList<PlansPlaninternationalsms>();
+    public List<PlansPlaninternationalsmsBean> mapBean(List<PlansPlaninternationalsms> entityList) {
+        List<PlansPlaninternationalsmsBean> retBean = new ArrayList<PlansPlaninternationalsmsBean>();
         for (int i=0; i<entityList.size();i++)
         {
-            PlansPlaninternationalsmsEntity entity = entityList.get(i);
-            PlansPlaninternationalsms bean = new PlansPlaninternationalsms();
+            PlansPlaninternationalsms entity = entityList.get(i);
+            PlansPlaninternationalsmsBean bean = new PlansPlaninternationalsmsBean();
             bean.setId(entity.getId());
             bean.setIsActive(entity.getIsActive());
             bean.setPlanPrimaryId(entity.getPlanPrimaryId().getId());
@@ -31,8 +31,8 @@ public class PlansPlaninternationalsmsMapper {
         return retBean;
     }
     
-    public PlansPlaninternationalsms mapBean(PlansPlaninternationalsmsEntity entity) {
-        PlansPlaninternationalsms bean = new PlansPlaninternationalsms();
+    public PlansPlaninternationalsmsBean mapBean(PlansPlaninternationalsms entity) {
+        PlansPlaninternationalsmsBean bean = new PlansPlaninternationalsmsBean();
         bean.setId(entity.getId());
         bean.setIsActive(entity.getIsActive());
         bean.setPlanPrimaryId(entity.getPlanPrimaryId().getId());
@@ -42,8 +42,8 @@ public class PlansPlaninternationalsmsMapper {
         return bean;
     }
 
-    public PlansPlaninternationalsmsEntity mapBeanToEntity(PlansPlaninternationalsms bean, PlansPlaninternationalsmsEntity existEntity) {
-        PlansPlaninternationalsmsEntity updateEntity = existEntity;
+    public PlansPlaninternationalsms mapBeanToEntity(PlansPlaninternationalsmsBean bean, PlansPlaninternationalsms existEntity) {
+        PlansPlaninternationalsms updateEntity = existEntity;
         updateEntity.setIsActive(bean.getIsActive());
         updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setInternationalSms(bean.getInternationalSms());
@@ -52,10 +52,10 @@ public class PlansPlaninternationalsmsMapper {
         return updateEntity;
     }
 
-    public PlansPlaninternationalsmsEntity mapBeanToEntity(PlansPlaninternationalsms bean) {
+    public PlansPlaninternationalsms mapBeanToEntity(PlansPlaninternationalsmsBean bean) {
         PlansPlanprimaryDao planrepository = new PlansPlanprimaryDao();
-        PlansPlanprimaryEntity plansPlanprimaryEntity = planrepository.findById(bean.getPlanPrimaryId());
-        PlansPlaninternationalsmsEntity updateEntity = new PlansPlaninternationalsmsEntity();
+        PlansPlanprimary plansPlanprimaryEntity = planrepository.findById(bean.getPlanPrimaryId());
+        PlansPlaninternationalsms updateEntity = new PlansPlaninternationalsms();
         updateEntity.setCreationDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setPlanPrimaryId(plansPlanprimaryEntity);

@@ -7,20 +7,20 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.mobilelife.controler.mapper.bean.PlansPlanroamingoutgoingmins;
+import com.mobilelife.controler.mapper.bean.PlansPlanroamingoutgoingminsBean;
 import com.mobilelife.persistance.dao.PlansPlanprimaryDao;
-import com.mobilelife.persistance.entities.PlansPlanprimaryEntity;
-import com.mobilelife.persistance.entities.PlansPlanroamingoutgoingminsEntity;
+import com.mobilelife.persistance.entities.PlansPlanprimary;
+import com.mobilelife.persistance.entities.PlansPlanroamingoutgoingmins;
 
 public class PlansPlanroamingoutgoingminsMapper {
 	private static Logger logger = LoggerFactory.getLogger(PlansPlanroamingoutgoingminsMapper.class);
 
-    public List<PlansPlanroamingoutgoingmins> mapBean(List<PlansPlanroamingoutgoingminsEntity> entityList) {
-        List<PlansPlanroamingoutgoingmins> retBean = new ArrayList<PlansPlanroamingoutgoingmins>();
+    public List<PlansPlanroamingoutgoingminsBean> mapBean(List<PlansPlanroamingoutgoingmins> entityList) {
+        List<PlansPlanroamingoutgoingminsBean> retBean = new ArrayList<PlansPlanroamingoutgoingminsBean>();
         for (int i=0; i<entityList.size();i++)
         {
-            PlansPlanroamingoutgoingminsEntity entity = entityList.get(i);
-            PlansPlanroamingoutgoingmins bean = new PlansPlanroamingoutgoingmins();
+            PlansPlanroamingoutgoingmins entity = entityList.get(i);
+            PlansPlanroamingoutgoingminsBean bean = new PlansPlanroamingoutgoingminsBean();
             bean.setId(entity.getId());
             bean.setIsActive(entity.getIsActive());
             bean.setPlanPrimaryId(entity.getPlanPrimaryId().getId());
@@ -32,8 +32,8 @@ public class PlansPlanroamingoutgoingminsMapper {
         return retBean;
     }
     
-    public PlansPlanroamingoutgoingmins mapBean(PlansPlanroamingoutgoingminsEntity entity) {
-        PlansPlanroamingoutgoingmins bean = new PlansPlanroamingoutgoingmins();
+    public PlansPlanroamingoutgoingminsBean mapBean(PlansPlanroamingoutgoingmins entity) {
+        PlansPlanroamingoutgoingminsBean bean = new PlansPlanroamingoutgoingminsBean();
         bean.setId(entity.getId());
         bean.setIsActive(entity.getIsActive());
         bean.setPlanPrimaryId(entity.getPlanPrimaryId().getId());
@@ -44,8 +44,8 @@ public class PlansPlanroamingoutgoingminsMapper {
         return bean;
     }
 
-    public PlansPlanroamingoutgoingminsEntity mapBeanToEntity(PlansPlanroamingoutgoingmins bean, PlansPlanroamingoutgoingminsEntity existEntity) {
-        PlansPlanroamingoutgoingminsEntity updateEntity = existEntity;
+    public PlansPlanroamingoutgoingmins mapBeanToEntity(PlansPlanroamingoutgoingminsBean bean, PlansPlanroamingoutgoingmins existEntity) {
+        PlansPlanroamingoutgoingmins updateEntity = existEntity;
         updateEntity.setIsActive(bean.getIsActive());
         updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setRoamingOutgoingBucketcode(bean.getRoamingOutgoingBucketcode());
@@ -55,10 +55,10 @@ public class PlansPlanroamingoutgoingminsMapper {
         return updateEntity;
     }
 
-    public PlansPlanroamingoutgoingminsEntity mapBeanToEntity(PlansPlanroamingoutgoingmins bean) {
+    public PlansPlanroamingoutgoingmins mapBeanToEntity(PlansPlanroamingoutgoingminsBean bean) {
         PlansPlanprimaryDao planrepository = new PlansPlanprimaryDao();
-        PlansPlanprimaryEntity plansPlanprimaryEntity = planrepository.findById(bean.getPlanPrimaryId());
-        PlansPlanroamingoutgoingminsEntity updateEntity = new PlansPlanroamingoutgoingminsEntity();
+        PlansPlanprimary plansPlanprimaryEntity = planrepository.findById(bean.getPlanPrimaryId());
+        PlansPlanroamingoutgoingmins updateEntity = new PlansPlanroamingoutgoingmins();
         updateEntity.setCreationDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setPlanPrimaryId(plansPlanprimaryEntity);

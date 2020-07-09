@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.exception.RecordNotFoundException;
 import com.mobilelife.controler.mapper.PlansOperatorMapper;
-import com.mobilelife.controler.mapper.bean.PlansOperator;
+import com.mobilelife.controler.mapper.bean.PlansOperatorBean;
 import com.mobilelife.persistance.dao.OperatorDao;
-import com.mobilelife.persistance.entities.PlansOperatorEntity;
+import com.mobilelife.persistance.entities.PlansOperator;
 
 
 public class PlansOperatorServices {
@@ -18,16 +18,16 @@ public class PlansOperatorServices {
 	OperatorDao repository = new OperatorDao();
 	PlansOperatorMapper mapper = new PlansOperatorMapper();
 
-	public List<PlansOperator> getAll() {
-        List<PlansOperatorEntity> entityList = repository.findAll();
-        List<PlansOperator> bean = mapper.mapBean(entityList);
+	public List<PlansOperatorBean> getAll() {
+        List<PlansOperator> entityList = repository.findAll();
+        List<PlansOperatorBean> bean = mapper.mapBean(entityList);
 		return bean;
 	}
 
-    public PlansOperator getById(Integer id)
+    public PlansOperatorBean getById(Integer id)
     {
-    	PlansOperatorEntity entity = repository.findById(id);
-    	PlansOperator bean = mapper.mapBean(entity);
+    	PlansOperator entity = repository.findById(id);
+    	PlansOperatorBean bean = mapper.mapBean(entity);
         if(null!=entity) {
             return bean;
         } else {
@@ -35,19 +35,19 @@ public class PlansOperatorServices {
         }
     }
      
-    public boolean createOrUpdate(PlansOperator bean)
+    public boolean createOrUpdate(PlansOperatorBean bean)
     {
     	boolean retVal = false;
     	if ((bean.getId()!=null) && (bean.getId()>0))
     	{
-    		PlansOperatorEntity existEntity = repository.findById(bean.getId());
+    		PlansOperator existEntity = repository.findById(bean.getId());
     		if(null!=existEntity)
 	        {
-    			PlansOperatorEntity entity = mapper.mapBeanToEntity(bean, existEntity);
+    			PlansOperator entity = mapper.mapBeanToEntity(bean, existEntity);
 	            retVal = repository.updateData(entity);
 	            return retVal;
 	        } else {
-    			PlansOperatorEntity entity = mapper.mapBeanToEntity(bean);
+    			PlansOperator entity = mapper.mapBeanToEntity(bean);
     			int id = repository.findId()+1;
     			entity.setId(id);		
 	        	retVal = repository.saveData(entity);
@@ -56,7 +56,7 @@ public class PlansOperatorServices {
     	}
     	else
     	{
-			PlansOperatorEntity entity = mapper.mapBeanToEntity(bean);
+			PlansOperator entity = mapper.mapBeanToEntity(bean);
 			int id = repository.findId()+1;
 			entity.setId(id);		
     		retVal = repository.saveData(entity);
@@ -67,7 +67,7 @@ public class PlansOperatorServices {
     public boolean delete(Integer id)
     {
     	boolean retVal =false;
-    	PlansOperatorEntity entity = repository.findById(id);
+    	PlansOperator entity = repository.findById(id);
 		if(null!=entity)
         {
 			retVal = repository.deleteData(entity);

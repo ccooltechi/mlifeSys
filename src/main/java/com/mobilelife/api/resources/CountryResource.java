@@ -18,8 +18,8 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.services.CountriesService;
 import com.mobilelife.common.CommonUtils;
-import com.mobilelife.controler.mapper.bean.Countries;
-import com.mobilelife.persistance.entities.CountriesEntity;
+import com.mobilelife.controler.mapper.bean.CountriesBean;
+import com.mobilelife.persistance.entities.Countries;
 
 @Path("/country")
 public class CountryResource {
@@ -32,9 +32,9 @@ public class CountryResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createUser(CountriesEntity countries) {
+    public Response createUser(Countries countries) {
     	boolean status = service.createOrUpdate(countries);
-        List<Countries> country = service.getAll();
+        List<CountriesBean> country = service.getAll();
         Response response = commonUtils.buildResponse(country);
 		return response;
     }
@@ -45,7 +45,7 @@ public class CountryResource {
     @Produces(MediaType.APPLICATION_JSON)
 	public Response getAllCountries(@PathParam("authtoken") String authtoken)
 	{
-        List<Countries> bean = service.getAll();
+        List<CountriesBean> bean = service.getAll();
         Response response = commonUtils.buildResponse(bean);
 		return response;
 	}
@@ -55,7 +55,7 @@ public class CountryResource {
     @Path("/{authtoken}/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCountryForId(@PathParam("id") Integer id) {
-    	Countries bean  = service.getById(id);
+    	CountriesBean bean  = service.getById(id);
         Response response = commonUtils.buildResponse(bean);
 		return response;
     }
@@ -64,9 +64,9 @@ public class CountryResource {
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateUser(CountriesEntity countries) {
+    public Response updateUser(Countries countries) {
     	boolean status = service.createOrUpdate(countries);
-        List<Countries> country = service.getAll();
+        List<CountriesBean> country = service.getAll();
         Response response = commonUtils.buildResponse(country);
 		return response;
     }
@@ -77,7 +77,7 @@ public class CountryResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteeUser(@PathParam("id") Integer id) {
     	boolean status = service.delete(id);
-        List<Countries> bean = service.getAll();
+        List<CountriesBean> bean = service.getAll();
         Response response = commonUtils.buildResponse(bean);
 		return response;
     }

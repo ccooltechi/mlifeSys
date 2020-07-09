@@ -11,8 +11,8 @@ import org.slf4j.LoggerFactory;
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
 import com.mobilelife.dbutils.TelcoMisHibernateSessionManager;
-import com.mobilelife.persistance.entities.PlansPlanprimaryEntity;
-import com.mobilelife.persistance.entities.UserInfoEntity;
+import com.mobilelife.persistance.entities.PlansPlanprimary;
+import com.mobilelife.persistance.entities.UserInfo;
 
 public class UserInfoDao {
 	private static Logger logger = LoggerFactory.getLogger(UserInfoDao.class);
@@ -23,24 +23,24 @@ public class UserInfoDao {
 		
 	}
 	
-	public List<UserInfoEntity> findAllCountry()
+	public List<UserInfo> findAllCountry()
 	{
 		Session session = TelcoMisHibernateSessionManager.getSession();
-		List<UserInfoEntity> userInfoList = null;
+		List<UserInfo> userInfoList = null;
 		Query query = session.getNamedQuery("UserInfo.findAll");
 		System.out.println("Size = "+query.list().size());
-		userInfoList = (List<UserInfoEntity>)query.list();
+		userInfoList = (List<UserInfo>)query.list();
 		return userInfoList;
 	}
 
-	public List<UserInfoEntity> findUserInfoByID(String userid)
+	public List<UserInfo> findUserInfoByID(String userid)
 	{
 		Session session = TelcoMisHibernateSessionManager.getSession();
-		List<UserInfoEntity> userInfoList = null;
+		List<UserInfo> userInfoList = null;
 		Query query = session.getNamedQuery("UserInfo.findByUserId");
 		query.setParameter("userId", userid);
 		System.out.println("findUserInfoByID = "+userid);
-		userInfoList = (List<UserInfoEntity>)query.list();
+		userInfoList = (List<UserInfo>)query.list();
 		return userInfoList;
 	}
 	
@@ -49,11 +49,11 @@ public class UserInfoDao {
 		Session session = TelcoMisHibernateSessionManager.getSession();
 		int rid = 0;
 		try {
-			List<UserInfoEntity> resultList = null;
+			List<UserInfo> resultList = null;
 
 			String query = "Select * from user_info order by id desc";
 			logger.debug("query in findID in  user_info " + query);
-			resultList = new HibernateDAO().findBySQLQuery(session, UserInfoEntity.class, query,"user_info");
+			resultList = new HibernateDAO().findBySQLQuery(session, UserInfo.class, query,"user_info");
 
 			logger.debug("findID  in  UserInfo Size = "+resultList.size());
 			if ((null!=resultList) && (resultList.size()>0))
@@ -72,7 +72,7 @@ public class UserInfoDao {
 	}
 
 
-	public void saveData(UserInfoEntity entityObj) {
+	public void saveData(UserInfo entityObj) {
 		Session session = TelcoMisHibernateSessionManager.getSession();
 		Transaction tx = null;
 		try {

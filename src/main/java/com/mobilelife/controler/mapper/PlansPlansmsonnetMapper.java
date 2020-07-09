@@ -7,20 +7,20 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.mobilelife.controler.mapper.bean.PlansPlansmsonnet;
+import com.mobilelife.controler.mapper.bean.PlansPlansmsonnetBean;
 import com.mobilelife.persistance.dao.PlansPlanprimaryDao;
-import com.mobilelife.persistance.entities.PlansPlanprimaryEntity;
-import com.mobilelife.persistance.entities.PlansPlansmsonnetEntity;
+import com.mobilelife.persistance.entities.PlansPlanprimary;
+import com.mobilelife.persistance.entities.PlansPlansmsonnet;
 
 public class PlansPlansmsonnetMapper {
 	private static Logger logger = LoggerFactory.getLogger(PlansPlansmsonnetMapper.class);
 
-    public List<PlansPlansmsonnet> mapBean(List<PlansPlansmsonnetEntity> entityList) {
-        List<PlansPlansmsonnet> retBean = new ArrayList<PlansPlansmsonnet>();
+    public List<PlansPlansmsonnetBean> mapBean(List<PlansPlansmsonnet> entityList) {
+        List<PlansPlansmsonnetBean> retBean = new ArrayList<PlansPlansmsonnetBean>();
         for (int i=0; i<entityList.size();i++)
         {
-            PlansPlansmsonnetEntity entity = entityList.get(i);
-            PlansPlansmsonnet bean = new PlansPlansmsonnet();
+            PlansPlansmsonnet entity = entityList.get(i);
+            PlansPlansmsonnetBean bean = new PlansPlansmsonnetBean();
             bean.setId(entity.getId());
             bean.setIsActive(entity.getIsActive());
             bean.setPlanPrimaryId(entity.getPlanPrimaryId().getId());
@@ -31,8 +31,8 @@ public class PlansPlansmsonnetMapper {
         return retBean;
     }
     
-    public PlansPlansmsonnet mapBean(PlansPlansmsonnetEntity entity) {
-        PlansPlansmsonnet bean = new PlansPlansmsonnet();
+    public PlansPlansmsonnetBean mapBean(PlansPlansmsonnet entity) {
+        PlansPlansmsonnetBean bean = new PlansPlansmsonnetBean();
         bean.setId(entity.getId());
         bean.setIsActive(entity.getIsActive());
         bean.setPlanPrimaryId(entity.getPlanPrimaryId().getId());
@@ -42,8 +42,8 @@ public class PlansPlansmsonnetMapper {
         return bean;
     }
 
-    public PlansPlansmsonnetEntity mapBeanToEntity(PlansPlansmsonnet bean, PlansPlansmsonnetEntity existEntity) {
-        PlansPlansmsonnetEntity updateEntity = existEntity;
+    public PlansPlansmsonnet mapBeanToEntity(PlansPlansmsonnetBean bean, PlansPlansmsonnet existEntity) {
+        PlansPlansmsonnet updateEntity = existEntity;
         updateEntity.setIsActive(bean.getIsActive());
         updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setLocalSmsOnnet(bean.getLocalSmsOnnet());
@@ -52,10 +52,10 @@ public class PlansPlansmsonnetMapper {
         return updateEntity;
     }
 
-    public PlansPlansmsonnetEntity mapBeanToEntity(PlansPlansmsonnet bean) {
+    public PlansPlansmsonnet mapBeanToEntity(PlansPlansmsonnetBean bean) {
         PlansPlanprimaryDao planrepository = new PlansPlanprimaryDao();
-        PlansPlanprimaryEntity plansPlanprimaryEntity = planrepository.findById(bean.getPlanPrimaryId());
-        PlansPlansmsonnetEntity updateEntity = new PlansPlansmsonnetEntity();
+        PlansPlanprimary plansPlanprimaryEntity = planrepository.findById(bean.getPlanPrimaryId());
+        PlansPlansmsonnet updateEntity = new PlansPlansmsonnet();
         updateEntity.setCreationDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setPlanPrimaryId(plansPlanprimaryEntity);

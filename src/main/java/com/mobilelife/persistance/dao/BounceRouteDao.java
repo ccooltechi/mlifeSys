@@ -14,10 +14,10 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.PartnerRouteArchiveEntity;
-import com.mobilelife.persistance.entities.PartnerRouteChildEntity;
-import com.mobilelife.persistance.entities.PartnerRouteMasterEntity;
-import com.mobilelife.persistance.entities.ReferencesMasterEntity;
+import com.mobilelife.persistance.entities.PartnerRouteArchive;
+import com.mobilelife.persistance.entities.PartnerRouteChild;
+import com.mobilelife.persistance.entities.PartnerRouteMaster;
+import com.mobilelife.persistance.entities.ReferencesMaster;
 
 public class BounceRouteDao {
 	private static Logger logger = LoggerFactory.getLogger(BounceRouteDao.class);
@@ -27,40 +27,40 @@ public class BounceRouteDao {
 		
 	}
 	
-	public List<PartnerRouteMasterEntity> findAllPartnerRoutes()
+	public List<PartnerRouteMaster> findAllPartnerRoutes()
 	{
 		Session session = HibernateSessionManager.getSession();
-		List<PartnerRouteMasterEntity> partnerRouteMaster = null;
+		List<PartnerRouteMaster> partnerRouteMaster = null;
 		Query query = session.getNamedQuery("PlansOperator.findAll");
 		System.out.println("Size = "+query.list().size());
 		partnerRouteMaster = query.list();
 		return partnerRouteMaster;
 	}
 
-	public PartnerRouteMasterEntity findAllPartnerRoutesByCode(String routingCode)
+	public PartnerRouteMaster findAllPartnerRoutesByCode(String routingCode)
 	{
 		Session session = HibernateSessionManager.getSession();
-		PartnerRouteMasterEntity partnerRouteMaster = null;
+		PartnerRouteMaster partnerRouteMaster = null;
 		logger.debug("routingCode = " +routingCode);
 		Query query = session.getNamedQuery("PartnerRouteMaster.findByRoutingCode");
 		query.setParameter("routingCode", routingCode);
 //		System.out.println("Size = "+query.list().size());
-		partnerRouteMaster = (PartnerRouteMasterEntity)query.list().get(0);
+		partnerRouteMaster = (PartnerRouteMaster)query.list().get(0);
 		System.out.println("operator ID = "+partnerRouteMaster.getId());
 		return partnerRouteMaster;
 	}
 
-	public PartnerRouteChildEntity findParternRoute(String routing_code)
+	public PartnerRouteChild findParternRoute(String routing_code)
 	{
 		Session session = HibernateSessionManager.getSession();
 		Timestamp currentdattime  = new Timestamp(System.currentTimeMillis());
-		PartnerRouteChildEntity partnerRouteChild = null;
+		PartnerRouteChild partnerRouteChild = null;
 		try {
-			List<PartnerRouteChildEntity> partnerRouteChildList = null;
+			List<PartnerRouteChild> partnerRouteChildList = null;
 //			String query = "Select a.* from partner_route_child a where a.is_active=1 and (calls_allowed - calls_used) >1 and a.routing_code ="+routing_code+" and  activation_start_date < '"+currentdattime+"' and activation_end_date >'"+currentdattime+"' order by a.priority_level ";
 			String query = "Select a.* from partner_route_child a where a.is_active=1 and (calls_allowed - calls_used) >1 and a.routing_code ="+routing_code+" and  activation_start_date < '"+currentdattime+"' order by a.priority_level ";
 			logger.debug("query in findParternRoute for all " + query);
-			partnerRouteChildList = new HibernateDAO().findBySQLQuery(session, PartnerRouteChildEntity.class, query,"partner_route_child");
+			partnerRouteChildList = new HibernateDAO().findBySQLQuery(session, PartnerRouteChild.class, query,"partner_route_child");
 
 			if ((null!=partnerRouteChildList) && (partnerRouteChildList.size()>0))
 			{
@@ -84,15 +84,15 @@ public class BounceRouteDao {
 		return partnerRouteChild;
 	}
 
-	public PartnerRouteChildEntity checkParternRoute(String routing_code)
+	public PartnerRouteChild checkParternRoute(String routing_code)
 	{
 		Session session = HibernateSessionManager.getSession();
-		PartnerRouteChildEntity partnerRouteChild = null;
+		PartnerRouteChild partnerRouteChild = null;
 		try {
-			List<PartnerRouteChildEntity> partnerRouteChildList = null;
+			List<PartnerRouteChild> partnerRouteChildList = null;
 			String query = "Select a.* from partner_route_child a where a.is_active=1 and a.routing_code ="+routing_code+"  order by a.priority_level ";
 			logger.debug("query in checkParternRoute for all " + query);
-			partnerRouteChildList = new HibernateDAO().findBySQLQuery(session, PartnerRouteChildEntity.class, query,"partner_route_child");
+			partnerRouteChildList = new HibernateDAO().findBySQLQuery(session, PartnerRouteChild.class, query,"partner_route_child");
 
 			if ((null!=partnerRouteChildList) && (partnerRouteChildList.size()>0))
 			{
@@ -108,15 +108,15 @@ public class BounceRouteDao {
 		return partnerRouteChild;
 	}
 
-	public PartnerRouteChildEntity checkParternRoute(int routing_child_id)
+	public PartnerRouteChild checkParternRoute(int routing_child_id)
 	{
 		Session session = HibernateSessionManager.getSession();
-		PartnerRouteChildEntity partnerRouteChild = null;
+		PartnerRouteChild partnerRouteChild = null;
 		try {
-			List<PartnerRouteChildEntity> partnerRouteChildList = null;
+			List<PartnerRouteChild> partnerRouteChildList = null;
 			String query = "Select a.* from partner_route_child a where a.is_active=1 and a.id ="+routing_child_id;
 			logger.debug("query in checkParternRoute for all " + query);
-			partnerRouteChildList = new HibernateDAO().findBySQLQuery(session, PartnerRouteChildEntity.class, query,"partner_route_child");
+			partnerRouteChildList = new HibernateDAO().findBySQLQuery(session, PartnerRouteChild.class, query,"partner_route_child");
 
 			if ((null!=partnerRouteChildList) && (partnerRouteChildList.size()>0))
 			{
@@ -132,8 +132,8 @@ public class BounceRouteDao {
 		return partnerRouteChild;
 	}
 
-	private PartnerRouteChildEntity createNewRouting(String routing_code) {
-		PartnerRouteChildEntity partnerRouteChild = checkParternRoute(routing_code);
+	private PartnerRouteChild createNewRouting(String routing_code) {
+		PartnerRouteChild partnerRouteChild = checkParternRoute(routing_code);
 		if (null!=partnerRouteChild)
 		{
 			Calendar activationStartDateC  = Calendar.getInstance();
@@ -154,8 +154,8 @@ public class BounceRouteDao {
 		return partnerRouteChild;
 	}
 
-	private PartnerRouteChildEntity createNewRouting(int routing_child_id) {
-		PartnerRouteChildEntity partnerRouteChild = checkParternRoute(routing_child_id);
+	private PartnerRouteChild createNewRouting(int routing_child_id) {
+		PartnerRouteChild partnerRouteChild = checkParternRoute(routing_child_id);
 		if (null!=partnerRouteChild)
 		{
 			Calendar activationStartDateC  = Calendar.getInstance();
@@ -176,8 +176,8 @@ public class BounceRouteDao {
 		return partnerRouteChild;
 	}
 
-	public PartnerRouteChildEntity updateRouting(int routing_child_id) {
-		PartnerRouteChildEntity partnerRouteChild = checkParternRoute(routing_child_id);
+	public PartnerRouteChild updateRouting(int routing_child_id) {
+		PartnerRouteChild partnerRouteChild = checkParternRoute(routing_child_id);
 		if (null!=partnerRouteChild)
 		{
 			int callused = partnerRouteChild.getCallsUsed()+1;
@@ -187,7 +187,7 @@ public class BounceRouteDao {
 		return partnerRouteChild;
 	}
 
-	public void saveData(PartnerRouteChildEntity entityObj) {
+	public void saveData(PartnerRouteChild entityObj) {
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
 		try {
@@ -202,7 +202,7 @@ public class BounceRouteDao {
 		}
 	}
 
-	public void updateData(PartnerRouteChildEntity entityObj) {
+	public void updateData(PartnerRouteChild entityObj) {
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
 		try {
@@ -217,7 +217,7 @@ public class BounceRouteDao {
 		}
 	}
 	
-	public void saveData(PartnerRouteArchiveEntity entityObj) {
+	public void saveData(PartnerRouteArchive entityObj) {
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
 		try {
@@ -234,9 +234,9 @@ public class BounceRouteDao {
 
 	public static void main(String[] args) {
 		BounceRouteDao searchPlan = new BounceRouteDao();
-		PartnerRouteMasterEntity partnerRouteMaster = searchPlan.findAllPartnerRoutesByCode("DU_DSA");
+		PartnerRouteMaster partnerRouteMaster = searchPlan.findAllPartnerRoutesByCode("DU_DSA");
 		List<String> returnValue = new ArrayList<String>();
-		PartnerRouteChildEntity partnerRouteChild = searchPlan.findParternRoute(partnerRouteMaster.getId()+"");
+		PartnerRouteChild partnerRouteChild = searchPlan.findParternRoute(partnerRouteMaster.getId()+"");
 		if ((partnerRouteChild.getCallsAllowed()-partnerRouteChild.getCallsUsed())==1)
 			returnValue.add("true");
 		returnValue.add(partnerRouteChild.getMerchantCode());
@@ -247,11 +247,11 @@ public class BounceRouteDao {
 		Session session = HibernateSessionManager.getSession();
 		int rid = 0;
 		try {
-			List<PartnerRouteArchiveEntity> partnerRouteArchive = null;
+			List<PartnerRouteArchive> partnerRouteArchive = null;
 
 			String query = "Select * from partner_route_archive order by id desc limit 1";
 			logger.debug("query in findIdreferencesMaster in  BounceRouteDao " + query);
-			partnerRouteArchive = new HibernateDAO().findBySQLQuery(session, PartnerRouteArchiveEntity.class, query,"partner_route_archive");
+			partnerRouteArchive = new HibernateDAO().findBySQLQuery(session, PartnerRouteArchive.class, query,"partner_route_archive");
 
 			logger.debug("findIdNextID in  ReferencesDao Size = "+partnerRouteArchive.size());
 			if ((null!=partnerRouteArchive) && (partnerRouteArchive.size()>0))

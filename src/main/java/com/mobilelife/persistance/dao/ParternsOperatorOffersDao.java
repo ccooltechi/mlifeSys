@@ -9,8 +9,8 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.dbutils.HibernateDAO;
 import com.mobilelife.dbutils.HibernateSessionManager;
-import com.mobilelife.persistance.entities.ParternsOperatorOffersEntity;
-import com.mobilelife.persistance.entities.PlansPlanfeeEntity;
+import com.mobilelife.persistance.entities.ParternsOperatorOffers;
+import com.mobilelife.persistance.entities.PlansPlanfee;
 
 public class ParternsOperatorOffersDao {
 	private static Logger logger = LoggerFactory.getLogger(ParternsOperatorOffersDao.class);
@@ -24,11 +24,11 @@ public class ParternsOperatorOffersDao {
 		Session session = HibernateSessionManager.getSession();
 		int rid = 0;
 		try {
-			List<ParternsOperatorOffersEntity> parternsOperatorOffersList = null;
+			List<ParternsOperatorOffers> parternsOperatorOffersList = null;
 
 			String query = "Select * from parterns_operator_offers order by id desc limit 1";
 			logger.debug("query in findID in  ParternsOperatorOffersDao " + query);
-			parternsOperatorOffersList = new HibernateDAO().findBySQLQuery(session, ParternsOperatorOffersEntity.class, query,"parterns_operator_offers");
+			parternsOperatorOffersList = new HibernateDAO().findBySQLQuery(session, ParternsOperatorOffers.class, query,"parterns_operator_offers");
 
 			logger.debug("findID  in  ParternsOperatorOffersDao Size = "+parternsOperatorOffersList.size());
 			if ((null!=parternsOperatorOffersList) && (parternsOperatorOffersList.size()>0))
@@ -45,16 +45,16 @@ public class ParternsOperatorOffersDao {
 		}
 		return rid;
 	}
-	public ParternsOperatorOffersEntity findOperatorOffersByID(String rid)
+	public ParternsOperatorOffers findOperatorOffersByID(String rid)
 	{
 		Session session = HibernateSessionManager.getSession();
-		ParternsOperatorOffersEntity parternsOperatorOffers = null;
+		ParternsOperatorOffers parternsOperatorOffers = null;
 		try {
-			List<ParternsOperatorOffersEntity> parternsOperatorOffersList = null;
+			List<ParternsOperatorOffers> parternsOperatorOffersList = null;
 
 			String query = "Select * from parterns_operator_offers where is_active=1 and id="+rid;
 			logger.debug("query in findID in  ParternsOperatorOffersDao " + query);
-			parternsOperatorOffersList = new HibernateDAO().findBySQLQuery(session, ParternsOperatorOffersEntity.class, query,"parterns_operator_offers");
+			parternsOperatorOffersList = new HibernateDAO().findBySQLQuery(session, ParternsOperatorOffers.class, query,"parterns_operator_offers");
 
 			logger.debug("findID  in  ParternsOperatorOffersDao Size = "+parternsOperatorOffersList.size());
 			if ((null!=parternsOperatorOffersList) && (parternsOperatorOffersList.size()>0))
@@ -72,7 +72,7 @@ public class ParternsOperatorOffersDao {
 		return parternsOperatorOffers;
 	}
 	
-	public void saveData(ParternsOperatorOffersEntity entityObj) {
+	public void saveData(ParternsOperatorOffers entityObj) {
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
 		try {
@@ -87,7 +87,7 @@ public class ParternsOperatorOffersDao {
 		}
 	}
 
-	public void updateData(ParternsOperatorOffersEntity entityObj) {
+	public void updateData(ParternsOperatorOffers entityObj) {
 		Session session = HibernateSessionManager.getSession();
 		Transaction tx = null;
 		try {

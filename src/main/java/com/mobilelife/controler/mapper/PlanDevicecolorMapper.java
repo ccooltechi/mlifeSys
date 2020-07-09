@@ -7,18 +7,18 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.mobilelife.controler.mapper.bean.PlanDevicecolor;
-import com.mobilelife.persistance.entities.PlanDevicecolorEntity;
+import com.mobilelife.controler.mapper.bean.PlanDevicecolorBean;
+import com.mobilelife.persistance.entities.PlanDevicecolor;
 
 public class PlanDevicecolorMapper {
 	private static Logger logger = LoggerFactory.getLogger(PlanDevicecolorMapper.class);
 
-    public List<PlanDevicecolor> mapBean(List<PlanDevicecolorEntity> entityList) {
-        List<PlanDevicecolor> retBean = new ArrayList<PlanDevicecolor>();
+    public List<PlanDevicecolorBean> mapBean(List<PlanDevicecolor> entityList) {
+        List<PlanDevicecolorBean> retBean = new ArrayList<PlanDevicecolorBean>();
         for (int i=0; i<entityList.size();i++)
         {
-        	PlanDevicecolorEntity entity = entityList.get(i);
-            PlanDevicecolor bean = new PlanDevicecolor();
+        	PlanDevicecolor entity = entityList.get(i);
+            PlanDevicecolorBean bean = new PlanDevicecolorBean();
             bean.setId(entity.getId());
             bean.setIsActive(entity.getIsActive());
             bean.setDeviceColor(entity.getDeviceColor());
@@ -28,8 +28,8 @@ public class PlanDevicecolorMapper {
         return retBean;
     }
     
-    public PlanDevicecolor mapBean(PlanDevicecolorEntity entity) {
-    	PlanDevicecolor bean = new PlanDevicecolor();
+    public PlanDevicecolorBean mapBean(PlanDevicecolor entity) {
+    	PlanDevicecolorBean bean = new PlanDevicecolorBean();
         bean.setId(entity.getId());
         bean.setIsActive(entity.getIsActive());
         bean.setDeviceColor(entity.getDeviceColor());
@@ -37,8 +37,8 @@ public class PlanDevicecolorMapper {
         return bean;
     }
 
-    public PlanDevicecolorEntity mapBeanToEntity(PlanDevicecolor bean, PlanDevicecolorEntity existEntity) {
-    	PlanDevicecolorEntity updateEntity = existEntity;
+    public PlanDevicecolor mapBeanToEntity(PlanDevicecolorBean bean, PlanDevicecolor existEntity) {
+    	PlanDevicecolor updateEntity = existEntity;
         updateEntity.setIsActive(bean.getIsActive());
         updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setDeviceColor(bean.getDeviceColor());
@@ -46,8 +46,8 @@ public class PlanDevicecolorMapper {
         return updateEntity;
     }
 
-    public PlanDevicecolorEntity mapBeanToEntity(PlanDevicecolor bean) {
-    	PlanDevicecolorEntity updateEntity = new PlanDevicecolorEntity();
+    public PlanDevicecolor mapBeanToEntity(PlanDevicecolorBean bean) {
+    	PlanDevicecolor updateEntity = new PlanDevicecolor();
         updateEntity.setCreationDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setLastModifiedDatetime(new Timestamp(System.currentTimeMillis()));
         updateEntity.setIsActive(bean.getIsActive());

@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mobilelife.api.services.PlansPlanfeeServices;
 import com.mobilelife.common.CommonUtils;
-import com.mobilelife.controler.mapper.bean.PlansPlanfee;
+import com.mobilelife.controler.mapper.bean.PlansPlanfeeBean;
 import com.mobilelife.controler.mapper.request.PlansPlanfeeRequest;
 
 @Path("/planfee")
@@ -33,9 +33,9 @@ public class PlansPlanfeeResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createNew(PlansPlanfeeRequest request) {
-        PlansPlanfee bean = (PlansPlanfee)request.getRequest();
+        PlansPlanfeeBean bean = (PlansPlanfeeBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlanfee country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlanfeeBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }
@@ -45,7 +45,7 @@ public class PlansPlanfeeResource {
     @Path("/{authtoken}/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") Integer id) {
-        PlansPlanfee bean  = service.getByPlanId(id);
+        PlansPlanfeeBean bean  = service.getByPlanId(id);
         Response response = commonUtils.buildResponse(bean);
         return response;
     }
@@ -55,9 +55,9 @@ public class PlansPlanfeeResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateExisting(PlansPlanfeeRequest request) {
-        PlansPlanfee bean = (PlansPlanfee)request.getRequest();
+        PlansPlanfeeBean bean = (PlansPlanfeeBean)request.getRequest();
         boolean status = service.createOrUpdate(bean);
-        PlansPlanfee country = service.getByPlanId(bean.getPlanPrimaryId());
+        PlansPlanfeeBean country = service.getByPlanId(bean.getPlanPrimaryId());
         Response response = commonUtils.buildResponse(country);
         return response;
     }
