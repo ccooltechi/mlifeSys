@@ -194,7 +194,7 @@
         <slf4j.version>1.7.21</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
         <mysql-connector.version>5.1.6</mysql-connector.version>
-        <org.hibernate.hibernate-core.version>3.3.2.GA</org.hibernate.hibernate-core.version>
+        <org.hibernate.hibernate-core.version>5.4.24.Final</org.hibernate.hibernate-core.version>
         <org.hibernate.hibernate-entitymanager.version>3.3.2.GA</org.hibernate.hibernate-entitymanager.version>
         <org.hibernate.hibernate-annotations.version>3.3.1.GA</org.hibernate.hibernate-annotations.version>
         <jackson.version>2.9.8</jackson.version>
