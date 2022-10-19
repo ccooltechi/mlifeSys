@@ -197,7 +197,7 @@
         <org.hibernate.hibernate-core.version>3.3.2.GA</org.hibernate.hibernate-core.version>
         <org.hibernate.hibernate-entitymanager.version>3.3.2.GA</org.hibernate.hibernate-entitymanager.version>
         <org.hibernate.hibernate-annotations.version>3.3.1.GA</org.hibernate.hibernate-annotations.version>
-        <jackson.version>2.9.8</jackson.version>
+        <jackson.version>2.13.4.1</jackson.version>
         <codehaus.jackson>1.9.10</codehaus.jackson>
         <spring.boot.version>1.5.7.RELEASE</spring.boot.version>		
         <sendgrid.sendgrid-java.version>2.2.2</sendgrid.sendgrid-java.version>  
